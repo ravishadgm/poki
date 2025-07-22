@@ -1,0 +1,102 @@
+@import './variables';
+
+:root {
+  --wrap: 1600px;
+  --wrapspace: 30px;
+  --paddingTopBottom:15px;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  font-family: "Manrope";
+
+  color: #111;
+  scroll-behavior: smooth;
+  margin: 0px !important;
+  background-color: var(--primary-green);
+  background-image: url('/images/bg-diamante.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+      background-attachment: fixed;
+    background-position: 50%;
+
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar (optional) */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #ccc;
+  border-radius: 4px;
+}
+footer {
+    background: white;
+    height: 200px;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    &::before {
+     content: "";
+  
+    clip-path: polygon(0 100%, 30% 0, 36% 100%, 100% 0, 100% 100%);
+ 
+    left: 0;
+    margin-bottom: -1px;
+    position: absolute;
+    right: 0;
+    background: #fff;
+    bottom: 100%;
+    height: 26px;
+  }
+}
