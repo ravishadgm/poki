@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
+import Header from "@/layout/Header/Page";
 
 const sizePattern = [
   { colSpan: 2, rowSpan: 1 },
@@ -41,7 +42,6 @@ export default function GameGrid({ games }) {
   const [selectedGame, setSelectedGame] = useState(null);
   const [gridCols, setGridCols] = useState(17);
 
-
   useEffect(() => {
     const updateCols = () => {
       const width = window.innerWidth;
@@ -58,16 +58,28 @@ export default function GameGrid({ games }) {
   const occupied = {};
   const positions = [];
 
+  // First, place the header at position (1,1) with span 2
+  const headerColSpan = Math.min(2, gridCols); // Changed from 3 to 2
+  const headerRowSpan = 1;
+  
+  // Mark header position as occupied
+  for (let r = 0; r < headerRowSpan; r++) {
+    for (let c = 0; c < headerColSpan; c++) {
+      occupied[`${1 + r},${1 + c}`] = true;
+    }
+  }
+
   const bottomRowCount = gridCols;
   const topGamesCount = games.length - bottomRowCount;
 
+  // Now place games starting after header
   games.forEach((_, index) => {
     const isBottomRow = index >= topGamesCount;
     const raw = isBottomRow
       ? { colSpan: 1, rowSpan: 1 }
       : sizePattern[index % sizePattern.length];
 
-    const colSpan = Math.min(raw.colSpan, gridCols); 
+    const colSpan = Math.min(raw.colSpan, gridCols);
     const rowSpan = raw.rowSpan;
 
     const { row, col } = findNextFreePos(occupied, colSpan, rowSpan, gridCols);
@@ -83,35 +95,49 @@ export default function GameGrid({ games }) {
 
   return (
     <>
-      <div className={styles.grid} style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}>
-        {games.map((game, idx) => {
-          const pos = positions[idx];
-          return (
-            <div
-              key={`${game.title}-${idx}`}
-              className={styles.card}
-              style={{
-                gridColumn: `${pos.colStart} / span ${pos.colSpan}`,
-                gridRow: `${pos.rowStart} / span ${pos.rowSpan}`,
-              }}
-              onClick={() => setSelectedGame(game)}
-            >
-              <img src={game.thumbnail} alt={game.title} />
-            </div>
-          );
-        })}
-      </div>
+      <div className={styles.container}>
+        <div className={styles.grid} style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}>
+          {/* Header as first grid item - now spans 2 columns */}
+          <div 
+            className={styles.headerGridItem}
+            style={{
+              gridColumn: `1 / span ${headerColSpan}`,
+              gridRow: `1 / span ${headerRowSpan}`,
+            }}
+          >
+            <Header />
+          </div>
 
-      {selectedGame && (
-        <div className={styles.player}>
-          <h2>{selectedGame.title}</h2>
-          <iframe
-            src={selectedGame.iframe}
-            allowFullScreen
-            title={selectedGame.title}
-          ></iframe>
+          {/* Game cards */}
+          {games.map((game, idx) => {
+            const pos = positions[idx];
+            return (
+              <div
+                key={`${game.title}-${idx}`}
+                className={styles.card}
+                style={{
+                  gridColumn: `${pos.colStart} / span ${pos.colSpan}`,
+                  gridRow: `${pos.rowStart} / span ${pos.rowSpan}`,
+                }}
+                onClick={() => setSelectedGame(game)}
+              >
+                <img src={game.thumbnail} alt={game.title} />
+              </div>
+            );
+          })}
         </div>
-      )}
+
+        {selectedGame && (
+          <div className={styles.player}>
+            <h2>{selectedGame.title}</h2>
+            <iframe
+              src={selectedGame.iframe}
+              allowFullScreen
+              title={selectedGame.title}
+            ></iframe>
+          </div>
+        )}
+      </div>
     </>
   );
 }

@@ -5,7 +5,6 @@ import Image from "next/image";
 import { Home, Search } from "lucide-react";
 import styles from "./Header.module.scss";
 import Images from "../../assets/images";
-
 import { useRouter } from 'next/navigation';
 import SearchDrawer from "@/components/SearchDrawer/Page";
 
@@ -20,22 +19,25 @@ const Header = () => {
   return (
     <>
       <div className={styles.headerWrapper}>
-        <div className={styles.headerTop}>
-          <Image
-            src={Images.Logo}
-            alt="Poki Logo"
-            width={70}
-            height={70}
-            className={styles.logo}
-          />
-        </div>
-        <div className={styles.headerBottom}>
-
-          <div className={styles.iconBox} onClick={goToHome}>
-            <Home size={20} />
+        <div className={styles.headerContent}>
+          <div className={styles.logoContainer}>
+            <Image
+              src={Images.Logo}
+              alt="Poki Logo"
+              width={40}
+              height={40}
+              className={styles.logo}
+              onClick={goToHome}
+            />
           </div>
-          <div className={styles.iconBox} onClick={() => setOpenDrawer(true)}>
-            <Search size={20} />
+          
+          <div className={styles.navIcons}>
+            <div className={styles.iconBox} onClick={goToHome}>
+              <Home size={18} />
+            </div>
+            <div className={styles.iconBox} onClick={() => setOpenDrawer(true)}>
+              <Search size={18} />
+            </div>
           </div>
         </div>
       </div>
@@ -50,4 +52,3 @@ const Header = () => {
 };
 
 export default Header;
-
