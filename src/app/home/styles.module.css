@@ -1,6 +1,0 @@
-/* app/home/styles.module.css */
-.container { padding: 2rem; font-family: sans-serif; }
-.grid { display: flex; flex-wrap: wrap; gap: 20px; }
-.card { width: 250px; border: 1px solid #ddd; border-radius: 8px; padding: 10px; }
-.card img { width: 100%; cursor: pointer; }
-.card h3 { font-size: 1rem; margin: 10px 0 0; }
