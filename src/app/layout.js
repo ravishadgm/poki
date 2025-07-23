@@ -1,5 +1,5 @@
 
-import Header from '@/components/Header/Page'
+import Header from '@/layout/Header/Page'
 import '../styles/main.scss'
 
 export const metadata = {

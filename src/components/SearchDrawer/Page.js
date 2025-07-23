@@ -2,8 +2,9 @@ import React from "react";
 import styles from "./Searchbar.module.scss";
 import { Search } from "lucide-react";
 import Image from "next/image";
-import Images from "../../../assets/images/index";
+
 import { ChevronLeft } from 'lucide-react';
+import images from "@/assets/images";
 
 const SearchDrawer = ({ setOpenDrawer }) => {
 
@@ -11,7 +12,7 @@ const SearchDrawer = ({ setOpenDrawer }) => {
     const games = [
         {
             title: 'Game1',
-            image: Images.Game1,
+            image: images.Game1,
             video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
         },
         {
