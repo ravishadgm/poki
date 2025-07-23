@@ -14,7 +14,7 @@ export default async function GamePage({ params }) {
   const games = await getGames();
   const game = games.find((g) => g.slug === params.slug);
 
-  if (!game) return notFound(); // or use: return <div>Game not found</div>;
+  if (!game) return notFound(); 
 
   return <GamePlay game={game} />;
 }

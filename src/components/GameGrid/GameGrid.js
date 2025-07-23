@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./styles.module.scss";
 import Header from "@/layout/Header/Page";
-import Image from 'next/image';
+import Image from "next/image";
+
 const sizePattern = [
   { colSpan: 2, rowSpan: 1 },
   { colSpan: 3, rowSpan: 2 },
@@ -45,27 +46,30 @@ export default function GameGrid({ games }) {
   const [gridCols, setGridCols] = useState(17);
   const router = useRouter();
 
-  useEffect(() => {
-    const updateCols = () => {
-      const width = window.innerWidth;
-      if (width <= 480) setGridCols(2);
-      else if (width <= 768) setGridCols(4);
-      else if (width <= 1024) setGridCols(8);
-      else setGridCols(17);
-    };
-    updateCols();
-    window.addEventListener("resize", updateCols);
-    return () => window.removeEventListener("resize", updateCols);
-  }, []);
+useEffect(() => {
+  const updateCols = () => {
+    const width = window.innerWidth;
+
+    if (width <= 480) setGridCols(2);         // Mobile
+    else if (width <= 768) setGridCols(4);    // Tablet
+    else if (width <= 1024) setGridCols(8);   // Small Laptop
+    else if (width <= 1366) setGridCols(12);  // Medium Laptop
+    else if (width <= 1700) setGridCols(14);  // Large Laptop
+    else setGridCols(17);                     // Desktop or ultrawide
+  };
+
+  updateCols();
+  window.addEventListener("resize", updateCols);
+  return () => window.removeEventListener("resize", updateCols);
+}, []);
+
 
   const occupied = {};
   const positions = [];
 
-  // First, place the header at position (1,1) with span 2
-  const headerColSpan = Math.min(2, gridCols); // Changed from 3 to 2
+  const headerColSpan = Math.min(2, gridCols);
   const headerRowSpan = 1;
-  
-  // Mark header position as occupied
+
   for (let r = 0; r < headerRowSpan; r++) {
     for (let c = 0; c < headerColSpan; c++) {
       occupied[`${1 + r},${1 + c}`] = true;
@@ -75,7 +79,6 @@ export default function GameGrid({ games }) {
   const bottomRowCount = gridCols;
   const topGamesCount = games.length - bottomRowCount;
 
-  // Now place games starting after header
   games.forEach((_, index) => {
     const isBottomRow = index >= topGamesCount;
     const raw = isBottomRow
@@ -127,7 +130,6 @@ export default function GameGrid({ games }) {
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
               onClick={() => router.push(`/home/${game.slug}`)}
-
             >
               {isHovered && game.video ? (
                 <video

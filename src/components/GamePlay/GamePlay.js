@@ -6,26 +6,14 @@ import styles from "./styles.module.scss";
 import Header from "@/layout/Header/Page";
 import Image from "next/image";
 
-const sizePattern = [
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 2, rowSpan: 2 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-  { colSpan: 1, rowSpan: 1 },
-];
+// Reusable Blue Ad Component
+const BlueAd = () => (
+  <div className={styles.blueDiv}>
+    Right Side Ad (Visible on all devices)
+  </div>
+);
 
+const sizePattern = new Array(50).fill({ colSpan: 1, rowSpan: 1 });
 const MAX_ROWS = 100;
 
 function findNextFreePos(occupied, colSpan, rowSpan, gridCols) {
@@ -49,17 +37,34 @@ function findNextFreePos(occupied, colSpan, rowSpan, gridCols) {
 
 export default function GamePlay({ game }) {
   const [extraGames, setExtraGames] = useState([]);
-  const [gridCols, setGridCols] = useState(17);
+  const [gridCols, setGridCols] = useState(14);
+  const [isMobile, setIsMobile] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     const updateCols = () => {
       const width = window.innerWidth;
-      if (width <= 480) setGridCols(2);
-      else if (width <= 768) setGridCols(4);
-      else if (width <= 1024) setGridCols(8);
-      else setGridCols(17);
+      if (width <= 480) {
+        setGridCols(2);
+        setIsMobile(true);
+      } else if (width <= 768) {
+        setGridCols(4);
+        setIsMobile(true);
+      } else if (width <= 1024) {
+        setGridCols(8);
+        setIsMobile(false);
+      } else if (width <= 1366) {
+        setGridCols(12);
+        setIsMobile(false);
+      } else if (width <= 1700) {
+        setGridCols(14);
+        setIsMobile(false);
+      } else {
+        setGridCols(17);
+        setIsMobile(false);
+      }
     };
+
     updateCols();
     window.addEventListener("resize", updateCols);
     return () => window.removeEventListener("resize", updateCols);
@@ -67,10 +72,14 @@ export default function GamePlay({ game }) {
 
   useEffect(() => {
     async function fetchGames() {
-      const res = await fetch("/data/games.json");
-      const data = await res.json();
-      const filtered = data.filter((g) => g.slug !== game.slug);
-      setExtraGames(filtered.slice(0, 100));
+      try {
+        const res = await fetch("/data/games.json");
+        const data = await res.json();
+        const filtered = data.filter((g) => g.slug !== game.slug);
+        setExtraGames(filtered.slice(0, 100));
+      } catch (error) {
+        console.error("Failed to fetch games:", error);
+      }
     }
     fetchGames();
   }, [game.slug]);
@@ -78,113 +87,155 @@ export default function GamePlay({ game }) {
   const occupied = {};
   const elements = [];
 
-  // Static Elements
-  const staticElements = [
-    {
-      type: "header",
-      colSpan: 2,
-      rowSpan: 1,
-      content: <Header />,
-    },
-   {
-  type: "iframe",
-  colSpan: 9,
-  rowSpan: 5,
-  content: (
-    <div className={styles.player}>
-      <iframe src={game.iframe} title={game.title} allowFullScreen />
-    </div>
-  ),
-},
+  if (isMobile) {
+    return (
+      <div className={styles.mobileContainer}>
+        <div className={styles.mobileHeader}>
+          <Header />
+        </div>
 
-    {
-      type: "left-sidebar",
-      colSpan: 2,
-      rowSpan: 8,
-      content: (
-        <div className={styles.leftSidebar}>
-          {extraGames.slice(0, 6).map((sideGame, idx) => (
+        <div className={styles.mobilePlayer}>
+          <iframe
+            src={game.iframe}
+            title={game.title}
+            allowFullScreen
+            className={styles.mobileIframe}
+          />
+        </div>
+
+        {/* Blue Ad below iframe on mobile */}
+        <div className={styles.mobileAd}>
+          <BlueAd />
+        </div>
+
+        <div className={styles.mobileAd}>
+          <div className={styles.adContainer}>
+            <span className={styles.adLabel}>Advertisement</span>
+            <div className={styles.adContent}>Bottom Banner Ad</div>
+          </div>
+        </div>
+
+        <div
+          className={styles.mobileGrid}
+          style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}
+        >
+          {extraGames.map((g, index) => (
             <div
-              key={`sidebar-${sideGame.slug}-${idx}`}
-              className={styles.sidebarGameCard}
-              onClick={() => router.push(`/home/${sideGame.slug}`)}
+              key={`mobile-game-${g.slug}-${index}`}
+              className={styles.mobileGameCard}
+              onClick={() => router.push(`/home/${g.slug}`)}
             >
               <Image
-                src={sideGame.thumbnail}
-                alt={sideGame.title}
+                src={g.thumbnail}
+                alt={g.title}
                 fill
-                className={styles.sidebarImage}
                 style={{ objectFit: "cover" }}
+                className={styles.gameImage}
               />
+              <div className={styles.gameTitle}>{g.title}</div>
             </div>
           ))}
         </div>
+      </div>
+    );
+  }
+
+  const staticElements = [
+    {
+      type: "header",
+      col: 1,
+      row: 1,
+      colSpan: gridCols <= 8 ? gridCols : 2,
+      rowSpan: 1,
+      content: <Header />,
+    },
+    {
+      type: "iframe",
+      col: gridCols <= 8 ? 1 : 3,
+      row: gridCols <= 8 ? 2 : 1,
+      colSpan: gridCols <= 8 ? gridCols : Math.min(10, gridCols - 4),
+      rowSpan: gridCols <= 8 ? 4 : 5,
+      content: (
+        <div className={styles.player}>
+          <iframe
+            src={game.iframe}
+            title={game.title}
+            allowFullScreen
+            className={styles.desktopIframe}
+          />
+        </div>
       ),
     },
+    ...(gridCols > 8
+      ? [
+          {
+            type: "left-sidebar",
+            col: 1,
+            row: 2,
+            colSpan: 2,
+            rowSpan: 8,
+            content: (
+              <div className={styles.leftSidebar}>
+                {extraGames.slice(0, 6).map((sideGame, idx) => (
+                  <div
+                    key={`sidebar-${sideGame.slug}-${idx}`}
+                    className={styles.sidebarGameCard}
+                    onClick={() => router.push(`/home/${sideGame.slug}`)}
+                  >
+                    <Image
+                      src={sideGame.thumbnail}
+                      alt={sideGame.title}
+                      fill
+                      className={styles.sidebarImage}
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                ))}
+              </div>
+            ),
+          },
+        ]
+      : []),
+
+    // ✅ Blue Ad always included
     {
-      type: "blue-div-1",
-      colSpan:4,
-      rowSpan: 4,
-      content: <div className={styles.blueDiv}></div>,
-    },
-    {
-      type: "blue-div-2",
+      type: "blue-div",
+      col: gridCols - 1,
+      row: 1,
       colSpan: 2,
-      rowSpan: 5,
-      content: <div className={styles.blueDiv}></div>,
+      rowSpan: 6,
+      content: <BlueAd />,
+    },
+
+    {
+      type: "bottom-ad",
+      col: gridCols <= 8 ? 1 : 3,
+      row: gridCols <= 8 ? 6 : 6,
+      colSpan: gridCols <= 8 ? gridCols : Math.min(10, gridCols - 4),
+      rowSpan: 1,
+      content: (
+        <div className={styles.adContainer}>
+          <span className={styles.adLabel}>Advertisement</span>
+          <div className={styles.adContent}>Bottom Banner Ad</div>
+        </div>
+      ),
     },
   ];
 
   staticElements.forEach((item) => {
-    const { colSpan, rowSpan } = item;
-    const pos = findNextFreePos(occupied, colSpan, rowSpan, gridCols);
-
+    const { row, col, rowSpan, colSpan } = item;
     for (let r = 0; r < rowSpan; r++) {
       for (let c = 0; c < colSpan; c++) {
-        occupied[`${pos.row + r},${pos.col + c}`] = true;
+        occupied[`${row + r},${col + c}`] = true;
       }
     }
-
-    elements.push({ ...item, ...pos });
+    elements.push(item);
   });
 
-  // Extra Games
-  let extraGameCount = 0;
-  extraGames.slice(6).forEach((g, index) => {
-    if (extraGameCount === 10) {
-      const pos = findNextFreePos(occupied, 8, 1, gridCols);
-      for (let r = 0; r < 1; r++) {
-        for (let c = 0; c < 8; c++) {
-          occupied[`${pos.row + r},${pos.col + c}`] = true;
-        }
-      }
-      elements.push({
-        type: "horizontal-blue-div",
-        colSpan: 8,
-        rowSpan: 1,
-        ...pos,
-        content: <div className={styles.horizontalBlueDiv}></div>,
-      });
-    }
-
-    if (extraGameCount === 15) {
-      const pos = findNextFreePos(occupied, 2, 3, gridCols);
-      for (let r = 0; r < 3; r++) {
-        for (let c = 0; c < 2; c++) {
-          occupied[`${pos.row + r},${pos.col + c}`] = true;
-        }
-      }
-      elements.push({
-        type: `tall-blue-div`,
-        colSpan: 2,
-        rowSpan: 3,
-        ...pos,
-        content: <div className={styles.tallBlueDiv}></div>,
-      });
-    }
-
+  const startIndex = gridCols > 8 ? 6 : 0;
+  extraGames.slice(startIndex).forEach((g, index) => {
     const pattern = sizePattern[index % sizePattern.length];
-    const colSpan = Math.min(pattern.colSpan, gridCols);
+    const colSpan = Math.min(pattern.colSpan, Math.floor(gridCols / 4));
     const rowSpan = pattern.rowSpan;
     const pos = findNextFreePos(occupied, colSpan, rowSpan, gridCols);
 
@@ -201,8 +252,6 @@ export default function GamePlay({ game }) {
       rowSpan,
       ...pos,
     });
-
-    extraGameCount++;
   });
 
   return (
@@ -222,6 +271,7 @@ export default function GamePlay({ game }) {
             style={{
               gridColumn: `${el.col} / span ${el.colSpan}`,
               gridRow: `${el.row} / span ${el.rowSpan}`,
+              aspectRatio: el.type === "game" ? "1 / 1" : "auto",
             }}
             onClick={() => {
               if (el.type === "game") {
@@ -235,6 +285,7 @@ export default function GamePlay({ game }) {
                 alt={el.game.title}
                 fill
                 style={{ objectFit: "cover" }}
+                className={styles.gameImage}
               />
             ) : el.type === "header" ? (
               <div className={styles.headerGridItem}>{el.content}</div>
