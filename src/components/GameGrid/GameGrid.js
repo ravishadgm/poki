@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import Header from "@/layout/Header/Page";
-
+import Image from 'next/image';
 const sizePattern = [
   { colSpan: 2, rowSpan: 1 },
   { colSpan: 3, rowSpan: 2 },
@@ -121,7 +121,8 @@ export default function GameGrid({ games }) {
                 }}
                 onClick={() => setSelectedGame(game)}
               >
-                <img src={game.thumbnail} alt={game.title} />
+               <Image src={game?.thumbnail} alt={game.title} fill />
+
               </div>
             );
           })}

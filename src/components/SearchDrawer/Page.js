@@ -17,27 +17,27 @@ const SearchDrawer = ({ setOpenDrawer }) => {
         },
         {
             title: 'Game2',
-            image: Images.Game2,
+           image: images.Game1,
             video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
         },
         {
             title: 'Game3',
-            image: Images.Game3,
+           image: images.Game1,
             video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
         },
         {
             title: 'Game4',
-            image: Images.Game4,
+         image: images.Game1,
             video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
         },
         {
             title: 'Game5',
-            image: Images.Game1,
+            image: images.Game1,
             video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
         },
         {
             title: 'Game6',
-            image: Images.Game2,
+            image: images.Game1,
             video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
         },
     ];
@@ -45,12 +45,12 @@ const SearchDrawer = ({ setOpenDrawer }) => {
     const games2 = [
         {
             title: 'Game1',
-            image: Images.Game1,
+          image: images.Game1,
             video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
         },
         {
             title: 'Game2',
-            image: Images.Game2,
+        image: images.Game1,
             video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
         },
     ]
@@ -65,7 +65,7 @@ const SearchDrawer = ({ setOpenDrawer }) => {
                             <ChevronLeft size={24} />
                         </div>
                         <Image
-                            src={Images.SmallLogo}
+                            src={images.Game1}
                             alt="Poki Small Logo"
                             width={38}
                             height={38}

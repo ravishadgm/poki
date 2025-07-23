@@ -10,8 +10,6 @@ export default async function HomePage() {
   const games = await getGames();
 
   return (
-    
-      <GameGrid games={games} />
- 
+    <GameGrid games={games} />
   );
 }
