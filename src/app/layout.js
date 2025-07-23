@@ -1,4 +1,5 @@
 
+import Header from '@/components/Header/Page'
 import '../styles/main.scss'
 
 export const metadata = {
@@ -10,9 +11,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <header>
-        
-        </header>
+        <Header />
         <main>{children}</main>
         <footer>this is footer</footer>
       </body>
