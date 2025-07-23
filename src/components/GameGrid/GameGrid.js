@@ -1,5 +1,7 @@
 "use client";
+
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import styles from "./styles.module.scss";
 import Header from "@/layout/Header/Page";
 import Image from 'next/image';
@@ -39,8 +41,9 @@ function findNextFreePos(occupied, colSpan, rowSpan, gridCols) {
 }
 
 export default function GameGrid({ games }) {
-  const [selectedGame, setSelectedGame] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const [gridCols, setGridCols] = useState(17);
+  const router = useRouter();
 
   useEffect(() => {
     const updateCols = () => {
@@ -94,51 +97,60 @@ export default function GameGrid({ games }) {
   });
 
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.grid} style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}>
-          {/* Header as first grid item - now spans 2 columns */}
-          <div 
-            className={styles.headerGridItem}
-            style={{
-              gridColumn: `1 / span ${headerColSpan}`,
-              gridRow: `1 / span ${headerRowSpan}`,
-            }}
-          >
-            <Header />
-          </div>
-
-          {/* Game cards */}
-          {games.map((game, idx) => {
-            const pos = positions[idx];
-            return (
-              <div
-                key={`${game.title}-${idx}`}
-                className={styles.card}
-                style={{
-                  gridColumn: `${pos.colStart} / span ${pos.colSpan}`,
-                  gridRow: `${pos.rowStart} / span ${pos.rowSpan}`,
-                }}
-                onClick={() => setSelectedGame(game)}
-              >
-               <Image src={game?.thumbnail} alt={game.title} fill />
-
-              </div>
-            );
-          })}
+    <div className={styles.container}>
+      <div
+        className={styles.grid}
+        style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}
+      >
+        <div
+          className={styles.headerGridItem}
+          style={{
+            gridColumn: `1 / span ${headerColSpan}`,
+            gridRow: `1 / span ${headerRowSpan}`,
+          }}
+        >
+          <Header />
         </div>
 
-        {selectedGame && (
-          <div className={styles.player}>
-            <h2>{selectedGame.title}</h2>
-            <iframe
-              src={selectedGame.iframe}
-              allowFullScreen
-              title={selectedGame.title}
-            ></iframe>
-          </div>
-        )}
+        {games.map((game, idx) => {
+          const pos = positions[idx];
+          const isHovered = hoveredIndex === idx;
+
+          return (
+            <div
+              key={`${game.title}-${idx}`}
+              className={styles.card}
+              style={{
+                gridColumn: `${pos.colStart} / span ${pos.colSpan}`,
+                gridRow: `${pos.rowStart} / span ${pos.rowSpan}`,
+              }}
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => router.push(`/home/${game.slug}`)}
+
+            >
+              {isHovered && game.video ? (
+                <video
+                  src={game.video}
+                  muted
+                  autoPlay
+                  loop
+                  playsInline
+                  className={styles.videoPreview}
+                />
+              ) : (
+                <Image
+                  src={game.thumbnail}
+                  alt={game.title}
+                  fill
+                  className={styles.cardImage}
+                  style={{ objectFit: "cover" }}
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
-    </>
+    </div>
   );
 }
