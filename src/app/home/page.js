@@ -1,18 +1,17 @@
-// app/home/page.js
-import ClientGameGrid from './ClientGameGrid';
-import styles from './styles.module.css';
+import GameGrid from "@/components/GameGrid/GameGrid";
+
+async function getGames() {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+  const res = await fetch(`${baseUrl}/data/games.json`, { cache: 'no-store' });
+  return res.json();
+}
 
 export default async function HomePage() {
-  const res = await fetch('https://api.gamezop.com/v3/games', {
-    headers: { Authorization: 'Bearer YOUR_API_KEY' }
-  });
-  const json = await res.json();
-  const games = json.data || [];
+  const games = await getGames();
 
   return (
-    <div className={styles.container}>
-      <h1>Gamezop HTML5 Games</h1>
-      <ClientGameGrid games={games} />
-    </div>
+    
+      <GameGrid games={games} />
+ 
   );
 }

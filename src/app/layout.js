@@ -11,7 +11,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
         <header>
-          <h1>My Game Site</h1>
+        
         </header>
         <main>{children}</main>
         <footer>this is footer</footer>
