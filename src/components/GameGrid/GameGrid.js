@@ -2,7 +2,8 @@
 import { useState, useEffect } from "react";
 import styles from "./styles.module.scss";
 import Header from "@/layout/Header/Page";
-import Image from 'next/image';
+import Image from "next/image";
+
 const sizePattern = [
   { colSpan: 2, rowSpan: 1 },
   { colSpan: 3, rowSpan: 2 },
@@ -40,6 +41,7 @@ function findNextFreePos(occupied, colSpan, rowSpan, gridCols) {
 
 export default function GameGrid({ games }) {
   const [selectedGame, setSelectedGame] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
   const [gridCols, setGridCols] = useState(17);
 
   useEffect(() => {
@@ -58,11 +60,9 @@ export default function GameGrid({ games }) {
   const occupied = {};
   const positions = [];
 
-  // First, place the header at position (1,1) with span 2
-  const headerColSpan = Math.min(2, gridCols); // Changed from 3 to 2
+  const headerColSpan = Math.min(2, gridCols);
   const headerRowSpan = 1;
-  
-  // Mark header position as occupied
+
   for (let r = 0; r < headerRowSpan; r++) {
     for (let c = 0; c < headerColSpan; c++) {
       occupied[`${1 + r},${1 + c}`] = true;
@@ -72,7 +72,6 @@ export default function GameGrid({ games }) {
   const bottomRowCount = gridCols;
   const topGamesCount = games.length - bottomRowCount;
 
-  // Now place games starting after header
   games.forEach((_, index) => {
     const isBottomRow = index >= topGamesCount;
     const raw = isBottomRow
@@ -94,51 +93,67 @@ export default function GameGrid({ games }) {
   });
 
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.grid} style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}>
-          {/* Header as first grid item - now spans 2 columns */}
-          <div 
-            className={styles.headerGridItem}
-            style={{
-              gridColumn: `1 / span ${headerColSpan}`,
-              gridRow: `1 / span ${headerRowSpan}`,
-            }}
-          >
-            <Header />
-          </div>
-
-          {/* Game cards */}
-          {games.map((game, idx) => {
-            const pos = positions[idx];
-            return (
-              <div
-                key={`${game.title}-${idx}`}
-                className={styles.card}
-                style={{
-                  gridColumn: `${pos.colStart} / span ${pos.colSpan}`,
-                  gridRow: `${pos.rowStart} / span ${pos.rowSpan}`,
-                }}
-                onClick={() => setSelectedGame(game)}
-              >
-               <Image src={game?.thumbnail} alt={game.title} fill />
-
-              </div>
-            );
-          })}
+    <div className={styles.container}>
+      <div className={styles.grid} style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}>
+        <div
+          className={styles.headerGridItem}
+          style={{
+            gridColumn: `1 / span ${headerColSpan}`,
+            gridRow: `1 / span ${headerRowSpan}`,
+          }}
+        >
+          <Header />
         </div>
 
-        {selectedGame && (
-          <div className={styles.player}>
-            <h2>{selectedGame.title}</h2>
-            <iframe
-              src={selectedGame.iframe}
-              allowFullScreen
-              title={selectedGame.title}
-            ></iframe>
-          </div>
-        )}
+        {games.map((game, idx) => {
+          const pos = positions[idx];
+          const isHovered = hoveredIndex === idx;
+
+          return (
+            <div
+              key={`${game.title}-${idx}`}
+              className={styles.card}
+              style={{
+                gridColumn: `${pos.colStart} / span ${pos.colSpan}`,
+                gridRow: `${pos.rowStart} / span ${pos.rowSpan}`,
+              }}
+              onMouseEnter={() => setHoveredIndex(idx)}
+              onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => setSelectedGame(game)}
+            >
+              {isHovered && game.video ? (
+                <video
+                  src={game.video}
+                  muted
+                  autoPlay
+                  loop
+                  playsInline
+                  className={styles.videoPreview}
+                />
+              ) : (
+                <Image
+                  src={game.thumbnail}
+                  alt={game.title}
+                  fill
+                  className={styles.cardImage}
+                  style={{ objectFit: "cover" }}
+                />
+              )}
+            </div>
+          );
+        })}
       </div>
-    </>
+
+      {selectedGame && (
+        <div className={styles.player}>
+          <h2>{selectedGame.title}</h2>
+          <iframe
+            src={selectedGame.iframe}
+            allowFullScreen
+            title={selectedGame.title}
+          ></iframe>
+        </div>
+      )}
+    </div>
   );
 }
