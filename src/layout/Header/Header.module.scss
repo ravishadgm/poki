@@ -1,65 +1,89 @@
-@import "../../styles/variables";
+@use "../../styles/variables" as *;
 
 .headerWrapper {
+  background: $white-color;
+  border-radius: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  // margin: 20px;
   width: 100%;
   height: 100%;
-  background: $white-color;
-  border-radius: 16px;
-  box-shadow: 0px 7px 15px 6px rgba(93, 107, 132, 0.4); // Enhanced shadow for sticky effect
-  display: flex;
-  align-items: center;
-  padding: 0 15px;
-  box-sizing: border-box;
-  backdrop-filter: blur(10px); // Optional: adds a subtle blur effect
 }
 
-.headerContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.headerTop {
   width: 100%;
-  gap: 10px;
-}
-
-.logoContainer {
+  height: 55%;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .logo {
   object-fit: contain;
   transition: transform 0.3s ease;
-  cursor: pointer;
+  width:85%;
+  height: 85%;
+   min-height: 70px;
+ 
 
-  &:hover {
+  &:hover{
     transform: scale(1.1);
   }
 }
 
-.navIcons {
+.headerBottom {
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
+  height: 45%;
+  border-top: 2px solid #f0f5fc;
+
+ 
 }
 
 .iconBox {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+  width: 90%;
+  height: 100%;
   cursor: pointer;
   transition: background 0.2s ease;
-  background: #f8f9fa;
 
   &:hover {
-    background: #f0f5fc;
+    background:  #f0f5fc;
+  }
+
+  &:nth-child(1) {
+    border-bottom-left-radius: 20px; 
+    
+
+    @media(min-width:1870px){
+      border-bottom-left-radius: 0px; 
+      border-top-right-radius: 20px; 
+      padding-bottom: 10px !important;
+    }
+
+    
+  }
+
+  &:nth-child(2) {
+    border-bottom-right-radius: 20px;
+    
   }
 
   svg {
-    stroke-width: 2.5;
-    color: #009cff;
+    stroke-width: 3.5;
+    color:#009cff;
+  }
+
+  &:nth-child(2) {
+    border-left: 2px solid #f0f5fc;
+
+    @media(min-width:1870px){
+      border-left: none;
+      border-top: 2px solid #f0f5fc;
+      padding-top: 10px;
+    }
   }
 }
 
@@ -70,6 +94,50 @@
   width: 100vw;
   height: 100vh;
   z-index: 999;
-  overflow: visible;
   display: flex;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  pointer-events: all;
 }
+
+.drawerWrapper.close {
+  transform: translateX(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.drawerWrapper.open {
+  transform: translateX(0%);
+  opacity: 1;
+  pointer-events: all;
+}
+
+
+
+@media(min-width:1870px){
+  .headerWrapper{
+    display: flex;
+    align-items: center;
+    
+    
+  }
+
+
+  .headerBottom{
+    flex-direction: column;
+    width:50%;
+    border-top: none;
+  }
+
+  .headerTop{
+    .logo{
+      width:90%;
+      height: 90%;
+      min-height: 100px;
+  }
+  }
+}
+
+
+
+
+

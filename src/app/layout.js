@@ -1,6 +1,7 @@
 
 import Header from '@/layout/Header/Page'
 import '../styles/main.scss'
+import Footer from '@/layout/Footer/Page'
 
 export const metadata = {
   title: 'Poki',
@@ -13,7 +14,8 @@ export default function RootLayout({ children }) {
       <body>
         {/* <Header /> */}
         <main>{children}</main>
-        <footer>this is footer</footer>
+
+        <Footer />
       </body>
     </html>
   )

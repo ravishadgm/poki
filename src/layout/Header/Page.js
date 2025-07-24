@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Home, Search } from "lucide-react";
 import styles from "./Header.module.scss";
@@ -10,41 +10,50 @@ import SearchDrawer from "@/components/SearchDrawer/Page";
 
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [visible, setVisible] = useState(false);
   const router = useRouter();
 
   const goToHome = () => {
     router.push('/');
   };
 
+  const handleOpenDrawer = () => {
+    setVisible(true);
+    setTimeout(() => {
+      setOpenDrawer(true);
+    }, 10);
+  };
+
+  const handleCloseDrawer = () => {
+    setOpenDrawer(false);
+    setTimeout(() => {
+      setVisible(false);
+    }, 500);
+  };
+
   return (
     <>
       <div className={styles.headerWrapper}>
-        <div className={styles.headerContent}>
-          <div className={styles.logoContainer}>
-            <Image
-              src={Images.Logo}
-              alt="Poki Logo"
-              width={40}
-              height={40}
-              className={styles.logo}
-              onClick={goToHome}
-            />
+        <div className={styles.headerTop}>
+          <Image
+            src={Images.Logo}
+            alt="Poki Logo"
+            className={styles.logo}
+          />
+        </div>
+        <div className={styles.headerBottom}>
+          <div className={styles.iconBox} onClick={goToHome}>
+            <Home size={20} />
           </div>
-          
-          <div className={styles.navIcons}>
-            <div className={styles.iconBox} onClick={goToHome}>
-              <Home size={18} />
-            </div>
-            <div className={styles.iconBox} onClick={() => setOpenDrawer(true)}>
-              <Search size={18} />
-            </div>
+          <div className={styles.iconBox} onClick={handleOpenDrawer}>
+            <Search size={20} />
           </div>
         </div>
       </div>
 
-      {openDrawer && (
-        <div className={styles.drawerWrapper}>
-          <SearchDrawer setOpenDrawer={setOpenDrawer} />
+      {visible && (
+        <div className={`${styles.drawerWrapper} ${openDrawer ? styles.open : styles.close}`}>
+          <SearchDrawer setOpenDrawer={handleCloseDrawer} />
         </div>
       )}
     </>
