@@ -1,10 +1,5 @@
-@use './variables' as *;
 
-:root {
-  --wrap: 1600px;
-  --wrapspace: 30px;
-  --paddingTopBottom:15px;
-}
+
 
 *,
 *::before,
@@ -25,7 +20,7 @@ body {
   color: #111;
   scroll-behavior: smooth;
   margin: 0px !important;
-  background-color: var(--primary-green);
+  background-color: $primary-green;
   background-image: url('/images/bg-diamante.svg');
   background-repeat: no-repeat;
   background-size: cover;
