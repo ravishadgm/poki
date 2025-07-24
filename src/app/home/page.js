@@ -1,6 +1,7 @@
 import AboutGame from "@/components/AboutGame/AboutGame";
 import AboutPoki from "@/components/AboutPoki/AboutPoki";
 import GameGrid from "@/components/GameGrid/GameGrid";
+import SmallGameGrid from "@/components/SmallGameGrid/SmallGameGrid";
 
 async function getGames() {
   const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
@@ -14,7 +15,9 @@ export default async function HomePage() {
   return (
     <>
       <GameGrid games={games} />
+      <SmallGameGrid />
       <AboutPoki />
+
       {/* <AboutGame /> */}
     </>
 

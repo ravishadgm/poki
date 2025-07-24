@@ -6,7 +6,7 @@ import { Home, Search } from "lucide-react";
 import styles from "./Header.module.scss";
 import Images from "../../assets/images";
 import { useRouter } from 'next/navigation';
-import SearchDrawer from "@/components/SearchDrawer/Page";
+import SearchDrawer from "@/components/SearchDrawer/SearchDrawer";
 
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
