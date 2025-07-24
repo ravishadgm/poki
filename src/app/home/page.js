@@ -1,3 +1,4 @@
+import { AdSenseTestAd } from "@/components/AdSense/AdSenseTestAd";
 import GameGrid from "@/components/GameGrid/GameGrid";
 
 async function getGames() {
@@ -10,6 +11,7 @@ export default async function HomePage() {
   const games = await getGames();
 
   return (
-    <GameGrid games={games} />
+     <GameGrid games={games} />
+
   );
 }

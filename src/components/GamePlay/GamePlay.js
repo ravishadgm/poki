@@ -5,11 +5,16 @@ import { useRouter } from "next/navigation";
 import styles from "./styles.module.scss";
 import Header from "@/layout/Header/Page";
 import Image from "next/image";
+import { AdSenseTestAd } from "../AdSense/AdSenseTestAd";
+
 
 // Reusable Blue Ad Component
-const BlueAd = () => (
-  <div className={styles.blueDiv}>Right Side Ad (Visible on all devices)</div>
-);
+export const BlueAd = () => (
+<div className={styles.blueDiv}>
+           <AdSenseTestAd /> 
+    </div>
+)
+
 
 const sizePattern = new Array(50).fill({ colSpan: 1, rowSpan: 1 });
 const MAX_ROWS = 100;
@@ -220,12 +225,8 @@ export default function GamePlay({ game }) {
       row: 6,
       colSpan: isTabletLayout ? gridCols : Math.min(10, gridCols - 4),
       rowSpan: 1,
-      content: (
-        <div className={styles.adContainer}>
-          <span className={styles.adLabel}>Advertisement</span>
-          <div className={styles.adContent}>Bottom Banner Ad</div>
-        </div>
-      ),
+       content: <BlueAd />,
+   
     },
   ];
 
