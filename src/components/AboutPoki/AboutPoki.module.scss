@@ -1,34 +1,31 @@
-@use "../../styles/variables" as *;
-@use '../../assets/fonts/index.scss' as *;
 
-.mainContainer{
-    margin:85px 0;
 
-    @media(max-width:768px){
-        margin:65px 0;
-    }
+.mainContainer {
+  margin: 85px 0;
+
+  @media (max-width: 768px) {
+    margin: 65px 0;
+  }
 }
 
 .container {
-    max-width: 1860px;
-    margin: 0 auto; 
-    background: $white-color;
-    padding: 2rem;
-    box-shadow: $shadow-mid;
+  max-width: 1860px;
+  margin: 0 auto;
+  background: $white-color;
+  padding: 2rem;
+  box-shadow: $shadow-mid;
 
   h5 {
     font-size: 12px;
-    font-weight: $text-weight;
+    font-weight: var(--text-weight);
     color: $blue-text;
-    margin-bottom:6px;
-
+    margin-bottom: 6px;
   }
 
   h2 {
     font-size: 20px;
-    font-weight:$text-weight;
+    font-weight: var(--text-weight);
     color: $blue-text;
-   
   }
 
   h3 {
@@ -36,24 +33,24 @@
     font-weight: 400;
     line-height: 24px;
     color: $blue-text;
+
     margin-top: 1.5rem;
-     
   }
 
   p {
-       color: $blue-text !important;
+    color: $blue-text;
     font-size: 18px;
     color: #333;
     line-height: 1.6;
-     padding:20px 0px;
+    padding: 20px 0px;
 
     a {
       color: #054a91;
       text-decoration: underline;
       margin: 0 0.2rem;
 
-      &:hover{
-        color:#009cff;
+      &:hover {
+        color: #009cff;
       }
     }
   }
@@ -62,14 +59,14 @@
     list-style-type: disc;
     padding-left: 1.2rem;
     margin-bottom: 1.5rem;
-    margin-left:25px;
+    margin-left: 25px;
 
-    @media(max-width:768px){
-        margin-left:15px;
+    @media (max-width: 768px) {
+      margin-left: 15px;
     }
 
-    @media(max-width:480px){
-        margin-left:0px;
+    @media (max-width: 480px) {
+      margin-left: 0px;
     }
 
     li {
@@ -77,15 +74,15 @@
       margin-bottom: 0.4rem;
 
       &::marker {
-      color: $blue-text; 
-    }
+        color: $blue-text;
+      }
 
       a {
         color: #054a91;
         text-decoration: underline;
 
-          &:hover{
-            color:#009cff;
+        &:hover {
+          color: #009cff;
         }
       }
     }

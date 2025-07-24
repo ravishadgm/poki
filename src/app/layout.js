@@ -1,6 +1,6 @@
-// app/layout.tsx
+
 import Script from "next/script";
-import "../styles/main.scss";
+import '../styles/globals.scss'
 import Footer from "@/layout/Footer/Page";
 
 export const metadata = {
@@ -13,7 +13,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <head>
         {/* AdSense script */}
-
         <Script
           async
           strategy="afterInteractive"

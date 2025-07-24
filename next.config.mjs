@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  sassOptions: {
+    additionalData: `
+      @use "src/assets/fonts/index.scss" as *;
+      @use "src/styles/variables" as *;
+    `,
+  },
+}
 
-export default nextConfig;
+export default nextConfig
