@@ -1,0 +1,413 @@
+// Container styles
+.container {
+  width: 100%;
+  padding: 0 16px;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+// Desktop Grid Layout
+.grid {
+  display: grid;
+  grid-auto-rows: 100px;
+  gap: 20px;
+  padding-bottom: 40px;
+  
+  @media (max-width: 1024px) {
+    grid-auto-rows: 80px;
+    gap: 16px;
+  }
+  
+  @media (max-width: 768px) {
+    grid-auto-rows: 70px;
+    gap: 12px;
+  }
+}
+
+// Mobile Container
+.mobileContainer {
+  width: 100%;
+  min-height: 100vh;
+
+}
+
+.mobileHeader {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 12px 16px;
+}
+
+.mobilePlayer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  margin-bottom: 16px;
+}
+
+.mobileIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+.mobileAd {
+  margin: 16px;
+  height: 80px; // Fixed height for consistency
+  
+  @media (max-width: 480px) {
+    margin: 12px;
+    height: 70px;
+  }
+}
+
+.mobileGrid {
+  display: grid;
+  gap: 12px;
+  padding: 0 16px 40px;
+  grid-auto-rows: auto;
+}
+
+.mobileGameCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.gameTitle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  padding: 16px 8px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+  
+  @media (max-width: 480px) {
+    font-size: 10px;
+    padding: 12px 6px 6px;
+  }
+}
+
+// Desktop styles
+.headerGridItem {
+  position: sticky;
+  top: 16px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow: 0px 7px 10px 4px #5d6b844d;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.05);
+    z-index: 2;
+  }
+
+  &:has(.player) {
+    &:hover {
+      transform: none !important;
+    }
+    cursor: default;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+  
+  @media (max-width: 1024px) {
+    border-radius: 12px;
+    
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
+
+.gameImage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  pointer-events: none;
+  transition: transform 0.3s ease;
+  
+  .card:hover & {
+    transform: scale(1.1);
+  }
+}
+
+// Sidebar styles
+.leftSidebarContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+}
+
+.leftSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  height: 100%;
+
+  @media (max-width: 1024px) {
+    gap: 8px;
+    padding: 8px;
+  }
+}
+
+.sidebarGameCard {
+  position: relative;
+  width: 100%;
+  height: calc((100% - 60px) / 6);
+  min-height: 80px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0px 7px 10px 4px #5d6b844d;
+  background: #fff;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    z-index: 2;
+  }
+
+  @media (max-width: 1024px) {
+    min-height: 60px;
+    border-radius: 12px;
+  }
+}
+
+.sidebarImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+// Player styles
+.player {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  border-radius: 8px;
+  overflow: hidden;
+
+  iframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+  }
+}
+
+.desktopIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+// Ad Container - Consistent across all devices
+.adContainer {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  border: 2px dashed #6c757d;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: linear-gradient(135deg, #e9ecef, #dee2e6);
+    border-color: #495057;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (max-width: 768px) {
+    border-radius: 8px;
+    border-width: 1.5px;
+  }
+}
+
+.adLabel {
+  position: absolute;
+  top: 8px;
+  left: 12px;
+  background: #6c757d;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  
+  @media (max-width: 768px) {
+    font-size: 9px;
+    padding: 1px 6px;
+    top: 6px;
+    left: 8px;
+  }
+}
+.videoPreview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.adContent {
+  color: #6c757d;
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  letter-spacing: 0.5px;
+  
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
+  
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
+}
+
+// Blue div styles - Enhanced responsive behavior
+.blueDiv {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0px 7px 10px 4px rgba(0, 123, 255, 0.3);
+  transition: transform 0.2s ease, background 0.2s ease;
+  text-align: center;
+  padding: 8px;
+
+  &:hover {
+    transform: scale(1.02);
+    background: linear-gradient(135deg, #0056b3, #004494);
+  }
+  
+  @media (max-width: 1024px) {
+    border-radius: 12px;
+    font-size: 0.8rem;
+    padding: 6px;
+  }
+  
+  @media (max-width: 768px) {
+    border-radius: 8px;
+    font-size: 0.7rem;
+    padding: 4px;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 12px;
+  }
+  
+  // Ensure grid layout works properly on tablets
+  .grid {
+    grid-auto-rows: 80px;
+    gap: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0;
+  }
+  
+  .grid {
+    padding: 16px;
+    gap: 12px;
+    grid-auto-rows: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobileGrid {
+    gap: 8px;
+    padding: 0 12px 32px;
+  }
+  
+  .mobileGameCard {
+    border-radius: 8px;
+  }
+  
+  .mobileHeader {
+    padding: 8px 12px;
+  }
+  
+  .mobileAd {
+    margin: 12px;
+    height: 60px;
+  }
+}
