@@ -8,9 +8,7 @@ import Image from "next/image";
 
 // Reusable Blue Ad Component
 const BlueAd = () => (
-  <div className={styles.blueDiv}>
-    Right Side Ad (Visible on all devices)
-  </div>
+  <div className={styles.blueDiv}>Right Side Ad (Visible on all devices)</div>
 );
 
 const sizePattern = new Array(50).fill({ colSpan: 1, rowSpan: 1 });
@@ -39,6 +37,8 @@ export default function GamePlay({ game }) {
   const [extraGames, setExtraGames] = useState([]);
   const [gridCols, setGridCols] = useState(14);
   const [isMobile, setIsMobile] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredSidebarIndex, setHoveredSidebarIndex] = useState(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -93,7 +93,6 @@ export default function GamePlay({ game }) {
         <div className={styles.mobileHeader}>
           <Header />
         </div>
-
         <div className={styles.mobilePlayer}>
           <iframe
             src={game.iframe}
@@ -102,19 +101,15 @@ export default function GamePlay({ game }) {
             className={styles.mobileIframe}
           />
         </div>
-
-        {/* Blue Ad below iframe on mobile */}
         <div className={styles.mobileAd}>
           <BlueAd />
         </div>
-
         <div className={styles.mobileAd}>
           <div className={styles.adContainer}>
             <span className={styles.adLabel}>Advertisement</span>
             <div className={styles.adContent}>Bottom Banner Ad</div>
           </div>
         </div>
-
         <div
           className={styles.mobileGrid}
           style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}
@@ -140,21 +135,23 @@ export default function GamePlay({ game }) {
     );
   }
 
+  const isTabletLayout = gridCols <= 8;
+
   const staticElements = [
     {
       type: "header",
       col: 1,
       row: 1,
-      colSpan: gridCols <= 8 ? gridCols : 2,
+      colSpan: isTabletLayout ? gridCols : 2,
       rowSpan: 1,
       content: <Header />,
     },
     {
       type: "iframe",
-      col: gridCols <= 8 ? 1 : 3,
-      row: gridCols <= 8 ? 2 : 1,
-      colSpan: gridCols <= 8 ? gridCols : Math.min(10, gridCols - 4),
-      rowSpan: gridCols <= 8 ? 4 : 5,
+      col: isTabletLayout ? 1 : 3,
+      row: isTabletLayout ? 2 : 1,
+      colSpan: isTabletLayout ? gridCols - 2 : Math.min(10, gridCols - 4),
+      rowSpan: isTabletLayout ? 4 : 5,
       content: (
         <div className={styles.player}>
           <iframe
@@ -181,14 +178,27 @@ export default function GamePlay({ game }) {
                     key={`sidebar-${sideGame.slug}-${idx}`}
                     className={styles.sidebarGameCard}
                     onClick={() => router.push(`/home/${sideGame.slug}`)}
+                    onMouseEnter={() => setHoveredSidebarIndex(idx)}
+                    onMouseLeave={() => setHoveredSidebarIndex(null)}
                   >
-                    <Image
-                      src={sideGame.thumbnail}
-                      alt={sideGame.title}
-                      fill
-                      className={styles.sidebarImage}
-                      style={{ objectFit: "cover" }}
-                    />
+                    {hoveredSidebarIndex === idx && sideGame.video ? (
+                      <video
+                        src={sideGame.video}
+                        muted
+                        autoPlay
+                        loop
+                        playsInline
+                        className={styles.videoPreview}
+                      />
+                    ) : (
+                      <Image
+                        src={sideGame.thumbnail}
+                        alt={sideGame.title}
+                        fill
+                        className={styles.sidebarImage}
+                        style={{ objectFit: "cover" }}
+                      />
+                    )}
                   </div>
                 ))}
               </div>
@@ -196,22 +206,19 @@ export default function GamePlay({ game }) {
           },
         ]
       : []),
-
-    // ✅ Blue Ad always included
     {
       type: "blue-div",
       col: gridCols - 1,
       row: 1,
       colSpan: 2,
-      rowSpan: 6,
+      rowSpan: isTabletLayout ? 4 : 6,
       content: <BlueAd />,
     },
-
     {
       type: "bottom-ad",
-      col: gridCols <= 8 ? 1 : 3,
-      row: gridCols <= 8 ? 6 : 6,
-      colSpan: gridCols <= 8 ? gridCols : Math.min(10, gridCols - 4),
+      col: isTabletLayout ? 1 : 3,
+      row: 6,
+      colSpan: isTabletLayout ? gridCols : Math.min(10, gridCols - 4),
       rowSpan: 1,
       content: (
         <div className={styles.adContainer}>
@@ -273,6 +280,10 @@ export default function GamePlay({ game }) {
               gridRow: `${el.row} / span ${el.rowSpan}`,
               aspectRatio: el.type === "game" ? "1 / 1" : "auto",
             }}
+            onMouseEnter={() =>
+              el.type === "game" ? setHoveredIndex(idx) : null
+            }
+            onMouseLeave={() => setHoveredIndex(null)}
             onClick={() => {
               if (el.type === "game") {
                 router.push(`/home/${el.game.slug}`);
@@ -280,13 +291,24 @@ export default function GamePlay({ game }) {
             }}
           >
             {el.type === "game" ? (
-              <Image
-                src={el.game.thumbnail}
-                alt={el.game.title}
-                fill
-                style={{ objectFit: "cover" }}
-                className={styles.gameImage}
-              />
+              hoveredIndex === idx && el.game.video ? (
+                <video
+                  src={el.game.video}
+                  muted
+                  autoPlay
+                  loop
+                  playsInline
+                  className={styles.videoPreview}
+                />
+              ) : (
+                <Image
+                  src={el.game.thumbnail}
+                  alt={el.game.title}
+                  fill
+                  style={{ objectFit: "cover" }}
+                  className={styles.gameImage}
+                />
+              )
             ) : el.type === "header" ? (
               <div className={styles.headerGridItem}>{el.content}</div>
             ) : (
