@@ -1,6 +1,7 @@
 // app/layout.tsx
 import Script from "next/script";
 import "../styles/main.scss";
+import Footer from "@/layout/Footer/Page";
 
 export const metadata = {
   title: "Poki",
@@ -22,8 +23,8 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <main>{children}</main>
-        {/* REMOVE <AdSenseTestAd /> FROM HERE — it's a Client Component */}
-        <footer>this is footer</footer>
+
+        <Footer />
       </body>
     </html>
   );
