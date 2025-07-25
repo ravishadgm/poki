@@ -2,6 +2,7 @@
 
 .mainContainer {
   margin: 85px 0;
+  font-family: "Open Sans", "Noto Sans Arabic", sans-serif;
 
   @media (max-width: 768px) {
     margin: 65px 0;
@@ -24,8 +25,12 @@
 
   h2 {
     font-size: 20px;
-    font-weight: var(--text-weight);
+    font-weight: bolder;
     color: $blue-text;
+
+    @media(max-width:1440){
+      font-size: 18px;
+    }
   }
 
   h3 {
@@ -35,14 +40,22 @@
     color: $blue-text;
 
     margin-top: 1.5rem;
+
+    @media(max-width:1440px){
+      font-size:14px;
+    }
   }
 
   p {
     color: $blue-text;
-    font-size: 18px;
+    font-size: 16px;
     color: #333;
     line-height: 1.6;
     padding: 20px 0px;
+
+     @media(max-width:1440px){
+      font-size:14px;
+    }
 
     a {
       color: #054a91;
@@ -70,8 +83,12 @@
     }
 
     li {
-      font-size: 1rem;
+      font-size: 16px;
       margin-bottom: 0.4rem;
+      
+      @media(max-width:1440px){
+        font-size: 14px;
+      }
 
       &::marker {
         color: $blue-text;

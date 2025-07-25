@@ -20,6 +20,19 @@ import smallCard4 from "./Games/smallCard/smallCard4.webp";
 import smallCard5 from "./Games/smallCard/smallCard5.webp";
 import smallCard6 from "./Games/smallCard/smallCard6.webp";
 import smallCard7 from "./Games/smallCard/smallCard7.webp";
+import smallCard8 from "./Games/smallCard/smallCard8.webp";
+import smallCard9 from "./Games/smallCard/smallCard9.webp";
+import smallCard10 from "./Games/smallCard/smallCard10.webp";
+import smallCard11 from "./Games/smallCard/smallCard11.webp";
+import smallCard12 from "./Games/smallCard/smallCard12.webp";
+import smallCard13 from "./Games/smallCard/smallCard13.webp";
+import smallCard14 from "./Games/smallCard/smallCard14.webp";
+import smallCard15 from "./Games/smallCard/smallCard15.webp";
+import smallCard16 from "./Games/smallCard/smallCard16.webp";
+import popularImg1 from "./Header/PopularImage/Game4.webp";
+import popularImg2 from "./Header/PopularImage/Game6.webp";
+import popularImg3 from "./Header/PopularImage/Game7.webp";
+import popularImg4 from "./Header/PopularImage/Game5.webp";
 
 const images = {
     Logo,
@@ -43,7 +56,20 @@ const images = {
     smallCard4,
     smallCard5,
     smallCard6,
-    smallCard7
+    smallCard7,
+    smallCard8,
+    smallCard9,
+    smallCard10,
+    smallCard11,
+    smallCard12,
+    smallCard13,
+    smallCard14,
+    smallCard15,
+    smallCard16,
+    popularImg1,
+    popularImg2,
+    popularImg3,
+    popularImg4,
 }
 
 export default images;

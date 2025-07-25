@@ -6,6 +6,7 @@
   grid-template-columns: repeat(8, 1fr);
   margin-bottom: 20px;
   
+
   @media (max-width: 1870px) {
     grid-template-columns: repeat(7, 1fr);
   }
@@ -65,7 +66,7 @@
     padding:3px 16px 10px 16px;
 
       @media (max-width: 480px) {
-      font-size: 0.8rem;
+      font-size: 1.2rem;
       padding: 6px 10px 10px 10px;
       text-align: center;
     }
@@ -143,14 +144,20 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     display: flex;
-    flex-direction: row;
+  
     align-items: center;
     justify-content: center;
+    padding:2px 0;
+    cursor: pointer;
+
+    @media(max-width:1440px){
+      padding:0px 0px;
+    }
 
     @media (max-width: 480px) {
       flex-direction: column;
-      padding: 12px;
-      
+      padding-top: 20px;
+      gap:10px;
     }
 
     &:hover {
@@ -160,8 +167,8 @@
     }
 
     .imageCard {
-      width: 70px !important;
-      height: 70px !important;
+      width: 90px;
+      height: 90px;
       object-fit: contain;
       flex: 0 0 50%;
       display: flex;
@@ -169,14 +176,15 @@
       align-items: center;
 
        @media (max-width: 480px) {
-        width: 60px !important;
-        height: 60px !important;
+        width: 60px;
+        height: 60px;
       }
     }
 
     span {
+      font-family: "Open Sans", "Noto Sans Arabic", sans-serif;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 800;
       color: $blue-text;
       text-align: start;
       line-height: 1.1;
@@ -184,15 +192,23 @@
       padding: 0 8px;
       flex: 0 0 50%;
       display: flex;
-      align-items: center;
+      
+      align-items: start;
       justify-content: center;
 
 
+
+        @media (max-width: 1440px) {
+          font-size: 11px;
+        }
+
         @media (max-width: 480px) {
-        font-size: 11px;
-        padding: 0 4px;
-      }
+           align-items: start;
+           text-align: center;
+          padding: 0 4px;
+        }
     }
+
   }
 }
 

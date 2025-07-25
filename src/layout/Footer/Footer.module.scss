@@ -3,6 +3,7 @@
 .footer {
   padding:20px 32px 2px 32px;
   text-align: center;
+  font-family: "Open Sans", "Noto Sans Arabic", sans-serif;
 
   .innerSection{
     max-width: 1860px;
@@ -82,6 +83,13 @@
 
                  @media(max-width:889px){
                     margin-right:20px;
+                    line-height: 1.8;
+                    
+                }
+
+                 @media(max-width:425px){
+                    margin-right:16px;
+                    line-height: 2;
                     
                 }
 

@@ -2,6 +2,7 @@
 import Script from "next/script";
 import "../styles/globals.scss";
 import Footer from "@/layout/Footer/Page";
+import { RecentGamesProvider } from "@/contexts/RecentGamesContext";
 
 export const metadata = {
   title: "Poki",
@@ -22,7 +23,11 @@ export default function RootLayout({ children }) {
         />
       </head>
       <body>
-        <main>{children}</main>
+        <main>
+          <RecentGamesProvider>
+            {children}
+          </RecentGamesProvider>
+        </main>
         <Footer />
       </body>
     </html>
