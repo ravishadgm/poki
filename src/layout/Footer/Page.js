@@ -36,9 +36,9 @@ export default function Footer() {
                         <a href="#">FAQ</a>
                         <a href="#">Contact</a>
                     </div>
-                    <div className={styles.flagBox} >
+                    {/* <div className={styles.flagBox} >
                         <Image src={Images.USA} alt="USA" className={styles.iconImg} />
-                    </div>
+                    </div> */}
                 </div>
             </div>
 

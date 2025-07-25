@@ -15,9 +15,64 @@ export default function SmallGameGrid() {
     ];
 
     const smallGameModel = [
-        { img: Images.GameCard1, title: "ACTION GAMES" },
-        { img: Images.GameCard2, title: "BOARD GAMES" },
+        { img: Images.smallCard1, title: "OBBY GAMES" },
+        { img: Images.smallCard2, title: "BRAINPOT GAMES" },
+        { img: Images.smallCard3, title: "TYCOON GAMES" },
+        { img: Images.smallCard4, title: "ADVENTURE GAMES" },
+        { img: Images.smallCard5, title: "SKILL GAMES" },
+        { img: Images.smallCard6, title: "MOBILE GAMES" },
+        { img: Images.smallCard7, title: "DYNOSAUR GAMES" },
+        { img: Images.GameCard2, title: "COOKING GAMES" },
+        { img: Images.GameCard1, title: "OBBY GAMES" },
+        { img: Images.GameCard2, title: "BRAINPOT GAMES" },
+        { img: Images.smallCard1, title: "OBBY GAMES" },
+        { img: Images.smallCard2, title: "BRAINPOT GAMES" },
+        { img: Images.smallCard3, title: "TYCOON GAMES" },
+        { img: Images.smallCard4, title: "ADVENTURE GAMES" },
+        { img: Images.smallCard5, title: "SKILL GAMES" },
+        { img: Images.smallCard6, title: "MOBILE GAMES" },
+        { img: Images.smallCard7, title: "DYNOSAUR GAMES" },
+        { img: Images.GameCard2, title: "COOKING GAMES" },
+        { img: Images.GameCard1, title: "OBBY GAMES" },
+        { img: Images.GameCard2, title: "BRAINPOT GAMES" },
+        { img: Images.smallCard1, title: "OBBY GAMES" },
+        { img: Images.smallCard2, title: "BRAINPOT GAMES" },
+        { img: Images.smallCard3, title: "TYCOON GAMES" },
+        { img: Images.smallCard4, title: "ADVENTURE GAMES" },
+        { img: Images.smallCard5, title: "SKILL GAMES" },
+        { img: Images.smallCard6, title: "MOBILE GAMES" },
+        { img: Images.smallCard7, title: "DYNOSAUR GAMES" },
+        { img: Images.GameCard2, title: "COOKING GAMES" },
+        { img: Images.GameCard1, title: "OBBY GAMES" },
+        { img: Images.GameCard2, title: "BRAINPOT GAMES" },
     ];
+
+    // const smallBox = [
+    //     { img: Images.smallCard1, title: "OBBY GAMES" },
+    //     { img: Images.smallCard2, title: "BRAINPOT GAMES" },
+    //     { img: Images.smallCard3, title: "TYCOON GAMES" },
+    //     { img: Images.smallCard4, title: "ADVENTURE GAMES" },
+    //     { img: Images.smallCard5, title: "SKILL GAMES" },
+    //     { img: Images.smallCard6, title: "MOBILE GAMES" },
+    //     { img: Images.smallCard7, title: "DYNOSAUR GAMES" },
+    //     { img: Images.GameCard2, title: "COOKING GAMES" },
+    //     { img: Images.GameCard1, title: "OBBY GAMES" },
+    //     { img: Images.GameCard2, title: "BRAINPOT GAMES" },
+    //     { img: Images.smallCard1, title: "OBBY GAMES" },
+    //     { img: Images.smallCard2, title: "BRAINPOT GAMES" },
+    //     { img: Images.smallCard3, title: "TYCOON GAMES" },
+    //     { img: Images.smallCard4, title: "ADVENTURE GAMES" },
+    //     { img: Images.smallCard5, title: "SKILL GAMES" },
+    //     { img: Images.smallCard6, title: "MOBILE GAMES" },
+    //     { img: Images.smallCard7, title: "DYNOSAUR GAMES" },
+    //     { img: Images.GameCard2, title: "COOKING GAMES" },
+    //     { img: Images.GameCard1, title: "OBBY GAMES" },
+    //     { img: Images.GameCard2, title: "BRAINPOT GAMES" },
+    //     { img: Images.smallCard1, title: "OBBY GAMES" },
+    //     { img: Images.smallCard2, title: "BRAINPOT GAMES" },
+    //     { img: Images.smallCard3, title: "TYCOON GAMES" },
+    //     { img: Images.smallCard4, title: "ADVENTURE GAMES" },
+    // ];
 
     return (
         <section>
@@ -34,7 +89,6 @@ export default function SmallGameGrid() {
                         <span>{cat.title}</span>
                     </div>
                 ))}
-
                 <div className={styles.smallCard}>
                     <Image
                         src={Images.GameCard7}
@@ -42,34 +96,46 @@ export default function SmallGameGrid() {
                         className={styles.imgCard}
                     />
                 </div>
+            </div>
 
-                {/* <div className={styles.smallgridWrapper}>
+
+            <div>
+                <div className={styles.secondCards}>
                     {smallGameModel.map((item, idx) => (
                         <div className={styles.smallGameCard} key={idx}>
                             <Image
                                 src={item.img}
                                 alt={item.title}
-                                className={styles.image}
-                            />
-                            <span>{item.title}</span>
-                        </div>
-                    ))}
-                </div> */}
-                <div className={styles.smallgridWrapper}>
-                    {smallGameModel.map((item, idx) => (
-                        <div className={styles.smallGameCard} key={idx}>
-                            <Image
-                                src={item.img}
-                                alt={item.title}
-                                className={styles.image}
-
+                                className={styles.imageCard}
+                                height={70}
+                                width={0}
                                 style={{ objectFit: "contain" }}
                             />
                             <span>{item.title}</span>
                         </div>
                     ))}
+
+
                 </div>
+
+                {/* <div className={styles.infoCard}>
+                    {smallBox.map((items, idx) => {
+                        return (
+                            <div className={styles.smallGameCard} key={idx}>
+                                <Image
+                                    src={items.img}
+                                    alt={items.title}
+                                    className={styles.imageCard}
+                                    height={70}
+                                    width={70}
+                                    style={{ objectFit: "contain" }}
+                                />
+                                <span>{items.title}</span>
+                            </div>
+                        );
+                    })}
+                </div> */}
             </div>
-        </section>
+        </section >
     );
 }
