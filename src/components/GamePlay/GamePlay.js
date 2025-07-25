@@ -9,11 +9,27 @@ import { AdSenseTestAd } from "../AdSense/AdSenseTestAd";
 
 
 // Reusable Blue Ad Component
+// export const BlueAd = () => (
+// <div className={styles.blueDiv}>
+//            <AdSenseTestAd /> 
+//     </div>
+// )
 export const BlueAd = () => (
-<div className={styles.blueDiv}>
-           <AdSenseTestAd /> 
-    </div>
-)
+  <div 
+    style={{
+      width: "100%",
+      height: "100%",
+      overflow: "hidden",
+      position: "relative",
+      display: "block",
+      boxSizing: "border-box",
+      background: "#f5f5f5", // Fallback background
+      borderRadius: "8px"
+    }}
+  >
+    <AdSenseTestAd /> 
+  </div>
+);
 
 
 const sizePattern = new Array(50).fill({ colSpan: 1, rowSpan: 1 });
