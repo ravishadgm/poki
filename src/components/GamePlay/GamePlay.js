@@ -8,29 +8,17 @@ import Image from "next/image";
 import { AdSenseTestAd } from "../AdSense/AdSenseTestAd";
 import { useRecentGames } from "@/contexts/RecentGamesContext";
 
-// Reusable Blue Ad Component
-// export const BlueAd = () => (
-// <div className={styles.blueDiv}>
-//            <AdSenseTestAd /> 
-//     </div>
-// )
 export const BlueAd = () => (
-  <div
-    style={{
-      width: "100%",
-      height: "100%",
-      overflow: "hidden",
-      position: "relative",
-      display: "block",
-      boxSizing: "border-box",
-      background: "#f5f5f5", // Fallback background
-      borderRadius: "8px"
-    }}
-  >
+  <div className={styles.adWrapper}>
     <AdSenseTestAd />
   </div>
 );
 
+export const TallAd = () => (
+  <div className={styles.tallAdWrapper}>
+    <AdSenseTestAd />
+  </div>
+);
 
 const sizePattern = new Array(50).fill({ colSpan: 1, rowSpan: 1 });
 const MAX_ROWS = 100;
@@ -55,9 +43,10 @@ function findNextFreePos(occupied, colSpan, rowSpan, gridCols) {
 }
 
 export default function GamePlay({ game }) {
+  const router = useRouter();
   const [extraGames, setExtraGames] = useState([]);
+  const [mounted, setMounted] = useState(false);
   const [gridCols, setGridCols] = useState(14);
-  const [isMobile, setIsMobile] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredSidebar, setHoveredSidebar] = useState(null);
   const { addToRecentGames } = useRecentGames();
@@ -73,117 +62,65 @@ export default function GamePlay({ game }) {
   };
   useEffect(() => {
     const updateCols = () => {
-      const width = window.innerWidth;
-      if (width <= 480) {
-        setGridCols(2);
-        setIsMobile(true);
-      } else if (width <= 768) {
-        setGridCols(4);
-        setIsMobile(true);
-      } else if (width <= 1024) {
-        setGridCols(8);
-        setIsMobile(false);
-      } else if (width <= 1366) {
-        setGridCols(12);
-        setIsMobile(false);
-      } else if (width <= 1700) {
-        setGridCols(14);
-        setIsMobile(false);
-      } else {
-        setGridCols(17);
-        setIsMobile(false);
-      }
+      const w = window.innerWidth;
+      if (w <= 480) setGridCols(2);
+      else if (w <= 768) setGridCols(4);
+      else if (w <= 1024) setGridCols(8);
+      else if (w <= 1366) setGridCols(12);
+      else if (w <= 1700) setGridCols(14);
+      else setGridCols(17);
     };
-
     updateCols();
     window.addEventListener("resize", updateCols);
     return () => window.removeEventListener("resize", updateCols);
   }, []);
 
   useEffect(() => {
-    async function fetchGames() {
+    (async () => {
       try {
         const res = await fetch("/data/games.json");
         const data = await res.json();
-        const filtered = data.filter((g) => g.slug !== game.slug);
-        setExtraGames(filtered.slice(0, 100));
-      } catch (error) {
-        console.error("Failed to fetch games:", error);
+        setExtraGames(data.filter((g) => g.slug !== game.slug));
+      } catch (e) {
+        console.error("Cannot fetch games", e);
       }
-    }
-    fetchGames();
+    })();
   }, [game.slug]);
 
-  const occupied = {};
-  const elements = [];
-
-  if (isMobile) {
+  useEffect(() => setMounted(true), []);
+  if (!mounted) {
     return (
-      <div className={styles.mobileContainer}>
-        <div className={styles.mobileHeader}>
-          <Header />
-        </div>
-        <div className={styles.mobilePlayer}>
-          <iframe
-            src={game.iframe}
-            title={game.title}
-            allowFullScreen
-            className={styles.mobileIframe}
-          />
-        </div>
-        <div className={styles.mobileAd}>
-          <BlueAd />
-        </div>
-        <div className={styles.mobileAd}>
-          <div className={styles.adContainer}>
-            <span className={styles.adLabel}>Advertisement</span>
-            <div className={styles.adContent}>Bottom Banner Ad</div>
-          </div>
-        </div>
-        <div
-          className={styles.mobileGrid}
-          style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}
-        >
-          {extraGames.map((g, index) => (
-            <div
-              key={`mobile-game-${g.slug}-${index}`}
-              className={styles.mobileGameCard}
-              // onClick={() => router.push(`/home/${g.slug}`)}
-              onClick={() => handleGameClick(g)}
-            >
-              <Image
-                src={g.thumbnail}
-                alt={g.title}
-                fill
-                style={{ objectFit: "cover" }}
-                className={styles.gameImage}
-              />
-              <div className={styles.gameTitle}>{g.title}</div>
-            </div>
-          ))}
-        </div>
+      <div className={styles.loadingContainer}>
+        <div className={styles.loadingSpinner}>Loading…</div>
       </div>
     );
   }
 
-  const isTabletLayout = gridCols <= 8;
+  const occupied = {};
+  const elements = [];
+  const isTablet = gridCols <= 8;
+  const isBig = gridCols >= 14;
 
   const staticElements = [
     {
       type: "header",
       col: 1,
       row: 1,
-      colSpan: isTabletLayout ? gridCols : 2,
+      colSpan: isTablet ? gridCols : 2,
       rowSpan: 1,
       content: <Header />,
     },
 
     {
       type: "iframe",
-      col: isTabletLayout ? 1 : 3,
-      row: isTabletLayout ? 2 : 1,
-      colSpan: isTabletLayout ? gridCols - 2 : Math.min(10, gridCols - 4),
-      rowSpan: isTabletLayout ? 4 : 5,
+      col: isTablet ? 1 : 3,
+      row: isTablet ? 2 : 1,
+      colSpan: isTablet
+        ? gridCols
+        : isBig
+          ? Math.min(8, gridCols - 5)
+          : Math.min(10, gridCols - 4),
+      rowSpan: isTablet ? 5 : 6,
       content: (
         <div className={styles.player}>
           <iframe
@@ -191,9 +128,24 @@ export default function GamePlay({ game }) {
             title={game.title}
             allowFullScreen
             className={styles.desktopIframe}
+            frameBorder="0"
+            scrolling="no"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           />
         </div>
       ),
+    },
+    {
+      type: "after-iframe-ad",
+      col: isTablet ? 1 : 3,
+      row: isTablet ? 7 : 7,
+      colSpan: isTablet
+        ? gridCols
+        : isBig
+          ? Math.min(8, gridCols - 5)
+          : Math.min(10, gridCols - 4),
+      rowSpan: 2,
+      content: <BlueAd />,
     },
     ...(gridCols > 8
       ? [
@@ -250,30 +202,12 @@ export default function GamePlay({ game }) {
         },
       ]
       : []),
-    {
-      type: "blue-div",
-      col: gridCols - 1,
-      row: 1,
-      colSpan: 2,
-      rowSpan: isTabletLayout ? 4 : 6,
-      content: <BlueAd />,
-    },
-    {
-      type: "bottom-ad",
-      col: isTabletLayout ? 1 : 3,
-      row: 6,
-      colSpan: isTabletLayout ? gridCols : Math.min(10, gridCols - 4),
-      rowSpan: 1,
-      content: <BlueAd />,
-
-    },
   ];
 
   staticElements.forEach((item) => {
-    const { row, col, rowSpan, colSpan } = item;
-    for (let r = 0; r < rowSpan; r++) {
-      for (let c = 0; c < colSpan; c++) {
-        occupied[`${row + r},${col + c}`] = true;
+    for (let r = 0; r < item.rowSpan; r++) {
+      for (let c = 0; c < item.colSpan; c++) {
+        occupied[`${item.row + r},${item.col + c}`] = true;
       }
     }
     elements.push(item);
@@ -286,19 +220,11 @@ export default function GamePlay({ game }) {
     const rowSpan = pat.rowSpan;
     const pos = findNextFreePos(occupied, colSpan, rowSpan, gridCols);
 
-    for (let r = 0; r < rowSpan; r++) {
-      for (let c = 0; c < colSpan; c++) {
+    for (let r = 0; r < rowSpan; r++)
+      for (let c = 0; c < colSpan; c++)
         occupied[`${pos.row + r},${pos.col + c}`] = true;
-      }
-    }
 
-    elements.push({
-      type: "game",
-      game: g,
-      colSpan,
-      rowSpan,
-      ...pos,
-    });
+    elements.push({ type: "game", game: g, colSpan, rowSpan, ...pos });
   });
 
   return (
@@ -402,22 +328,12 @@ export default function GamePlay({ game }) {
                   />
                 )
               ) : (
-                <Image
-                  src={el.game.thumbnail}
-                  alt={el.game.title}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  className={styles.gameImage}
-                />
-              )
-            ) : el.type === "header" ? (
-              <div className={styles.headerGridItem}>{el.content}</div>
-              ) : (
-              el.content
-            )}
+                el.content
+              )}
             </div>
           ))}
         </div>
       </div>
-      );
+    </div>
+  );
 }
