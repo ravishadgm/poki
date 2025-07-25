@@ -46,23 +46,22 @@ export default function GameGrid({ games }) {
   const [gridCols, setGridCols] = useState(17);
   const router = useRouter();
 
-useEffect(() => {
-  const updateCols = () => {
-    const width = window.innerWidth;
+  useEffect(() => {
+    const updateCols = () => {
+      const width = window.innerWidth;
 
-    if (width <= 480) setGridCols(2);         // Mobile
-    else if (width <= 768) setGridCols(4);    // Tablet
-    else if (width <= 1024) setGridCols(8);   // Small Laptop
-    else if (width <= 1366) setGridCols(12);  // Medium Laptop
-    else if (width <= 1700) setGridCols(14);  // Large Laptop
-    else setGridCols(17);                     // Desktop or ultrawide
-  };
+      if (width <= 480) setGridCols(2); // Mobile
+      else if (width <= 768) setGridCols(4); // Tablet
+             else if (w <= 1024) setGridCols(8);
+      else if (width <= 1366) setGridCols(12); // Medium Laptop
+      else if (width <= 1700) setGridCols(14); // Large Laptop
+      else setGridCols(17); // Desktop or ultrawide
+    };
 
-  updateCols();
-  window.addEventListener("resize", updateCols);
-  return () => window.removeEventListener("resize", updateCols);
-}, []);
-
+    updateCols();
+    window.addEventListener("resize", updateCols);
+    return () => window.removeEventListener("resize", updateCols);
+  }, []);
 
   const occupied = {};
   const positions = [];
@@ -145,6 +144,7 @@ useEffect(() => {
                   src={game.thumbnail}
                   alt={game.title}
                   fill
+  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   className={styles.cardImage}
                   style={{ objectFit: "cover" }}
                 />
