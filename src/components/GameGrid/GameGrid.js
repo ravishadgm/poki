@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import styles from "./styles.module.scss";
 import Header from "@/layout/Header/Page";
 import Image from "next/image";
+import { useRecentGames } from "@/contexts/RecentGamesContext";
 
 const sizePattern = [
   { colSpan: 2, rowSpan: 1 },
@@ -45,23 +46,26 @@ export default function GameGrid({ games }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [gridCols, setGridCols] = useState(17);
   const router = useRouter();
+  const { addToRecentGames } = useRecentGames();
+
 
   useEffect(() => {
     const updateCols = () => {
       const width = window.innerWidth;
 
-      if (width <= 480) setGridCols(2); // Mobile
-      else if (width <= 768) setGridCols(4); // Tablet
-      else if (width <= 1024) setGridCols(8);
-      else if (width <= 1366) setGridCols(12); // Medium Laptop
-      else if (width <= 1700) setGridCols(14); // Large Laptop
-      else setGridCols(17); // Desktop or ultrawide
+      if (width <= 480) setGridCols(2);         // Mobile
+      else if (width <= 768) setGridCols(4);    // Tablet
+      else if (width <= 1024) setGridCols(8);   // Small Laptop
+      else if (width <= 1366) setGridCols(12);  // Medium Laptop
+      else if (width <= 1700) setGridCols(14);  // Large Laptop
+      else setGridCols(17);                     // Desktop or ultrawide
     };
 
     updateCols();
     window.addEventListener("resize", updateCols);
     return () => window.removeEventListener("resize", updateCols);
   }, []);
+
 
   const occupied = {};
   const positions = [];
@@ -98,6 +102,20 @@ export default function GameGrid({ games }) {
     positions.push({ colStart: col, rowStart: row, colSpan, rowSpan });
   });
 
+
+  const handleGameClick = (game) => {
+
+    addToRecentGames({
+      title: game.title,
+      slug: game.slug,
+      image: game.thumbnail,
+      video: game.video,
+      thumbnail: game.thumbnail
+    });
+
+    router.push(`/home/${game.slug}`);
+  };
+
   return (
     <div className={styles.container}>
       <div
@@ -128,7 +146,8 @@ export default function GameGrid({ games }) {
               }}
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
-              onClick={() => router.push(`/home/${game.slug}`)}
+              // onClick={() => router.push(`/home/${game.slug}`)}
+              onClick={() => handleGameClick(game)}
             >
               {isHovered && game.video ? (
                 <video

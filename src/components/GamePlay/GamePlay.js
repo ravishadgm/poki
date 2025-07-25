@@ -6,6 +6,7 @@ import styles from "./styles.module.scss";
 import Header from "@/layout/Header/Page";
 import Image from "next/image";
 import { AdSenseTestAd } from "../AdSense/AdSenseTestAd";
+import { useRecentGames } from "@/contexts/RecentGamesContext";
 
 export const BlueAd = () => (
   <div className={styles.adWrapper}>
@@ -48,7 +49,17 @@ export default function GamePlay({ game }) {
   const [gridCols, setGridCols] = useState(14);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredSidebar, setHoveredSidebar] = useState(null);
-
+  const { addToRecentGames } = useRecentGames();
+const handleGameClick = (gameToPlay) => {
+    addToRecentGames({
+      title: gameToPlay.title,
+      slug: gameToPlay.slug,
+      image: gameToPlay.thumbnail,
+      video: gameToPlay.video,
+      thumbnail: gameToPlay.thumbnail
+    });
+    router.push(`/home/${gameToPlay.slug}`);
+  };
   useEffect(() => {
     const updateCols = () => {
       const w = window.innerWidth;
@@ -152,7 +163,7 @@ export default function GamePlay({ game }) {
                     className={styles.sidebarGameCard}
                     onMouseEnter={() => setHoveredSidebar(idx)}
                     onMouseLeave={() => setHoveredSidebar(null)}
-                    onClick={() => router.push(`/home/${g.slug}`)}
+                                 onClick={() => handleGameClick(g)}
                   >
                     {hoveredSidebar === idx && g.video ? (
                       <video
@@ -247,7 +258,7 @@ export default function GamePlay({ game }) {
             <div
               key={idx}
               className={styles.mobileGameCard}
-              onClick={() => router.push(`/home/${g.slug}`)}
+                            onClick={() => handleGameClick(g)}
             >
               <Image
                 src={g.thumbnail}
@@ -290,9 +301,12 @@ export default function GamePlay({ game }) {
                 el.type === "game" ? setHoveredIndex(idx) : null
               }
               onMouseLeave={() => setHoveredIndex(null)}
-              onClick={() => {
-                if (el.type === "game") router.push(`/home/${el.game.slug}`);
-              }}
+             onClick={() => {
+              if (el.type === "game") {
+                // router.push(`/home/${el.game.slug}`);
+                handleGameClick(el.game);
+              }
+            }}
             >
               {el.type === "game" ? (
                 hoveredIndex === idx && el.game.video ? (
