@@ -1,9 +1,6 @@
 // Container styles
 .container {
-  width: 100%;
-  padding: 0 16px;
-  max-width: 1920px;
-  margin: 0 auto;
+position: relative;
 }
 
 // Desktop Grid Layout
@@ -135,28 +132,7 @@
   align-items: center;
   justify-content: center;
 
-  &:hover {
-    transform: scale(1.05);
-    z-index: 2;
-  }
-
-  &:has(.player) {
-    &:hover {
-      transform: none !important;
-    }
-    cursor: default;
-    border-radius: 0;
-    box-shadow: none;
-    background: transparent;
-  }
-
-  @media (max-width: 1024px) {
-    border-radius: 12px;
-
-    &:hover {
-      transform: scale(1.02);
-    }
-  }
+ 
 }
 
 .gameImage {

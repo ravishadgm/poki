@@ -1,0 +1,260 @@
+// Enhanced ad containment styles
+.adsbygoogle {
+  width: 100% !important;
+  height: 100% !important;
+  min-width: 0 !important;
+  min-height: 0 !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  display: block !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  position: relative !important;
+  
+  // Force all nested elements to respect bounds
+  * {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    box-sizing: border-box !important;
+    overflow: hidden !important;
+  }
+  
+  // Specifically target iframe elements that AdSense might create
+  iframe {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    border: none !important;
+  }
+}
+
+// Enhanced mobile ad styles
+.mobileAd {
+  margin: 16px;
+  height: 80px;
+  width: calc(100% - 32px); // Account for margins
+  overflow: hidden !important;
+  position: relative;
+  
+  // Force containment
+  * {
+    max-width: 100% !important;
+    max-height: 100% !important;
+  }
+
+  @media (max-width: 480px) {
+    margin: 12px;
+    height: 70px;
+    width: calc(100% - 24px);
+  }
+}
+
+// Enhanced card styles for desktop ads
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden !important; // Force overflow hidden
+  border-radius: 16px;
+  box-shadow: 0px 7px 10px 4px #5d6b844d;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  // Containment for ads
+  &:has(.adsbygoogle) {
+    overflow: hidden !important;
+    
+    // Disable hover effects for ad containers
+    &:hover {
+      transform: none !important;
+    }
+    
+    cursor: default;
+    
+    // Force all children to stay within bounds
+    * {
+      max-width: 100% !important;
+      max-height: 100% !important;
+      overflow: hidden !important;
+    }
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    z-index: 2;
+  }
+
+  &:has(.player) {
+    &:hover {
+      transform: none !important;
+    }
+    cursor: default;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  @media (max-width: 1024px) {
+    border-radius: 12px;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
+
+// Blue div container enhancements
+.blueDiv {
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden !important;
+  background: #f0f0f0;
+  position: relative;
+  
+  // CSS containment to prevent layout issues
+  contain: layout style paint;
+  
+  // Force strict boundaries
+  * {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    overflow: hidden !important;
+  }
+}
+
+// Additional containment rules
+[data-ad-client] {
+  max-width: 100% !important;
+  max-height: 100% !important;
+  overflow: hidden !important;
+  
+  // Prevent AdSense from creating elements outside container
+  &::before,
+  &::after {
+    display: none !important;
+  }
+}
+
+// Force containment on any element with AdSense attributes
+ins[class*="adsbygoogle"] {
+  overflow: hidden !important;
+  max-width: 100% !important;
+  max-height: 100% !important;
+  position: relative !important;
+  
+  // Clip any overflow content
+  clip-path: inset(0) !important;
+}
+
+// Container styles
+.container {
+  width: 100%;
+  padding: 0 16px;
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+// Desktop Grid Layout
+.grid {
+  display: grid;
+  grid-auto-rows: 100px;
+  gap: 20px;
+  padding-bottom: 40px;
+
+  @media (max-width: 1024px) {
+    grid-auto-rows: 80px;
+    gap: 16px;
+  }
+
+  @media (max-width: 768px) {
+    grid-auto-rows: 70px;
+    gap: 12px;
+  }
+}
+
+// Mobile Container
+.mobileContainer {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.mobileHeader {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 12px 16px;
+}
+
+.mobilePlayer {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #000;
+  margin-bottom: 16px;
+}
+
+.mobileIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+.mobileGrid {
+  display: grid;
+  gap: 12px;
+  padding: 0 16px 40px;
+  grid-auto-rows: auto;
+}
+
+.mobileGameCard {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: #fff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  }
+}
+
+// Rest of your existing styles...
+.gameTitle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  color: white;
+  padding: 16px 8px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.2;
+
+  @media (max-width: 480px) {
+    font-size: 10px;
+    padding: 12px 6px 6px;
+  }
+}
