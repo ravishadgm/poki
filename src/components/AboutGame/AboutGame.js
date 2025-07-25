@@ -1,6 +1,6 @@
 'use client';
 
-import GameDescription from '@/components/common/GameDescription/GameDescription';
+import GameDescription from '@/components/GameDescription/GameDescription';
 import Images from '@/assets/images/index';
 
 const gamesData = {
