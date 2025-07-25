@@ -52,7 +52,7 @@ export default function GameGrid({ games }) {
 
       if (width <= 480) setGridCols(2); // Mobile
       else if (width <= 768) setGridCols(4); // Tablet
-             else if (w <= 1024) setGridCols(8);
+      else if (width <= 1024) setGridCols(8);
       else if (width <= 1366) setGridCols(12); // Medium Laptop
       else if (width <= 1700) setGridCols(14); // Large Laptop
       else setGridCols(17); // Desktop or ultrawide
@@ -144,7 +144,7 @@ export default function GameGrid({ games }) {
                   src={game.thumbnail}
                   alt={game.title}
                   fill
-  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                   className={styles.cardImage}
                   style={{ objectFit: "cover" }}
                 />
