@@ -84,15 +84,18 @@ export default function SmallGameGrid() {
     return (
         <section>
             <div className={styles.gridWrapper}>
-                {categories.map((cat, idx) => (
+                {categories?.map((cat, idx) => (
                     <div key={idx} className={styles.card}>
-                        <Image
-                            src={cat.img}
-                            alt={cat.title}
-                            width={100}
-                            height={100}
-                            className={styles.image}
-                        />
+                     {cat.img && (
+  <Image
+    src={cat.img}
+    alt={cat.title}
+    width={100}
+    height={100}
+    className={styles.image}
+  />
+)}
+
                         <span>{cat.title}</span>
                     </div>
                 ))}

@@ -59,10 +59,8 @@ export default function GamePlay({ game }) {
   const [gridCols, setGridCols] = useState(14);
   const [isMobile, setIsMobile] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [hoveredSidebarIndex, setHoveredSidebarIndex] = useState(null);
-  const router = useRouter();
+  const [hoveredSidebar, setHoveredSidebar] = useState(null);
   const { addToRecentGames } = useRecentGames();
-
   const handleGameClick = (gameToPlay) => {
     addToRecentGames({
       title: gameToPlay.title,
@@ -73,7 +71,6 @@ export default function GamePlay({ game }) {
     });
     router.push(`/home/${gameToPlay.slug}`);
   };
-
   useEffect(() => {
     const updateCols = () => {
       const width = window.innerWidth;
@@ -180,6 +177,7 @@ export default function GamePlay({ game }) {
       rowSpan: 1,
       content: <Header />,
     },
+
     {
       type: "iframe",
       col: isTabletLayout ? 1 : 3,
@@ -207,18 +205,17 @@ export default function GamePlay({ game }) {
           rowSpan: 8,
           content: (
             <div className={styles.leftSidebar}>
-              {extraGames.slice(0, 6).map((sideGame, idx) => (
+              {extraGames.slice(0, 6).map((g, idx) => (
                 <div
-                  key={`sidebar-${sideGame.slug}-${idx}`}
+                  key={idx}
                   className={styles.sidebarGameCard}
-                  // onClick={() => router.push(`/home/${sideGame.slug}`)}
-                  onClick={() => handleGameClick(sideGame)}
-                  onMouseEnter={() => setHoveredSidebarIndex(idx)}
-                  onMouseLeave={() => setHoveredSidebarIndex(null)}
+                  onMouseEnter={() => setHoveredSidebar(idx)}
+                  onMouseLeave={() => setHoveredSidebar(null)}
+                  onClick={() => handleGameClick(g)}
                 >
-                  {hoveredSidebarIndex === idx && sideGame.video ? (
+                  {hoveredSidebar === idx && g.video ? (
                     <video
-                      src={sideGame.video}
+                      src={game.video}
                       muted
                       autoPlay
                       loop
@@ -227,8 +224,8 @@ export default function GamePlay({ game }) {
                     />
                   ) : (
                     <Image
-                      src={sideGame.thumbnail}
-                      alt={sideGame.title}
+                      src={g.thumbnail}
+                      alt={g.title}
                       fill
                       className={styles.sidebarImage}
                       style={{ objectFit: "cover" }}
@@ -238,6 +235,18 @@ export default function GamePlay({ game }) {
               ))}
             </div>
           ),
+        },
+      ]
+      : []),
+    ...(isBig
+      ? [
+        {
+          type: "tall-ad",
+          col: 11,
+          row: 1,
+          colSpan: 2,
+          rowSpan: 6,
+          content: <TallAd />,
         },
       ]
       : []),
@@ -271,10 +280,10 @@ export default function GamePlay({ game }) {
   });
 
   const startIndex = gridCols > 8 ? 6 : 0;
-  extraGames.slice(startIndex).forEach((g, index) => {
-    const pattern = sizePattern[index % sizePattern.length];
-    const colSpan = Math.min(pattern.colSpan, Math.floor(gridCols / 4));
-    const rowSpan = pattern.rowSpan;
+  extraGames.slice(startIndex).forEach((g, i) => {
+    const pat = sizePattern[i % sizePattern.length];
+    const colSpan = Math.min(pat.colSpan, Math.floor(gridCols / 4));
+    const rowSpan = pat.rowSpan;
     const pos = findNextFreePos(occupied, colSpan, rowSpan, gridCols);
 
     for (let r = 0; r < rowSpan; r++) {
@@ -293,45 +302,105 @@ export default function GamePlay({ game }) {
   });
 
   return (
-    <div className={styles.container}>
-      <div
-        className={styles.grid}
-        style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}
-      >
-        {elements.map((el, idx) => (
-          <div
-            key={`${el.type}-${idx}`}
-            className={
-              el.type === "left-sidebar"
-                ? styles.leftSidebarContainer
-                : styles.card
-            }
-            style={{
-              gridColumn: `${el.col} / span ${el.colSpan}`,
-              gridRow: `${el.row} / span ${el.rowSpan}`,
-              aspectRatio: el.type === "game" ? "1 / 1" : "auto",
-            }}
-            onMouseEnter={() =>
-              el.type === "game" ? setHoveredIndex(idx) : null
-            }
-            onMouseLeave={() => setHoveredIndex(null)}
-            onClick={() => {
-              if (el.type === "game") {
-                // router.push(`/home/${el.game.slug}`);
-                handleGameClick(el.game);
+    <div className={styles.responsiveContainer}>
+      <div className={styles.mobileLayout}>
+        <div className={styles.mobileHeader}>
+          <Header />
+        </div>
+
+        <div className={styles.mobilePlayer}>
+          <iframe
+            src={game.iframe}
+            title={game.title}
+            allowFullScreen
+            className={styles.mobileIframe}
+            frameBorder="0"
+            scrolling="no"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          />
+        </div>
+
+        <div className={styles.mobileAfterIframeAd}>
+          <BlueAd />
+        </div>
+
+        <div
+          className={styles.mobileGrid}
+          style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}
+        >
+          {extraGames.map((g, idx) => (
+            <div
+              key={idx}
+              className={styles.mobileGameCard}
+              onClick={() => handleGameClick(g)}
+            >
+              <Image
+                src={g.thumbnail}
+                alt={g.title}
+                fill
+                className={styles.gameImage}
+                style={{ objectFit: "cover" }}
+              />
+              <div className={styles.gameTitle}>{g.title}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.desktopLayout}>
+        <div
+          className={styles.grid}
+          style={{ gridTemplateColumns: `repeat(${gridCols}, 1fr)` }}
+        >
+          {elements.map((el, idx) => (
+            <div
+              key={`${el.type}-${idx}`}
+              className={
+                el.type === "header"
+                  ? styles.headerGridItem
+                  : el.type === "left-sidebar"
+                    ? styles.leftSidebarContainer
+                    : el.type === "after-iframe-ad"
+                      ? styles.afterIframeAdCard
+                      : el.type === "tall-ad"
+                        ? styles.tallAdCard
+                        : styles.card
               }
-            }}
-          >
-            {el.type === "game" ? (
-              hoveredIndex === idx && el.game.video ? (
-                <video
-                  src={el.game.video}
-                  muted
-                  autoPlay
-                  loop
-                  playsInline
-                  className={styles.videoPreview}
-                />
+              style={{
+                gridColumn: `${el.col} / span ${el.colSpan}`,
+                gridRow: `${el.row} / span ${el.rowSpan}`,
+                aspectRatio: el.type === "game" ? "1 / 1" : "auto",
+              }}
+              onMouseEnter={() =>
+                el.type === "game" ? setHoveredIndex(idx) : null
+              }
+              onMouseLeave={() => setHoveredIndex(null)}
+              onClick={() => {
+                if (el.type === "game") {
+                  // router.push(`/home/${el.game.slug}`);
+                  handleGameClick(el.game);
+                }
+              }}
+            >
+              {el.type === "game" ? (
+                hoveredIndex === idx && el.game.video ? (
+                  <video
+                    src={el.game.video}
+                    muted
+                    autoPlay
+                    loop
+                    playsInline
+                    className={styles.videoPreview}
+                  />
+                ) : (
+                  <Image
+                    src={el.game.thumbnail}
+                    alt={el.game.title}
+                    fill
+                    className={styles.gameImage}
+                    style={{ objectFit: "cover" }}
+                  />
+                )
               ) : (
                 <Image
                   src={el.game.thumbnail}
@@ -343,12 +412,12 @@ export default function GamePlay({ game }) {
               )
             ) : el.type === "header" ? (
               <div className={styles.headerGridItem}>{el.content}</div>
-            ) : (
+              ) : (
               el.content
             )}
-          </div>
-        ))}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
-  );
+      );
 }

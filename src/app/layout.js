@@ -24,9 +24,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <main>
-          <RecentGamesProvider>
-            {children}
-          </RecentGamesProvider>
+          <RecentGamesProvider>{children}</RecentGamesProvider>
         </main>
         <Footer />
       </body>
