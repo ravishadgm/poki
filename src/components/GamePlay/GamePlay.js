@@ -99,6 +99,7 @@ export default function GamePlay({ game }) {
       rowSpan: 1,
       content: <Header />,
     },
+
     {
       type: "iframe",
       col: isTablet ? 1 : 3,
@@ -202,7 +203,7 @@ export default function GamePlay({ game }) {
   });
 
   const startIndex = gridCols > 8 ? 6 : 0;
-  extraGames.slice(startIndex).forEach((g, i) => {
+    extraGames.slice(startIndex).forEach((g, i) => {
     const pat = sizePattern[i % sizePattern.length];
     const colSpan = Math.min(pat.colSpan, Math.floor(gridCols / 4));
     const rowSpan = pat.rowSpan;
