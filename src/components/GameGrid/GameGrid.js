@@ -43,7 +43,7 @@ function findNextFreePos(occupied, colSpan, rowSpan, gridCols) {
 }
 
 export default function GameGrid({ games }) {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState("");
   const [gridCols, setGridCols] = useState(17);
   const router = useRouter();
   const { addToRecentGames } = useRecentGames();

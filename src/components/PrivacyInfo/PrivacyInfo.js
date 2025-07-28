@@ -1,10 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import styles from './PrivacyInfo.module.scss';
 import { BookOpen, Cookie, Scale, ShieldCheck, Info, Circle, ExternalLink } from 'lucide-react';
-import Images from "../../assets/images/index"
-import Link from 'next/link';
+
 
 export default function PrivacyInfo() {
     return (

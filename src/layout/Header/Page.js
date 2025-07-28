@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { Home, Search } from "lucide-react";
 import styles from "./Header.module.scss";
-import Images from "../../assets/images";
+import Images from "../../../public/images/index";
 import { useRouter } from 'next/navigation';
 import SearchDrawer from "@/components/SearchDrawer/SearchDrawer";
 

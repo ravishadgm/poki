@@ -2,7 +2,7 @@
 import styles from './GetInTouch.module.scss';
 import { Pencil, PhoneCall, MapPin } from "lucide-react";
 import Image from 'next/image';
-import Images from '@/assets/images/index';
+import Images from '../../../public/images/index';
 
 export default function GetInTouch() {
     return (
