@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  padding: 20px;
+  gap: 20px;
+  align-items: flex-start;
+
+  .content {
+    background-color: white;
+    width: 100%;
+    padding: 20px;
+
+    h2 {
+      color: $blue-hover;
+      font-size: 20px;
+      line-height: 1.25;
+      padding-bottom: 30px;
+      font-family: Open Sans, Noto Sans Arabic, sans-serif;
+    }
+
+    p {
+      padding-bottom: 15px;
+      font-family: Open Sans, Noto Sans Arabic, sans-serif;
+    }
+  }
+  a {
+    color: $blue-hover;
+  }
+ 
+}
+ @media (max-width: 1870px) {
+    
+    .header{
+        width: 230px;
+                height: 162px;
+    }
+  }
+ @media (max-width: 720px) {
+   
+    .header{
+             width: 221px;
+        height: 134px;
+    }
+  }
+
+     
