@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
 import styles from './PrivacyHeader.module.scss';
-import Images from '@/assets/images/index';
+import Images from '../../../public/images/index';
 
 const PrivacyHeader = () => {
     return (

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import styles from "./SmallGameGrid.module.scss";
-import Images from "@/assets/images/index";
+import Images from "../../../public/images/index";
 
 export default function SmallGameGrid() {
     const categories = [

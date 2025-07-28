@@ -1,8 +1,9 @@
 "use client";
 
-import images from "@/assets/images";
+import images from "../../../public/images/index";
 import styles from "./Footer.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Footer() {
     return (
@@ -10,7 +11,7 @@ export default function Footer() {
             <div className={styles.innerSection}>
                 <div className={styles.logoSection}>
                     <a
-                        href="https://your-target-url.com"
+                        href="/"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
@@ -25,9 +26,9 @@ export default function Footer() {
 
                 <div className={styles.linksSection}>
                     <div className={styles.linkColumn}>
-                        <a href="/about">About</a>
-                        <a href="/privacy">Privacy Center</a>
-                        <a href="/contact">Contact</a>
+                        <Link href="/about">About</Link>
+                        <Link href="/contact">Contact</Link>
+                        <Link href="/privacy">Privacy Center</Link>
                     </div>
                 </div>
             </div>
