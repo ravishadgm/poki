@@ -1,11 +1,15 @@
 'use client';
 
+import Image from 'next/image';
 import styles from './PrivacyInfo.module.scss';
-import { BookOpen, Cookie, Scale, ShieldCheck, Info } from 'lucide-react';
+import { BookOpen, Cookie, Scale, ShieldCheck, Info, Circle, ExternalLink } from 'lucide-react';
+import Images from "../../assets/images/index"
+import Link from 'next/link';
 
 export default function PrivacyInfo() {
     return (
         <section className={styles.privacyWrapper}>
+
             <div className={styles.heading}>
                 <h1>Everything you need to know about privacy</h1>
                 <p>
@@ -16,7 +20,7 @@ export default function PrivacyInfo() {
             </div>
             <div className={styles.cardGrid}>
                 <div className={styles.card}>
-                    <BookOpen className={styles.icon} />
+                    <ShieldCheck className={styles.icon} />
                     <strong>Why we use your data</strong>
                 </div>
                 <div className={styles.card}>
@@ -28,7 +32,7 @@ export default function PrivacyInfo() {
                     <strong>Your privacy rights</strong>
                 </div>
                 <div className={styles.card}>
-                    <ShieldCheck className={styles.icon} />
+                    <BookOpen className={styles.icon} />
                     <strong>Our website rules</strong>
                 </div>
             </div>
@@ -52,11 +56,10 @@ export default function PrivacyInfo() {
                     It’s important to see info that matches your country, as it might affect your privacy rights and how we inform you about this. Not sure it’s correct? Contact us—We’re here to help.
                 </p>
                 <div className={styles.note}>
-                    <span className={styles.dot}>●</span>
+                    <Info className={styles.infoIcon} />
                     <span>
                         Depending on your location, there might be an age requirement for using Poki. Click the button to go to the age rules.
                     </span>
-                    <button className={styles.ageBtn}>SEE AGE RULES</button>
                 </div>
             </div>
         </section>

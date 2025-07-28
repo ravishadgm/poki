@@ -7,6 +7,7 @@ import Header from "@/layout/Header/Page";
 import Image from "next/image";
 import { AdSenseTestAd } from "../AdSense/AdSenseTestAd";
 import { useRecentGames } from "@/contexts/RecentGamesContext";
+import GameDescription from "../GameDescription/GameDescription";
 
 export const BlueAd = () => (
   <div className={styles.adWrapper}>
@@ -333,6 +334,16 @@ export default function GamePlay({ game }) {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className={styles.mobileGameDescription}>
+        <GameDescription game={{
+          name: game.title,
+          category: game.category || "Arcade",
+          description: game.description || "No description provided.",
+          image: game.thumbnail,
+          tags: ['2PLAYER GAMES', 'CAR GAMES', 'SHOOTING GAMES']
+        }} />
       </div>
     </div>
   );
