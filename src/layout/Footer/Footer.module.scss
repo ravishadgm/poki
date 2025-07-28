@@ -1,6 +1,7 @@
 @use "../../styles/variables" as *;
 
 .footer {
+  margin:0px 20px; 
   padding:20px 32px 2px 32px;
   text-align: center;
   font-family: "Open Sans", "Noto Sans Arabic", sans-serif;
@@ -73,6 +74,12 @@
 
               @media(max-width:889px){
                     text-align: center;
+
+                }
+
+                
+              @media(max-width:480px){
+                    font-size: 14px;
 
                 }
 

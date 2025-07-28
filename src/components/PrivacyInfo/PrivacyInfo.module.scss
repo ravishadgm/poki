@@ -1,0 +1,145 @@
+.privacyWrapper {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+  color:$blue-text;
+
+  padding-top: 70px;
+
+  .heading{
+    padding:0 10px;
+
+    @media(max-width:480px){
+        paddign:0px;
+    }
+
+    h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+
+    @media(max-width:1200px){
+        font-size: 22px;
+    }
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+
+     @media(max-width:1200px){
+        font-size: 15px;
+    }
+  }
+  }
+  
+}
+
+.cardGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px;
+  margin-bottom: 30px;
+}
+
+.card {
+  width: calc(25% - 16.5px); 
+  min-width: 220px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+
+  .icon {
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 12px;
+    display: block;
+  }
+
+  strong {
+    font-size: 15px;
+  }
+}
+
+.infoBox {
+  background: #f8f8f8;
+  border-radius: 12px;
+  padding: 15px 20px;
+  text-align: left;
+  margin-bottom: 20px;
+
+  h4 {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+  }
+}
+
+.infoBoxBlue {
+  background: #e8f2fc;
+  border-radius: 12px;
+  padding: 15px 20px;
+  text-align: left;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h4 {
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .infoIcon {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  p {
+    font-size: 14px;
+    margin: 10px 0;
+
+    strong {
+      font-weight: bold;
+    }
+  }
+
+  .note {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #001e3c;
+    margin-top: 12px;
+
+    .dot {
+      font-size: 20px;
+      color: #0057e2;
+    }
+
+    .ageBtn {
+      margin-left: auto;
+      padding: 4px 10px;
+      background: #007bff;
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: default;
+    }
+  }
+}

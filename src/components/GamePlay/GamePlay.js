@@ -50,7 +50,7 @@ export default function GamePlay({ game }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredSidebar, setHoveredSidebar] = useState(null);
   const { addToRecentGames } = useRecentGames();
-const handleGameClick = (gameToPlay) => {
+  const handleGameClick = (gameToPlay) => {
     addToRecentGames({
       title: gameToPlay.title,
       slug: gameToPlay.slug,
@@ -118,8 +118,8 @@ const handleGameClick = (gameToPlay) => {
       colSpan: isTablet
         ? gridCols
         : isBig
-        ? Math.min(8, gridCols - 5)
-        : Math.min(10, gridCols - 4),
+          ? Math.min(8, gridCols - 5)
+          : Math.min(10, gridCols - 4),
       rowSpan: isTablet ? 5 : 6,
       content: (
         <div className={styles.player}>
@@ -142,65 +142,65 @@ const handleGameClick = (gameToPlay) => {
       colSpan: isTablet
         ? gridCols
         : isBig
-        ? Math.min(8, gridCols - 5)
-        : Math.min(10, gridCols - 4),
+          ? Math.min(8, gridCols - 5)
+          : Math.min(10, gridCols - 4),
       rowSpan: 2,
       content: <BlueAd />,
     },
     ...(gridCols > 8
       ? [
-          {
-            type: "left-sidebar",
-            col: 1,
-            row: 2,
-            colSpan: 2,
-            rowSpan: 8,
-            content: (
-              <div className={styles.leftSidebar}>
-                {extraGames.slice(0, 6).map((g, idx) => (
-                  <div
-                    key={idx}
-                    className={styles.sidebarGameCard}
-                    onMouseEnter={() => setHoveredSidebar(idx)}
-                    onMouseLeave={() => setHoveredSidebar(null)}
-                                 onClick={() => handleGameClick(g)}
-                  >
-                    {hoveredSidebar === idx && g.video ? (
-                      <video
-                        src={game.video}
-                        muted
-                        autoPlay
-                        loop
-                        playsInline
-                        className={styles.videoPreview}
-                      />
-                    ) : (
-                      <Image
-                        src={g.thumbnail}
-                        alt={g.title}
-                        fill
-                        className={styles.sidebarImage}
-                        style={{ objectFit: "cover" }}
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-            ),
-          },
-        ]
+        {
+          type: "left-sidebar",
+          col: 1,
+          row: 2,
+          colSpan: 2,
+          rowSpan: 8,
+          content: (
+            <div className={styles.leftSidebar}>
+              {extraGames.slice(0, 6).map((g, idx) => (
+                <div
+                  key={idx}
+                  className={styles.sidebarGameCard}
+                  onMouseEnter={() => setHoveredSidebar(idx)}
+                  onMouseLeave={() => setHoveredSidebar(null)}
+                  onClick={() => handleGameClick(g)}
+                >
+                  {hoveredSidebar === idx && g.video ? (
+                    <video
+                      src={game.video}
+                      muted
+                      autoPlay
+                      loop
+                      playsInline
+                      className={styles.videoPreview}
+                    />
+                  ) : (
+                    <Image
+                      src={g.thumbnail}
+                      alt={g.title}
+                      fill
+                      className={styles.sidebarImage}
+                      style={{ objectFit: "cover" }}
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+          ),
+        },
+      ]
       : []),
     ...(isBig
       ? [
-          {
-            type: "tall-ad",
-            col: 11,
-            row: 1,
-            colSpan: 2,
-            rowSpan: 6,
-            content: <TallAd />,
-          },
-        ]
+        {
+          type: "tall-ad",
+          col: 11,
+          row: 1,
+          colSpan: 2,
+          rowSpan: 6,
+          content: <TallAd />,
+        },
+      ]
       : []),
   ];
 
@@ -214,7 +214,7 @@ const handleGameClick = (gameToPlay) => {
   });
 
   const startIndex = gridCols > 8 ? 6 : 0;
-    extraGames.slice(startIndex).forEach((g, i) => {
+  extraGames.slice(startIndex).forEach((g, i) => {
     const pat = sizePattern[i % sizePattern.length];
     const colSpan = Math.min(pat.colSpan, Math.floor(gridCols / 4));
     const rowSpan = pat.rowSpan;
@@ -258,7 +258,7 @@ const handleGameClick = (gameToPlay) => {
             <div
               key={idx}
               className={styles.mobileGameCard}
-                            onClick={() => handleGameClick(g)}
+              onClick={() => handleGameClick(g)}
             >
               <Image
                 src={g.thumbnail}
@@ -285,12 +285,12 @@ const handleGameClick = (gameToPlay) => {
                 el.type === "header"
                   ? styles.headerGridItem
                   : el.type === "left-sidebar"
-                  ? styles.leftSidebarContainer
-                  : el.type === "after-iframe-ad"
-                  ? styles.afterIframeAdCard
-                  : el.type === "tall-ad"
-                  ? styles.tallAdCard
-                  : styles.card
+                    ? styles.leftSidebarContainer
+                    : el.type === "after-iframe-ad"
+                      ? styles.afterIframeAdCard
+                      : el.type === "tall-ad"
+                        ? styles.tallAdCard
+                        : styles.card
               }
               style={{
                 gridColumn: `${el.col} / span ${el.colSpan}`,
@@ -301,12 +301,12 @@ const handleGameClick = (gameToPlay) => {
                 el.type === "game" ? setHoveredIndex(idx) : null
               }
               onMouseLeave={() => setHoveredIndex(null)}
-             onClick={() => {
-              if (el.type === "game") {
-                // router.push(`/home/${el.game.slug}`);
-                handleGameClick(el.game);
-              }
-            }}
+              onClick={() => {
+                if (el.type === "game") {
+                  // router.push(`/home/${el.game.slug}`);
+                  handleGameClick(el.game);
+                }
+              }}
             >
               {el.type === "game" ? (
                 hoveredIndex === idx && el.game.video ? (
