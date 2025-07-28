@@ -16,5 +16,9 @@ export default async function GamePage({ params }) {
 
   if (!game) return notFound();
 
-  return <GamePlay game={game} />;
+  return (
+    <div style={{ padding: '20px' }}>
+      <GamePlay game={game} />
+    </div>
+  )
 }

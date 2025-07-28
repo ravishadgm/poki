@@ -9,9 +9,9 @@ import Zombie from "./Games/Zombie.webp";
 import GameCard1 from "./Games/GameType1.png";
 import GameCard2 from "./Games/GameType2.png";
 import GameCard3 from "./Games/GameType3.webp";
-import GameCard4 from "./Games/GameType4.webp";
-import GameCard5 from "./Games/GameType5.webp";
-import GameCard6 from "./Games/GameType6.webp";
+
+import GameCard5 from "./Games/GameType5.jpg";
+import GameCard6 from "./Games/GameType6.jpg";
 import GameCard7 from "./Games/smallAdd.jpeg";
 import smallCard1 from "./Games/smallCard/smallCard1.webp";
 import smallCard2 from "./Games/smallCard/smallCard2.webp";
@@ -33,6 +33,8 @@ import popularImg1 from "./Header/PopularImage/Game4.webp";
 import popularImg2 from "./Header/PopularImage/Game6.webp";
 import popularImg3 from "./Header/PopularImage/Game7.webp";
 import popularImg4 from "./Header/PopularImage/Game5.webp";
+import privacyHeader from "./Privacy/header-bg.svg";
+import privacyFooter from "./Privacy/footer-bg.svg";
 
 const images = {
     Logo,
@@ -46,7 +48,7 @@ const images = {
     GameCard1,
     GameCard2,
     GameCard3,
-    GameCard4,
+
     GameCard5,
     GameCard6,
     GameCard7,
@@ -70,6 +72,8 @@ const images = {
     popularImg2,
     popularImg3,
     popularImg4,
+    privacyHeader,
+    privacyFooter
 }
 
 export default images;

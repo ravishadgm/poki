@@ -4,10 +4,10 @@
   padding: 0 24px;
   text-align: center;
   color:$blue-text;
+  
+}
 
-  padding-top: 70px;
-
-  .heading{
+.heading{
     padding:0 10px;
 
     @media(max-width:480px){
@@ -29,12 +29,10 @@
     line-height: 1.5;
     margin-bottom: 30px;
 
-     @media(max-width:1200px){
+    @media(max-width:1200px){
         font-size: 15px;
     }
   }
-  }
-  
 }
 
 .cardGrid {
@@ -47,50 +45,93 @@
 
 .card {
   width: calc(25% - 16.5px); 
-  min-width: 220px;
-  background: #fff;
+  width:23%;
+  background: $white-color;
   border-radius: 10px;
-  padding: 20px;
+  padding:20px ;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  box-shadow: $shadow-mid;
+  transition: all 0.3s ease;
 
   .icon {
-    width: 76px;
-    height: 76px;
+    width: 75px;
+    height: 75px;
     margin: 0 auto 12px;
     display: block;
+    transition: color 0.3s ease;
   }
 
   strong {
-    font-size: 15px;
+    font-size: 18px;
+
+     @media(max-width:1200px){
+        font-size: 15px;
+    }
+  }
+
+   &:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 8px 10px 5px #5d6b84a8;
+
+    .icon {
+      color: $blue-hover;
+    }
+
+    strong{
+        color:$blue-hover;
+    }
+  }
+
+
+}
+
+ @media (max-width: 1024px) {
+  .card {
+    width: 48%;
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 100%; 
   }
 }
 
 .infoBox {
-  background: #f8f8f8;
+  background: $white-color;
   border-radius: 12px;
   padding: 15px 20px;
   text-align: left;
   margin-bottom: 20px;
+  box-shadow: $shadow-mid;
 
   h4 {
-    font-size: 15px;
+    font-size: 18px;
     font-weight: bold;
     margin-bottom: 5px;
+
+    @media(max-width:1200px){
+        font-size: 15px;
+    }
   }
 
   p {
     font-size: 14px;
-    color: #333;
     line-height: 1.4;
   }
 }
 
 .infoBoxBlue {
-  background: #e8f2fc;
   border-radius: 12px;
   padding: 15px 20px;
   text-align: left;
+  box-shadow: $shadow-mid;
+  margin-bottom: 25px;
+
+  @Media(max-wdith:480px){
+    margin-bottom:12px;
+  }
 
   .header {
     display: flex;
@@ -98,8 +139,12 @@
     justify-content: space-between;
 
     h4 {
-      font-size: 15px;
+      font-size: 18px;
       font-weight: bold;
+
+      @media(max-width:1200px){
+        font-size: 15px;
+    }
     }
 
     .infoIcon {
@@ -114,6 +159,10 @@
 
     strong {
       font-weight: bold;
+      background-color: #f0f5fc;
+      border-radius: 12px;
+      padding:5px;
+      font-weight: bolder;
     }
   }
 
@@ -121,25 +170,16 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    font-size: 13px;
-    color: #001e3c;
+    font-size: 12px;
     margin-top: 12px;
+    background-color: #f0f5fc;
+    border-radius: 12px;
+    padding:10px;
 
-    .dot {
-      font-size: 20px;
-      color: #0057e2;
+    .infoIcon {
+      width: 18px;
+      height: 18px;
     }
 
-    .ageBtn {
-      margin-left: auto;
-      padding: 4px 10px;
-      background: #007bff;
-      color: #fff;
-      font-size: 12px;
-      font-weight: 600;
-      border: none;
-      border-radius: 6px;
-      cursor: default;
-    }
   }
 }
