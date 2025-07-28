@@ -3,6 +3,7 @@
 import images from '@/assets/images';
 import styles from './Footer.module.scss';
 import Image from 'next/image';
+import Link from 'next/link';
 import Images from "../../assets/images";
 
 export default function Footer() {
@@ -32,7 +33,7 @@ export default function Footer() {
                         <a href="#">Poki for Developers</a>
                         <a href="#">Jobs</a>
                         <a href="#">Poki Kids</a>
-                        <a href="#">Privacy Center</a>
+                        <a href="/privacy">Privacy Center</a>
                         <a href="#">FAQ</a>
                         <a href="#">Contact</a>
                     </div>

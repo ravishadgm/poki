@@ -6,7 +6,7 @@ import Images from "@/assets/images/index";
 
 export default function SmallGameGrid() {
     const categories = [
-        { img: Images.GameCard1, title: "2 PLAYER GAMES" },
+        { img: Images.smallCard3, title: "2 PLAYER GAMES" },
         { img: Images.GameCard2, title: "GAMES FOR GIRLS" },
         { img: Images.GameCard3, title: "PUZZLE GAMES" },
         { img: Images.GameCard4, title: "MULTIPLAYER GAMES" },
@@ -34,24 +34,24 @@ export default function SmallGameGrid() {
 
 
 
-        { img: Images.smallCard2, title: "BRAINPOT GAMES" },
-        { img: Images.smallCard3, title: "TYCOON GAMES" },
-        { img: Images.smallCard4, title: "ADVENTURE GAMES" },
-        { img: Images.smallCard5, title: "SKILL GAMES" },
-        { img: Images.smallCard6, title: "MOBILE GAMES" },
-        { img: Images.smallCard7, title: "DYNOSAUR GAMES" },
-        { img: Images.GameCard2, title: "COOKING GAMES" },
-        { img: Images.GameCard1, title: "OBBY GAMES" },
-        { img: Images.GameCard2, title: "BRAINPOT GAMES" },
+        { img: Images.smallCard3, title: "BRAINPOT GAMES" },
         { img: Images.smallCard1, title: "OBBY GAMES" },
-        { img: Images.smallCard2, title: "BRAINPOT GAMES" },
-        { img: Images.smallCard3, title: "TYCOON GAMES" },
-        { img: Images.smallCard4, title: "ADVENTURE GAMES" },
-        { img: Images.smallCard5, title: "SKILL GAMES" },
-        { img: Images.smallCard6, title: "MOBILE GAMES" },
         { img: Images.smallCard7, title: "DYNOSAUR GAMES" },
-        { img: Images.GameCard2, title: "COOKING GAMES" },
-        { img: Images.GameCard1, title: "OBBY GAMES" },
+        { img: Images.smallCard8, title: "COOKING GAMES" },
+        { img: Images.smallCard5, title: "TYCOON GAMES" },
+        { img: Images.smallCard2, title: "ADVENTURE GAMES" },
+        { img: Images.smallCard4, title: "SKILL GAMES" },
+        { img: Images.smallCard6, title: "MOBILE GAMES" },
+        { img: Images.smallCard9, title: "COOL GAMES" },
+        { img: Images.smallCard10, title: "GAMES FOR BOYS" },
+        { img: Images.smallCard11, title: "PLATFORM GAMES" },
+        { img: Images.smallCard12, title: "ONLINE GAMES" },
+        { img: Images.smallCard13, title: "ESCAPE GAMES" },
+        { img: Images.smallCard14, title: "ACTION GAMES" },
+        { img: Images.smallCard15, title: "3d GAMES" },
+        { img: Images.smallCard16, title: "STICKMAN GAMES" },
+        { img: Images.smallCard3, title: "BRAINPOT GAMES" },
+        { img: Images.smallCard1, title: "OBBY GAMES" },
     ];
 
     // const smallBox = [
@@ -86,15 +86,15 @@ export default function SmallGameGrid() {
             <div className={styles.gridWrapper}>
                 {categories?.map((cat, idx) => (
                     <div key={idx} className={styles.card}>
-                     {cat.img && (
-  <Image
-    src={cat.img}
-    alt={cat.title}
-    width={100}
-    height={100}
-    className={styles.image}
-  />
-)}
+                        {cat.img && (
+                            <Image
+                                src={cat.img}
+                                alt={cat.title}
+                                width={100}
+                                height={100}
+                                className={styles.image}
+                            />
+                        )}
 
                         <span>{cat.title}</span>
                     </div>
