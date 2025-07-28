@@ -1,4 +1,3 @@
-// RootLayout.tsx
 import Script from "next/script";
 import "../styles/globals.scss";
 import Footer from "@/layout/Footer/Page";
@@ -13,7 +12,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <head>
-        {/* Load AdSense script globally */}
         <Script
           id="adsense-script"
           strategy="afterInteractive"
@@ -22,10 +20,10 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
       </head>
-      <body>
-        <main>
+      <body className="layout-wrapper">
+        <div className="layout-content">
           <RecentGamesProvider>{children}</RecentGamesProvider>
-        </main>
+        </div>
         <Footer />
       </body>
     </html>
