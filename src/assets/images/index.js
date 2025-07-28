@@ -9,7 +9,7 @@ import Zombie from "./Games/Zombie.webp";
 import GameCard1 from "./Games/GameType1.png";
 import GameCard2 from "./Games/GameType2.png";
 import GameCard3 from "./Games/GameType3.webp";
-import GameCard4 from "./Games/GameType4.avif";
+
 import GameCard5 from "./Games/GameType5.jpg";
 import GameCard6 from "./Games/GameType6.jpg";
 import GameCard7 from "./Games/smallAdd.jpeg";
@@ -48,7 +48,7 @@ const images = {
     GameCard1,
     GameCard2,
     GameCard3,
-    GameCard4,
+
     GameCard5,
     GameCard6,
     GameCard7,
