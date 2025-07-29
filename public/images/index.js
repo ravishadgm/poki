@@ -4,10 +4,10 @@ import GameCard7 from "./Games/smallAdd.jpeg";
 import privacyHeader from "./Privacy/header-bg.svg";
 import privacyFooter from "./Privacy/footer-bg.svg";
 
-import GameOne from "./GameType4.avif";
-import GameTwo from "./templerun.avif";
-import GameThree from "./snake.avif";
-import GameFour from "./streethiddenobjects.webp";
+import GameOne from "./playboy.jpg";
+import GameTwo from "./playboy.jpg";
+import GameThree from "./playboy.jpg";
+import GameFour from "./playboy.jpg";
 
 const images = {
     Logo,

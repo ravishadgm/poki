@@ -6,29 +6,29 @@ import Images from "../../../public/images/index";
 
 export default function SmallGameGrid() {
     const categories = [
-        { img: "/images/GameType.avif", title: "2 PLAYER GAMES" },
-        { img: "/images/templerun.avif", title: "GAMES FOR GIRLS" },
-        { img: "/images/GameType.avif", title: "PUZZLE GAMES" },
-        { img: "/images/GameType4.avif", title: "MULTIPLAYER GAMES" },
-        { img: "/images/templerun.avif", title: "SHOOTING GAMES" },
-        { img: "/images/GameType4.avif", title: "CAR GAMES" },
+        { img: "/images/GameType.playboy.jpg", title: "2 PLAYER GAMES" },
+        { img: "/images/playboy.jpg", title: "GAMES FOR GIRLS" },
+        { img: "/images/GameType.playboy.jpg", title: "PUZZLE GAMES" },
+        { img: "/images/playboy.jpg", title: "MULTIPLAYER GAMES" },
+        { img: "/images/playboy.jpg", title: "SHOOTING GAMES" },
+        { img: "/images/playboy.jpg", title: "CAR GAMES" },
 
     ];
 
     const smallGameModel = [
-        { img: "/images/constructor.avif", title: "BRAINPOT GAMES" },
-        { img: "/images/snake.avif", title: "OBBY GAMES" },
-        { img: "/images/constructor.avif", title: "DYNOSAUR GAMES" },
-        { img: "/images/snake.avif", title: "COOKING GAMES" },
-        { img: "/images/constructor.avif", title: "TYCOON GAMES" },
-        { img: "/images/snake.avif", title: "ADVENTURE GAMES" },
+        { img: "/images/playboy.jpg", title: "BRAINPOT GAMES" },
+        { img: "/images/playboy.jpg", title: "OBBY GAMES" },
+        { img: "/images/playboy.jpg", title: "DYNOSAUR GAMES" },
+        { img: "/images/playboy.jpg", title: "COOKING GAMES" },
+        { img: "/images/playboy.jpg", title: "TYCOON GAMES" },
+        { img: "/images/playboy.jpg", title: "ADVENTURE GAMES" },
 
-        { img: "/images/constructor.avif", title: "SKILL GAMES" },
-        { img: "/images/snake.avif", title: "MOBILE GAMES" },
-        { img: "/images/constructor.avif", title: "COOL GAMES" },
-        { img: "/images/snake.avif", title: "GAMES FOR BOYS" },
-        { img: "/images/constructor.avif", title: "PLATFORM GAMES" },
-        { img: "/images/snake.avif", title: "ONLINE GAMES" },
+        { img: "/images/playboy.jpg", title: "SKILL GAMES" },
+        { img: "/images/playboy.jpg", title: "MOBILE GAMES" },
+        { img: "/images/playboy.jpg", title: "COOL GAMES" },
+        { img: "/images/playboy.jpg", title: "GAMES FOR BOYS" },
+        { img: "/images/playboy.jpg", title: "PLATFORM GAMES" },
+        { img: "/images/playboy.jpg", title: "ONLINE GAMES" },
 
     ]
 

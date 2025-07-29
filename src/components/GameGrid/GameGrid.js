@@ -47,8 +47,7 @@ export default function GameGrid({ games }) {
   const [gridCols, setGridCols] = useState(17);
   const router = useRouter();
   const { addToRecentGames } = useRecentGames();
-console.log(games,"gamesgamesgamesgames")
-
+  
   useEffect(() => {
     const updateCols = () => {
       const width = window.innerWidth;
