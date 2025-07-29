@@ -36,7 +36,7 @@
   height: 100%;
   overflow: hidden;
   border-radius: 16px;
-  box-shadow: 0px 7px 10px 4px #5d6b844d;
+  box-shadow:$shadow-mid;
   transition: transform 0.2s ease;
   cursor: pointer;
   display: flex;
@@ -54,7 +54,7 @@
     object-fit: cover;
     border-radius: 12px;
     pointer-events: none;
-    box-shadow: 0px 7px 10px 4px #5d6b844d;
+    box-shadow: $shadow-mid;
   }
 }
 

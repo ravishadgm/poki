@@ -14,12 +14,10 @@
       font-size: 20px;
       line-height: 1.25;
       padding-bottom: 30px;
-      font-family: Open Sans, Noto Sans Arabic, sans-serif;
     }
 
     p {
       padding-bottom: 15px;
-      font-family: Open Sans, Noto Sans Arabic, sans-serif;
     }
   }
   a {
@@ -37,9 +35,20 @@
  @media (max-width: 720px) {
    
     .header{
-             width: 221px;
+        width: 221px;
         height: 134px;
     }
+
+    .container {
+      flex-direction: column;
+    }
+}
+
+@media(max-width:480px){
+  .header{
+    width: 181px;
+    height: 134px;
   }
+}
 
      

@@ -2,7 +2,6 @@
 
 .mainContainer {
   margin: 85px 0;
-  font-family: "Open Sans", "Noto Sans Arabic", sans-serif;
 
   @media (max-width: 768px) {
     margin: 65px 0;
@@ -63,7 +62,7 @@
       margin: 0 0.2rem;
 
       &:hover {
-        color: #009cff;
+        color: $blue-hover;
       }
     }
   }
@@ -99,7 +98,7 @@
         text-decoration: underline;
 
         &:hover {
-          color: #009cff;
+          color: $blue-hover;
         }
       }
     }
