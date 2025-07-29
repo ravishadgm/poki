@@ -1,30 +1,22 @@
 export async function getGames() {
- const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
- console.log('🔍 Base URL:', baseUrl);
- 
- if (!baseUrl) {
-   console.error('❌ NEXT_PUBLIC_BASE_URL is not defined');
-   return [];
- }
- 
- const timestamp = Date.now();
- const url = `${baseUrl}/data/games.json?t=${timestamp}`;
- console.log('🔍 Fetching URL:', url);
+  const baseUrl =
+    process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000'
+      : 'https://poki-tan.vercel.app'; // hardcoded for production
 
- try {
-   const res = await fetch(url, { cache: 'no-store' });
+  try {
+    const res = await fetch(`${baseUrl}/data/games.json`, {
+      cache: 'no-store',
+    });
 
-   if (!res.ok) {
-     console.error(`❌ HTTP error! status: ${res.status}`);
-     return [];
-   }
+    if (!res.ok) {
+      throw new Error(`❌ Failed to fetch games: ${res.status}`);
+    }
 
-   const data = await res.json();
-   console.log('✅ Data fetched successfully');
-   return data;
-
- } catch (err) {
-   console.error('❌ Exception while fetching games:', err);
-   return [];
- }
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('❌ Error fetching games:', error.message);
+    return [];
+  }
 }
