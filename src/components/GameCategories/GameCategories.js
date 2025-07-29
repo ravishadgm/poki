@@ -6,29 +6,29 @@ import Images from "../../../public/images/index";
 
 export default function GameCategories() {
     const categories = [
-        { img: "/images/GameType.playboy.jpg", title: "2 PLAYER GAMES" },
-        { img: "/images/playboy.jpg", title: "GAMES FOR GIRLS" },
-        { img: "/images/GameType.playboy.jpg", title: "PUZZLE GAMES" },
-        { img: "/images/playboy.jpg", title: "MULTIPLAYER GAMES" },
-        { img: "/images/playboy.jpg", title: "SHOOTING GAMES" },
-        { img: "/images/playboy.jpg", title: "CAR GAMES" },
+        { img: "/images/GameType.playboy.png", title: "2 PLAYER GAMES" },
+        { img: "/images/playboy.png", title: "GAMES FOR GIRLS" },
+        { img: "/images/GameType.playboy.png", title: "PUZZLE GAMES" },
+        { img: "/images/playboy.png", title: "MULTIPLAYER GAMES" },
+        { img: "/images/playboy.png", title: "SHOOTING GAMES" },
+        { img: "/images/playboy.png", title: "CAR GAMES" },
 
     ];
 
     const smallGameModel = [
-        { img: "/images/playboy.jpg", title: "BRAINPOT GAMES" },
-        { img: "/images/playboy.jpg", title: "OBBY GAMES" },
-        { img: "/images/playboy.jpg", title: "DYNOSAUR GAMES" },
-        { img: "/images/playboy.jpg", title: "COOKING GAMES" },
-        { img: "/images/playboy.jpg", title: "TYCOON GAMES" },
-        { img: "/images/playboy.jpg", title: "ADVENTURE GAMES" },
+        { img: "/images/playboy.png", title: "BRAINPOT GAMES" },
+        { img: "/images/playboy.png", title: "OBBY GAMES" },
+        { img: "/images/playboy.png", title: "DYNOSAUR GAMES" },
+        { img: "/images/playboy.png", title: "COOKING GAMES" },
+        { img: "/images/playboy.png", title: "TYCOON GAMES" },
+        { img: "/images/playboy.png", title: "ADVENTURE GAMES" },
 
-        { img: "/images/playboy.jpg", title: "SKILL GAMES" },
-        { img: "/images/playboy.jpg", title: "MOBILE GAMES" },
-        { img: "/images/playboy.jpg", title: "COOL GAMES" },
-        { img: "/images/playboy.jpg", title: "GAMES FOR BOYS" },
-        { img: "/images/playboy.jpg", title: "PLATFORM GAMES" },
-        { img: "/images/playboy.jpg", title: "ONLINE GAMES" },
+        { img: "/images/playboy.png", title: "SKILL GAMES" },
+        { img: "/images/playboy.png", title: "MOBILE GAMES" },
+        { img: "/images/playboy.png", title: "COOL GAMES" },
+        { img: "/images/playboy.png", title: "GAMES FOR BOYS" },
+        { img: "/images/playboy.png", title: "PLATFORM GAMES" },
+        { img: "/images/playboy.png", title: "ONLINE GAMES" },
 
     ]
 
