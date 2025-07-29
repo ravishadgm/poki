@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./Searchbar.module.scss";
+import styles from "./styles.module.scss";
 import { Search } from "lucide-react";
 import Image from "next/image";
 import { useRecentGames } from "@/contexts/RecentGamesContext";

@@ -2,6 +2,8 @@
 
 import { useRef, useEffect, useState } from 'react';
 import styles from './style.module.scss';
+import Link from 'next/link';
+
 
 const slides = [
   {
@@ -66,8 +68,11 @@ export default function AboutPage() {
       </div>
 
       <div className={styles.header}>
-        <h1 className={styles.logo}>poki</h1>
-      </div>
+  <Link href="/" passHref>
+    <h1 className={styles.logo} style={{ cursor: 'pointer' }}>poki</h1>
+  </Link>
+</div>
+
 
       <div
         className={styles.slider}

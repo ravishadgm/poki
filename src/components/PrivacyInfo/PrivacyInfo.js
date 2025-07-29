@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './PrivacyInfo.module.scss';
+import styles from './styles.module.scss';
 import { BookOpen, Cookie, Scale, ShieldCheck, Info, Circle, ExternalLink } from 'lucide-react';
 
 

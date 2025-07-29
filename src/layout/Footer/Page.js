@@ -1,7 +1,7 @@
 "use client";
 
 import images from "../../../public/images/index";
-import styles from "./Footer.module.scss";
+import styles from "./styles.module.scss";
 import Image from "next/image";
 import Link from "next/link";
 

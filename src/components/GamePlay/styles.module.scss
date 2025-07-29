@@ -1,34 +1,32 @@
-/* ───────────────────────────────
-   Generic containers / loader
-   ─────────────────────────────── */
-.responsiveContainer { 
-  min-height: 100vh; 
-  position: relative; 
+
+.responsiveContainer {
+  min-height: 100vh;
+  position: relative;
 }
 
-.loadingContainer { 
-  min-height: 100vh; 
+.loadingContainer {
+  min-height: 100vh;
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
 }
 
-.loadingSpinner { 
+.loadingSpinner {
   color: #666;
-  font-size: 16px; 
+  font-size: 16px;
 }
 
 /* ───────────────────────────────
    MOBILE LAYOUT
    ─────────────────────────────── */
-.mobileLayout { 
-  display: block; 
+.mobileLayout {
+  display: block;
   @media (min-width: 769px) {
     display: none;
-  } 
+  }
 }
 
-.mobileHeader { 
+.mobileHeader {
   position: sticky;
   top: 5px;
   z-index: 100;
@@ -37,23 +35,20 @@
   align-items: center;
   margin-bottom: 10px;
 
- 
-   @media (max-width: 480px) {
+  @media (max-width: 480px) {
     height: 84px;
- 
   }
 }
 
-.mobilePlayer { 
+.mobilePlayer {
   position: relative;
   width: 100%;
-aspect-ratio: 3/4; // <<<<< changed here
-
+  aspect-ratio: 3/4;
   background: #000;
   overflow: hidden;
 }
 
-.mobileIframe { 
+.mobileIframe {
   position: absolute;
   top: 0;
   left: 0;
@@ -65,19 +60,19 @@ aspect-ratio: 3/4; // <<<<< changed here
   object-fit: cover;
 }
 
-.mobileAfterIframeAd { 
+.mobileAfterIframeAd {
   width: 100%;
   padding: 0 16px;
   margin: 16px 0;
   height: 100px;
   background: #fff;
-  
+
   @media (max-width: 768px) {
     height: 80px;
     margin: 12px 0;
     padding: 0 12px;
   }
-  
+
   @media (max-width: 480px) {
     height: 60px;
     margin: 8px 0;
@@ -85,19 +80,19 @@ aspect-ratio: 3/4; // <<<<< changed here
   }
 }
 
-.mobileGrid { 
+.mobileGrid {
   display: grid;
   gap: 12px;
   padding: 16px;
   grid-auto-rows: auto;
-  
+
   @media (max-width: 480px) {
     gap: 8px;
     padding: 12px;
-  } 
+  }
 }
 
-.mobileGameCard { 
+.mobileGameCard {
   position: relative;
   aspect-ratio: 1;
   border-radius: 12px;
@@ -111,31 +106,14 @@ aspect-ratio: 3/4; // <<<<< changed here
     transform: translateY(-4px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
   }
-  
+
   @media (max-width: 480px) {
     border-radius: 8px;
   }
 }
 
-.gameTitle { 
-  position: absolute;
-  inset-inline: 0;
-  bottom: 0;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-  color: #fff;
-  padding: 16px 8px 8px;
-  font-size: 12px;
-  font-weight: 500;
-  text-align: center;
-  line-height: 1.3;
 
-  @media (max-width: 480px) {
-    font-size: 11px;
-    padding: 12px 6px 6px;
-  }
-}
-
-.gameImage { 
+.gameImage {
   position: absolute;
   inset: 0;
   object-fit: cover;
@@ -151,26 +129,23 @@ aspect-ratio: 3/4; // <<<<< changed here
 /* ───────────────────────────────
    DESKTOP LAYOUT
    ─────────────────────────────── */
-.desktopLayout { 
-  display: none; 
+.desktopLayout {
+  display: none;
   @media (min-width: 769px) {
     display: block;
-  } 
+  }
 }
 
-.grid { 
+.grid {
   display: grid;
   gap: 20px;
   grid-auto-rows: 100px;
-  
   padding-bottom: 40px;
   transition: all 0.3s ease;
-
-  
 }
 
-.headerGridItem { 
-    position: sticky;
+.headerGridItem {
+  position: sticky;
   top: 20px;
   width: 100%;
   height: 100%;
@@ -180,7 +155,7 @@ aspect-ratio: 3/4; // <<<<< changed here
   z-index: 100;
 }
 
-.card { 
+.card {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
@@ -203,8 +178,8 @@ aspect-ratio: 3/4; // <<<<< changed here
   }
 }
 
-.videoPreview { 
-   position: absolute;
+.videoPreview {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -215,7 +190,7 @@ aspect-ratio: 3/4; // <<<<< changed here
   transition: opacity 0.3s ease;
 }
 
-.sidebarImage { 
+.sidebarImage {
   position: absolute;
   inset: 0;
   object-fit: cover;
@@ -224,12 +199,12 @@ aspect-ratio: 3/4; // <<<<< changed here
 }
 
 /* Left sidebar */
-.leftSidebarContainer { 
+.leftSidebarContainer {
   height: 100%;
-  width: 100%; 
+  width: 100%;
 }
 
-.leftSidebar { 
+.leftSidebar {
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -237,7 +212,7 @@ aspect-ratio: 3/4; // <<<<< changed here
   padding: 8px;
 }
 
-.sidebarGameCard { 
+.sidebarGameCard {
   position: relative;
   border-radius: 12px;
   overflow: hidden;
@@ -255,7 +230,7 @@ aspect-ratio: 3/4; // <<<<< changed here
 }
 
 /* ───────────────────────────────
-   PLAYER STYLES - FIXED
+   PLAYER STYLES
    ─────────────────────────────── */
 .player {
   position: relative;
@@ -265,7 +240,7 @@ aspect-ratio: 3/4; // <<<<< changed here
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
-  
+
   iframe {
     position: absolute;
     top: 0;
@@ -291,21 +266,20 @@ aspect-ratio: 3/4; // <<<<< changed here
 }
 
 /* ───────────────────────────────
-   AD STYLES (single orange theme)
+   AD STYLES
    ─────────────────────────────── */
-.adWrapper, .tallAdWrapper {
+.adWrapper,
+.tallAdWrapper {
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  
   border-radius: 12px;
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
   min-height: 120px;
-
 
   @media (max-width: 768px) {
     border-radius: 8px;
@@ -320,10 +294,10 @@ aspect-ratio: 3/4; // <<<<< changed here
 
 .tallAdWrapper {
   min-height: 400px;
- 
 }
 
-.afterIframeAdCard, .tallAdCard {
+.afterIframeAdCard,
+.tallAdCard {
   position: relative;
   width: 100%;
   height: 100%;
@@ -335,37 +309,21 @@ aspect-ratio: 3/4; // <<<<< changed here
   justify-content: center;
   box-shadow: 0px 6px 12px rgba(255, 152, 0, 0.2);
   border: 1px solid rgba(255, 152, 0, 0.1);
-  
+
   @media (max-width: 1366px) {
     border-radius: 10px;
     box-shadow: 0px 4px 8px rgba(255, 152, 0, 0.15);
   }
 }
 
-/* keeps the hover scale on games only */
-.card:hover .gameImage { 
-  transform: scale(1.05); 
+/* Game hover zoom */
+.card:hover .gameImage {
+  transform: scale(1.05);
 }
 
 /* ───────────────────────────────
-   RESPONSIVE BREAKPOINTS
+   MOBILE GAME DESCRIPTION
    ─────────────────────────────── */
-@media (max-width: 768px) {
-  .mobileGrid {
-    padding: 12px;
-    gap: 10px;
-  }
-}
-
-@media (max-width: 480px) {
-  .mobileGrid {
-    padding: 8px;
-    gap: 8px;
-  }
-}
-
-
-
-.mobileGameDescription{
-  margin-bottom:40px;
+.mobileGameDescription {
+  margin-bottom: 40px;
 }

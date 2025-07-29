@@ -42,7 +42,7 @@ function findNextFreePos(occupied, colSpan, rowSpan, gridCols) {
   return { row: 1, col: 1 };
 }
 
-export default function GameGrid({ games }) {
+export default function GameShowcase({ games }) {
   const [hoveredIndex, setHoveredIndex] = useState("");
   const [gridCols, setGridCols] = useState(17);
   const router = useRouter();

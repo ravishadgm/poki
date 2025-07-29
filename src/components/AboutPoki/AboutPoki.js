@@ -1,6 +1,6 @@
 "use client"
 
-import styles from './AboutPoki.module.scss';
+import styles from './styles.module.scss';
 import Link from 'next/link';
 
 const AboutPoki = () => {

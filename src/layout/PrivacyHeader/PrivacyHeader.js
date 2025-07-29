@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ExternalLink } from 'lucide-react';
-import styles from './PrivacyHeader.module.scss';
+import styles from './styles.module.scss';
 import Images from '../../../public/images/index';
 
 const PrivacyHeader = () => {

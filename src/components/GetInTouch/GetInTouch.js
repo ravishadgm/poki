@@ -1,5 +1,5 @@
 "use client";
-import styles from './GetInTouch.module.scss';
+import styles from './styles.module.scss';
 import { Pencil, PhoneCall, MapPin } from "lucide-react";
 import Image from 'next/image';
 import Images from '../../../public/images/index';

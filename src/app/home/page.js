@@ -1,15 +1,8 @@
 import AboutPoki from "@/components/AboutPoki/AboutPoki";
-import GameGrid from "@/components/GameGrid/GameGrid";
-import SmallGameGrid from "@/components/SmallGameGrid/SmallGameGrid";
+import GameGrid from "@/components/GameShowcase/GameShowcase";
+import SmallGameGrid from "@/components/GameCategories/GameCategories";
+import { getGames } from "@/services/gameService";
 
-async function getGames() {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-  const timestamp = Date.now();
-  const res = await fetch(`${baseUrl}/data/games.json?t=${timestamp}`, { 
-    cache: 'no-store' 
-  });
-  return res.json();
-}
 export default async function HomePage() {
   const games = await getGames();
 
@@ -18,6 +11,6 @@ export default async function HomePage() {
       <GameGrid games={games} />
       <SmallGameGrid />
       <AboutPoki />
-    </div >
+    </div>
   );
 }

@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import styles from "./SmallGameGrid.module.scss";
+import styles from "./styles.module.scss";
 import Images from "../../../public/images/index";
 
-export default function SmallGameGrid() {
+export default function GameCategories() {
     const categories = [
         { img: "/images/GameType.playboy.jpg", title: "2 PLAYER GAMES" },
         { img: "/images/playboy.jpg", title: "GAMES FOR GIRLS" },

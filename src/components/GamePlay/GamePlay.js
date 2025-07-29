@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import styles from "./styles.module.scss";
 import Header from "@/layout/Header/Page";
 import Image from "next/image";
-import { AdSenseTestAd } from "../AdSense/AdSenseTestAd";
+import { AdSenseTestAd } from "../../ads/AdSense/AdSenseTestAd";
 import { useRecentGames } from "@/contexts/RecentGamesContext";
 import GameDescription from "../GameDescription/GameDescription";
 
