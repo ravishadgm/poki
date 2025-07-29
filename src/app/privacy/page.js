@@ -5,7 +5,7 @@ import PrivacyHeader from "@/layout/PrivacyHeader/PrivacyHeader";
 
 export default function PrivacyPage() {
     return (
-        <div className={styles.privacySection}>
+        <div style={{ backgroundColor: '#ffffff' }}>
             <PrivacyHeader />
             <PrivacyInfo />
             <GetInTouch />
