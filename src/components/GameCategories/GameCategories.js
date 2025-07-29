@@ -15,10 +15,11 @@ export default function GameCategories() {
                             <Image
                                 src={cat.img}
                                 alt={cat.title}
-                                width={120}
-                                height={120}
+                                fill
                                 className={styles.imgCard}
                                 quality={100}
+                                priority
+                                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
                             />
                         </div>
                         <span>{cat.title}</span>
@@ -37,23 +38,24 @@ export default function GameCategories() {
                 </div>
             </div>
 
-            <div>
-                <div className={styles.secondCards}>
-                    {smallGameModel.map((item, idx) => (
-                        <div className={styles.smallGameCard} key={idx}>
+            <div className={styles.secondCards}>
+                {smallGameModel.map((item, idx) => (
+                    <div className={styles.smallGameCard} key={idx}>
+                        <div className={styles.imageCard}>
                             <Image
                                 src={item.img}
                                 alt={item.title}
-                                width={80}
-                                height={80}
-                                className={styles.imageCard}
-                                style={{ objectFit: "contain" }}
+                                fill
+                                priority
+                                className={styles.imageCardImg}
+                                sizes="(max-width: 480px) 60px, (max-width: 768px) 80px, 80px"
                             />
-                            <span>{item.title}</span>
                         </div>
-                    ))}
-                </div>
+                        <span>{item.title}</span>
+                    </div>
+                ))}
             </div>
+
         </section>
     );
 }
