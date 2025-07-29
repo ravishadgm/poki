@@ -4,9 +4,9 @@ import GameCard7 from "./Games/smallAdd.jpeg";
 import privacyHeader from "./Privacy/header-bg.svg";
 import privacyFooter from "./Privacy/footer-bg.svg";
 
-import GameOne from "./4winds.avif";
-import GameTwo from "./marbleshooter.webp";
-import GameThree from "./summerbeach.webp";
+import GameOne from "./GameType4.avif";
+import GameTwo from "./templerun.avif";
+import GameThree from "./snake.avif";
 import GameFour from "./streethiddenobjects.webp";
 
 const images = {

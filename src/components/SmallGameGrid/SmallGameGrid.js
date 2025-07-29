@@ -7,10 +7,10 @@ import Images from "../../../public/images/index";
 export default function SmallGameGrid() {
     const categories = [
         { img: "/images/GameType.avif", title: "2 PLAYER GAMES" },
-        { img: "/images/GameTypee.avif", title: "GAMES FOR GIRLS" },
+        { img: "/images/templerun.avif", title: "GAMES FOR GIRLS" },
         { img: "/images/GameType.avif", title: "PUZZLE GAMES" },
         { img: "/images/GameType4.avif", title: "MULTIPLAYER GAMES" },
-        { img: "/images/GameTypee.avif", title: "SHOOTING GAMES" },
+        { img: "/images/templerun.avif", title: "SHOOTING GAMES" },
         { img: "/images/GameType4.avif", title: "CAR GAMES" },
 
     ];
@@ -32,45 +32,6 @@ export default function SmallGameGrid() {
 
     ]
 
-    // const smallGameModel = [
-    //     { img: Images.smallCard3, title: "BRAINPOT GAMES" },
-    //     { img: Images.smallCard1, title: "OBBY GAMES" },
-    //     { img: Images.smallCard7, title: "DYNOSAUR GAMES" },
-    //     { img: Images.smallCard8, title: "COOKING GAMES" },
-    //     { img: Images.smallCard5, title: "TYCOON GAMES" },
-    //     { img: Images.smallCard2, title: "ADVENTURE GAMES" },
-    //     { img: Images.smallCard4, title: "SKILL GAMES" },
-    //     { img: Images.smallCard6, title: "MOBILE GAMES" },
-    //     { img: Images.smallCard9, title: "COOL GAMES" },
-    //     { img: Images.smallCard10, title: "GAMES FOR BOYS" },
-    //     { img: Images.smallCard11, title: "PLATFORM GAMES" },
-    //     { img: Images.smallCard12, title: "ONLINE GAMES" },
-    //     { img: Images.smallCard13, title: "ESCAPE GAMES" },
-    //     { img: Images.smallCard14, title: "ACTION GAMES" },
-    //     { img: Images.smallCard15, title: "3d GAMES" },
-    //     { img: Images.smallCard16, title: "STICKMAN GAMES" },
-
-
-
-    //     { img: Images.smallCard3, title: "BRAINPOT GAMES" },
-    //     { img: Images.smallCard1, title: "OBBY GAMES" },
-    //     { img: Images.smallCard7, title: "DYNOSAUR GAMES" },
-    //     { img: Images.smallCard8, title: "COOKING GAMES" },
-    //     { img: Images.smallCard5, title: "TYCOON GAMES" },
-    //     { img: Images.smallCard2, title: "ADVENTURE GAMES" },
-    //     { img: Images.smallCard4, title: "SKILL GAMES" },
-    //     { img: Images.smallCard6, title: "MOBILE GAMES" },
-    //     { img: Images.smallCard9, title: "COOL GAMES" },
-    //     { img: Images.smallCard10, title: "GAMES FOR BOYS" },
-    //     { img: Images.smallCard11, title: "PLATFORM GAMES" },
-    //     { img: Images.smallCard12, title: "ONLINE GAMES" },
-    //     { img: Images.smallCard13, title: "ESCAPE GAMES" },
-    //     { img: Images.smallCard14, title: "ACTION GAMES" },
-    //     { img: Images.smallCard15, title: "3d GAMES" },
-    //     { img: Images.smallCard16, title: "STICKMAN GAMES" },
-    //     { img: Images.smallCard3, title: "BRAINPOT GAMES" },
-    //     { img: Images.smallCard1, title: "OBBY GAMES" },
-    // ];
 
     return (
         <section>

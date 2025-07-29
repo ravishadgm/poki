@@ -12,7 +12,7 @@ const games = [
     {
         title: '4 Winds',
         slug: '4-winds',
-        image: Images.GameOne,
+        image: Images.GameFour,
         video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
     },
     {
@@ -36,7 +36,7 @@ const games = [
     {
         title: '4 Winds',
         slug: '4-winds',
-        image: Images.GameOne,
+        image: Images.GameTwo,
         video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
     },
     {
