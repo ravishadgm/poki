@@ -7,45 +7,8 @@ import { useRecentGames } from "@/contexts/RecentGamesContext";
 import { ChevronLeft } from 'lucide-react';
 import Images from "../../../public/images/index";
 import { useRouter } from "next/navigation";
+import { games } from "@/dataStore/categories";
 
-const games = [
-    {
-        title: '4 Winds',
-        slug: '4-winds',
-        image: Images.GameFour,
-        video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
-    },
-    {
-        title: 'Marble Shooter',
-        slug: 'marble-shooter',
-        image: Images.GameTwo,
-        video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
-    },
-    {
-        title: 'Rotate Puzzle',
-        slug: "rotate-puzzle",
-        image: Images.GameThree,
-        video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
-    },
-    {
-        title: 'Street Hidden Object',
-        slug: "street-hidden-object",
-        image: Images.GameFour,
-        video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
-    },
-    {
-        title: '4 Winds',
-        slug: '4-winds',
-        image: Images.GameTwo,
-        video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
-    },
-    {
-        title: 'Marble Shooter',
-        slug: 'marble-shooter',
-        image: Images.GameTwo,
-        video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
-    },
-];
 
 
 const SearchDrawer = ({ setOpenDrawer }) => {

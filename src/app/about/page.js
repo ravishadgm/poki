@@ -3,36 +3,16 @@
 import { useRef, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import Link from 'next/link';
+import { slides } from '@/dataStore/categories';
 
 
-const slides = [
-  {
-    title: 'We let the world play',
-    content:
-      'Because play is how we learn. That&#39;s why we&#39;re creating the ultimate online playground. Free and open to all. Wanna play?',
-    bgClass: 'section1',
-    hasButton: true,
-    buttonLabel: "Let's roll!",
-  },
-  {
-    title: 'Easy access for all',
-    content: 'Millions of players. Two lines of code. Better ads.',
-    bgClass: 'section2',
-    hasButton: true,
-    buttonLabel: 'Try it now!',
-  },
-  {
-    title: 'Original content',
-    content: 'We work with top brands for exclusive experiences.',
-    bgClass: 'section3',
-    hasButton: false,
-  },
-];
 
 export default function AboutPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const scrollTimeout = useRef(null);
+  const touchStartY = useRef(null);
 
+  // Desktop scroll
   const handleWheel = (e) => {
     if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
 
@@ -45,6 +25,24 @@ export default function AboutPage() {
     }, 100);
   };
 
+  // Mobile touch swipe
+  const handleTouchStart = (e) => {
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e) => {
+    const touchEndY = e.changedTouches[0].clientY;
+    const deltaY = touchStartY.current - touchEndY;
+
+    if (Math.abs(deltaY) > 50) {
+      if (deltaY > 0 && currentSlide < slides.length - 1) {
+        setCurrentSlide((prev) => prev + 1); // swipe up
+      } else if (deltaY < 0 && currentSlide > 0) {
+        setCurrentSlide((prev) => prev - 1); // swipe down
+      }
+    }
+  };
+
   const handleButtonClick = () => {
     if (currentSlide < slides.length - 1) {
       setCurrentSlide((prev) => prev + 1);
@@ -53,14 +51,26 @@ export default function AboutPage() {
 
   useEffect(() => {
     window.addEventListener('wheel', handleWheel);
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchend', handleTouchEnd);
+
+    // Optional: disable native scroll on mobile
+    const preventScroll = (e) => e.preventDefault();
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('touchmove', preventScroll, { passive: false });
+
     return () => {
       window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchend', handleTouchEnd);
+      document.removeEventListener('touchmove', preventScroll);
+      document.body.style.overflow = '';
     };
   }, [currentSlide]);
 
   return (
     <div className={styles.wrapper}>
-      {/* Floating shapes shared across all slides */}
+      {/* Floating shared shapes */}
       <div className={styles.floatingBackground}>
         <div className={styles.floatingCircleLarge}></div>
         <div className={styles.floatingSquare}></div>
@@ -68,11 +78,10 @@ export default function AboutPage() {
       </div>
 
       <div className={styles.header}>
-  <Link href="/" passHref>
-    <h1 className={styles.logo} style={{ cursor: 'pointer' }}>poki</h1>
-  </Link>
-</div>
-
+        <Link href="/" passHref>
+          <h1 className={styles.logo} style={{ cursor: 'pointer' }}>poki</h1>
+        </Link>
+      </div>
 
       <div
         className={styles.slider}
