@@ -10,17 +10,13 @@ export default function Footer() {
         <footer className={`${styles.footerRoot} ${styles.footer}`}>
             <div className={styles.innerSection}>
                 <div className={styles.logoSection}>
-                    <a
-                        href="/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
+                    <Link href="/">
                         <Image
                             src={images.Logo}
                             alt="Poki Logo"
                             className={styles.logo}
                         />
-                    </a>
+                    </Link>
                     <span>Let the world play</span>
                 </div>
 

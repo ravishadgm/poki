@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './style.module.scss';
 import Header from '@/layout/Header/Page';
 
+
 const Contact = () => {
   return (
     <div className={styles.container}>

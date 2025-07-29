@@ -6,9 +6,9 @@ import Images from "../../../public/images/index";
 
 export default function GameCategories() {
     const categories = [
-        { img: "/images/GameType.playboy.png", title: "2 PLAYER GAMES" },
+        { img: "/images/playboy.png", title: "2 PLAYER GAMES" },
         { img: "/images/playboy.png", title: "GAMES FOR GIRLS" },
-        { img: "/images/GameType.playboy.png", title: "PUZZLE GAMES" },
+        { img: "/images/playboy.png", title: "PUZZLE GAMES" },
         { img: "/images/playboy.png", title: "MULTIPLAYER GAMES" },
         { img: "/images/playboy.png", title: "SHOOTING GAMES" },
         { img: "/images/playboy.png", title: "CAR GAMES" },

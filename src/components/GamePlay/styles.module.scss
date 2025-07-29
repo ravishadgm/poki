@@ -65,8 +65,8 @@
   padding: 0 16px;
   margin: 16px 0;
   height: 100px;
-  background: #fff;
-
+  background: $white-color;
+  
   @media (max-width: 768px) {
     height: 80px;
     margin: 12px 0;
@@ -99,7 +99,7 @@
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background: #fff;
+  background: $white-color;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 
   &:hover {
@@ -161,7 +161,7 @@
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 6px 12px rgba(93, 107, 132, 0.3);
-  background: #fff;
+  background: $white-color;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   align-items: center;
@@ -218,7 +218,7 @@
   overflow: hidden;
   cursor: pointer;
   box-shadow: 0 4px 8px rgba(93, 107, 132, 0.3);
-  background: #fff;
+  background: $white-color;
   transition: transform 0.3s ease;
   height: calc((100% - 60px) / 6);
   min-height: 80px;
@@ -303,7 +303,7 @@
   height: 100%;
   border-radius: 12px;
   overflow: hidden;
-  background: #fff;
+  background: $white-color;
   display: flex;
   align-items: center;
   justify-content: center;

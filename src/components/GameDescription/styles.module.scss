@@ -7,7 +7,10 @@
   box-shadow: $shadow-mid;
   background-color: $white-color;
   gap: 2rem;
-  font-family: "Open Sans", "Noto Sans Arabic", sans-serif; 
+
+  @media(max-width:768px){
+    margin-top:20px;
+  }
 }
 
 .left {
