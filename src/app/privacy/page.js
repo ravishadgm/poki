@@ -1,5 +1,5 @@
 import PrivacyInfo from "@/components/PrivacyInfo/PrivacyInfo";
-import styles from "./privacy.module.scss";
+import styles from "./style.module.scss";
 import GetInTouch from "@/components/GetInTouch/GetInTouch";
 import PrivacyHeader from "@/layout/PrivacyHeader/PrivacyHeader";
 
