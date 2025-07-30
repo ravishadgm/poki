@@ -6,15 +6,9 @@ import styles from "./filter.module.scss";
 import Header from "@/layout/Header/Page";
 import Image from "next/image";
 import { useRecentGames } from "@/contexts/RecentGamesContext";
+import { categories } from "@/dataStore/categories";
 
-export const categories = [
-  { img: "/images/playboy.png", title: "2 PLAYER GAMES", slug: "puzzle-games" },
-  { img: "/images/playboy.png", title: "GAMES FOR GIRLS", slug: "shooting-games" },
-  { img: "/images/playboy.png", title: "PUZZLE GAMES", slug: "puzzle-games" },
-  { img: "/images/playboy.png", title: "MULTIPLAYER GAMES", slug: "shooting-games" },
-  { img: "/images/playboy.png", title: "SHOOTING GAMES", slug: "shooting-games" },
-  { img: "/images/playboy.png", title: "CAR GAMES", slug: "puzzle-games" },
-];
+
 
 const sizePattern = [
   { colSpan: 1, rowSpan: 1 },
@@ -75,7 +69,7 @@ export default function FilteredGames({ games, categoryTitle }) {
     return () => window.removeEventListener("resize", updateCols);
   }, []);
 
-  if (gridCols === null) return null; // Prevent early render until client screen width is known
+  if (gridCols === null) return null;
 
   const occupied = {};
   const positions = [];
