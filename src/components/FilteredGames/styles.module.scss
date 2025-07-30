@@ -1,0 +1,156 @@
+.container {
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  grid-auto-rows: 100px;
+  gap: 20px;
+  padding-bottom: 40px;
+
+
+}
+
+.headerGridItem {
+  position: sticky;
+  top: 20px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+
+  @media (max-width: 768px) {
+    top: 15px;
+  }
+
+  @media (max-width: 480px) {
+    top: 10px;
+  }
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 16px;
+  box-shadow:$shadow-mid;
+  transition: transform 0.2s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.05);
+    z-index: 2;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    pointer-events: none;
+    box-shadow: $shadow-mid;
+  }
+}
+
+.videoPreview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.helloGridItem {
+  background: #fff;
+  color: #333;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.helloText {
+  margin: 0;
+  font-size: 1.4rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+
+// Responsive behavior
+@media (max-width: 1024px) {
+  .helloGridItem {
+    font-size: 1.6rem;
+  }
+  .helloText {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .helloGridItem {
+    font-size: 1.3rem;
+    padding: 12px;
+  }
+  .helloText {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 492px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  .helloGridItem {
+    grid-column: 1 / span 2 !important;
+    font-size: 1rem;
+    padding: 8px;
+  }
+}
+
+.categoryCard {
+  background: white;
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.categoryIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.categoryTitle {
+  font-size: 1rem;
+  font-weight: 500;
+  color: #333;
+}

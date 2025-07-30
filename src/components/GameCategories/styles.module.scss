@@ -89,27 +89,6 @@
   }
 }
 
-.smallCard {
-  background: $white-color;
-  border-radius: 12px !important;
-  width: 100%; 
-  height: 100%; 
-  transition: all 0.3s ease;
-
-
-  .imgCard {
-    width: 100%;
-    height: 100%;
-    border-radius: 12px !important;
-    object-fit: cover;
-  }
-
-  &:hover {
-    transform: scale(1.03);
-    box-shadow: $shadow-mid;
-    background: linear-gradient(145deg, $white-color);
-  }
-}
 
 .secondCards {
   max-width: 1860px;
