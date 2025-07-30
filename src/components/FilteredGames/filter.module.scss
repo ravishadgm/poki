@@ -116,9 +116,9 @@
 }
 
 @media (max-width: 492px) {
-  .grid {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
+  // .grid {
+  //   grid-template-columns: repeat(2, 1fr) !important;
+  // }
 
   .helloGridItem {
     grid-column: 1 / span 2 !important;

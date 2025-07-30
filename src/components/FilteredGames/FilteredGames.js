@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./styles.module.scss";
+import styles from "./filter.module.scss";
 import Header from "@/layout/Header/Page";
 import Image from "next/image";
 import { useRecentGames } from "@/contexts/RecentGamesContext";
@@ -53,39 +53,39 @@ function findNextFreePos(occupied, colSpan, rowSpan, gridCols) {
   return { row: 1, col: 1 };
 }
 
-export default function FilteredGames({ games,categoryTitle }) {
+export default function FilteredGames({ games, categoryTitle }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [gridCols, setGridCols] = useState(17);
+  const [gridCols, setGridCols] = useState(null);
   const router = useRouter();
   const { addToRecentGames } = useRecentGames();
 
-useLayoutEffect(() => {
-  const updateCols = () => {
-    const width = window.innerWidth;
-    if (width <= 480) setGridCols(2);
-    else if (width <= 768) setGridCols(4);
-    else if (width <= 1024) setGridCols(8);
-    else if (width <= 1366) setGridCols(12);
-    else if (width <= 1700) setGridCols(14);
-    else setGridCols(17);
-  };
+  useLayoutEffect(() => {
+    const updateCols = () => {
+      const width = window.innerWidth;
+      if (width <= 480) setGridCols(2);
+      else if (width <= 768) setGridCols(4);
+      else if (width <= 1024) setGridCols(8);
+      else if (width <= 1366) setGridCols(12);
+      else if (width <= 1700) setGridCols(14);
+      else setGridCols(17);
+    };
 
-  updateCols();
-  window.addEventListener("resize", updateCols);
-  return () => window.removeEventListener("resize", updateCols);
-}, []);
+    updateCols();
+    window.addEventListener("resize", updateCols);
+    return () => window.removeEventListener("resize", updateCols);
+  }, []);
 
-  
+  if (gridCols === null) return null; // Prevent early render until client screen width is known
 
   const occupied = {};
   const positions = [];
-
   const headerColSpan = 2;
+
   for (let c = 1; c <= headerColSpan; c++) {
     occupied[`1,${c}`] = true;
   }
 
-  let helloCardIndex = 0;
+  const helloCardIndex = 0;
 
   games.forEach((_, index) => {
     const raw =
@@ -192,7 +192,6 @@ useLayoutEffect(() => {
         {categories.map((cat, index) => {
           const { row, col } = findNextFreePos(occupied, 2, 1, gridCols);
 
-          // Mark space as occupied
           for (let r = 0; r < 1; r++) {
             for (let c = 0; c < 2; c++) {
               occupied[`${row + r},${col + c}`] = true;
