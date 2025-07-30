@@ -53,7 +53,7 @@ export default function GameCategories() {
                 fill
                 priority
                 className={styles.imageCardImg}
-                sizes="(max-width: 480px) 60px, (max-width: 768px) 80px, 80px"
+                sizes="(max-width:344px) 80px, (max-width: 480px) 90px, (max-width: 768px) 80px, 80px"
               />
             </div>
             <span>{item.title}</span>

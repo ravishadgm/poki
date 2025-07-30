@@ -109,7 +109,7 @@ const SearchDrawer = ({ setOpenDrawer }) => {
             <div className={styles.nav}>
                 <div className={styles.searchContainer}>
                     <div className={styles.iconLeft} onClick={() => setOpenDrawer(false)}>
-                        <div className={styles.mobileCloseIcon} onClick={() => setOpenDrawer(false)}>
+                        <div className={styles.mobileCloseIcon} >
                             <ChevronLeft size={24} />
                         </div>
                         <Image
