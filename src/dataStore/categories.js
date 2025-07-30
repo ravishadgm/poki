@@ -74,50 +74,58 @@ export const slides = [
   },
 ];
 
+
 export const games = [
   {
     title: '4 Winds',
     slug: '4-winds',
     image: images.playboy,
-    video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    video:
+      'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    tags: ['2 player', 'sports', 'arcade', 'obby'],
   },
   {
     title: 'Marble Shooter',
     slug: 'marble-shooter',
     image: images.playboy,
-    video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    video:
+      'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    tags: ['arcade', 'shooter', 'Car', '2 Player'],
   },
   {
     title: 'Rotate Puzzle',
-    slug: "rotate-puzzle",
+    slug: 'rotate-puzzle',
     image: images.playboy,
-    video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    video:
+      'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    tags: ['puzzle', 'rotate', 'logic'],
   },
   {
     title: 'Street Hidden Object',
-    slug: "street-hidden-object",
+    slug: 'street-hidden-object',
     image: images.playboy,
-    video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    video:
+      'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    tags: ['hidden', 'object', 'adventure'],
   },
   {
     title: '4 Winds',
     slug: '4-winds',
     image: images.playboy,
-    video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    video:
+      'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    tags: ['2 player', 'sports', 'arcade'],
   },
-  // {
-  //   title: 'Car Games',
-  //   slug: '4-winds',
-  //   image: images.playboy,
-  //   video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
-  // },
   {
     title: 'Marble Shooter',
     slug: 'marble-shooter',
     image: images.playboy,
-    video: 'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    video:
+      'https://v.poki-cdn.com/6c430da8-91f5-4fb3-9b40-77d349535dd9/thumbnail.1x1.vp9.mp4',
+    tags: ['shooter', 'marble', 'arcade'],
   },
 ];
+
 
 export const filterCategories = [
   {
