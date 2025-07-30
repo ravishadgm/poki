@@ -90,13 +90,9 @@
 
   .mobileGrid {
     display: grid;
-    gap: 12px;
+    gap: 20px;
     grid-auto-rows: auto;
 
-    @media (max-width: 480px) {
-      gap: 8px;
-  
-    }
   }
 
   .mobileGameCard {
