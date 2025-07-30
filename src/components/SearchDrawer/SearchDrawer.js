@@ -1,282 +1,288 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import styles from "./styles.module.scss";
-import { Search, X } from "lucide-react";
+import { Search, X, ChevronLeft } from "lucide-react";
 import Image from "next/image";
-import { useRecentGames } from "@/contexts/RecentGamesContext";
-import { ChevronLeft } from 'lucide-react';
-import Images from "../../../public/images/index";
 import { useRouter } from "next/navigation";
+import { useRecentGames } from "@/contexts/RecentGamesContext";
 import { getGames } from "@/services/gameService";
+import Images from "../../../public/images/index";
 
 const SearchDrawer = ({ setOpenDrawer }) => {
-    const { recentGames, addToRecentGames } = useRecentGames();
-    const router = useRouter();
-    const [searchQuery, setSearchQuery] = useState("");
-    const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
-    const [selectedCategory, setSelectedCategory] = useState("");
-    const [isSearching, setIsSearching] = useState(false);
-    const [games, setGames] = useState([]);
-    const [categories, setCategories] = useState([]);
+  const router = useRouter();
+  const { recentGames, addToRecentGames } = useRecentGames();
 
-    useEffect(() => {
-        const fetchGames = async () => {
-            try {
-                const gamesData = await getGames();
-                setGames(gamesData);
+  const [games, setGames] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
-                const uniqueCategories = [...new Set(gamesData.map(game => game.category))];
-                const formattedCategories = uniqueCategories.map(category => ({
-                    title: category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
-                    slug: category
-                }));
-                setCategories(formattedCategories);
-            } catch (error) {
-                console.error('Error fetching games:', error);
-                setGames([]);
-                setCategories([]);
-            }
-        };
+  const debounceTimer = useRef(null);
+  const didLogRef = useRef({
+    fetchGames: false,
+    debounce: false,
+    categories: false,
+    filter: false,
+  });
 
-        fetchGames();
-    }, []);
 
-    useEffect(() => {
-        if (searchQuery && searchQuery !== debouncedSearchQuery) {
-            setIsSearching(true);
-        }
+  useEffect(() => {
+    const fetchGames = async () => {
+      if (!didLogRef.current.fetchGames) {
 
-        const timer = setTimeout(() => {
-            setDebouncedSearchQuery(searchQuery);
-            setIsSearching(false);
-        }, 1000);
+        didLogRef.current.fetchGames = true;
+      }
 
-        return () => clearTimeout(timer);
-    }, [searchQuery]);
-
-    const getFilteredGames = () => {
-        let filtered = games;
-
-        if (selectedCategory) {
-            const categorySlug = categories.find(cat => cat.title === selectedCategory)?.slug;
-            if (categorySlug) {
-                filtered = filtered.filter(game => game.category === categorySlug);
-            }
-        }
-
-        if (debouncedSearchQuery.trim() && (!selectedCategory || debouncedSearchQuery !== selectedCategory)) {
-            filtered = filtered.filter(game =>
-                game.title.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) ||
-                game.category.toLowerCase().includes(debouncedSearchQuery.toLowerCase())
-            );
-        }
-
-        const uniqueGamesMap = new Map();
-        filtered.forEach(game => {
-            if (!uniqueGamesMap.has(game.slug)) {
-                uniqueGamesMap.set(game.slug, game);
-            }
-        });
-
-        return Array.from(uniqueGamesMap.values());
+      try {
+        const data = await getGames();
+        setGames(data || []);
+      } catch (error) {
+        setGames([]);
+      } finally {
+        setIsLoading(false);
+      }
     };
+    fetchGames();
+  }, []);
 
-    const filteredGames = getFilteredGames();
+  useEffect(() => {
+    if (!didLogRef.current.debounce) {
+      didLogRef.current.debounce = true;
+    }
 
-    const handleCategoryClick = (categoryTitle) => {
-        setSelectedCategory(categoryTitle);
-        setSearchQuery(categoryTitle);
-        setDebouncedSearchQuery(categoryTitle);
-        setIsSearching(false);
+    if (debounceTimer.current) clearTimeout(debounceTimer.current);
+
+    if (searchQuery !== debouncedQuery) setIsSearching(true);
+
+    debounceTimer.current = setTimeout(() => {
+      setDebouncedQuery(searchQuery);
+      setIsSearching(false);
+    }, 300);
+
+    return () => {
+      if (debounceTimer.current) clearTimeout(debounceTimer.current);
     };
+  }, [searchQuery]); 
 
-    const handleSearchChange = (e) => {
-        setSearchQuery(e.target.value);
-        if (selectedCategory && e.target.value !== selectedCategory) {
-            setSelectedCategory("");
-        }
-    };
+  const categories = useMemo(() => {
+    if (!didLogRef.current.categories) {
 
-    const handleClearSearch = () => {
-        setSearchQuery("");
-        setDebouncedSearchQuery("");
-        setSelectedCategory("");
-        setIsSearching(false);
-    };
+      didLogRef.current.categories = true;
+    }
 
-    const getPlaceholder = () => {
-        return selectedCategory || "What are you playing today?";
-    };
+    const unique = [...new Set(games.map((g) => g.category))];
+    return unique.map((slug) => ({
+      slug,
+      title: slug.replace(/-/g, " ").replace(/\b\w/g, (l) => l.toUpperCase()),
+    }));
+  }, [games]);
 
-    const handleGameClick = (game) => {
-        router.push(`/home/${game.slug}`);
-        setTimeout(() => {
-            addToRecentGames({
-                title: game.title,
-                slug: game.slug,
-                image: game.thumbnail,
-                video: game.video,
-                thumbnail: game.thumbnail
-            });
-        }, 600);
-    };
 
+  const filteredGames = useMemo(() => {
+    if (!didLogRef.current.filter) {
+   
+      didLogRef.current.filter = true;
+    }
+
+    let result = [...games];
+
+    if (selectedCategory) {
+      const catSlug = categories.find((c) => c.title === selectedCategory)?.slug;
+      result = result.filter((g) => g.category === catSlug);
+    }
+
+    if (debouncedQuery.trim() && debouncedQuery !== selectedCategory) {
+      const q = debouncedQuery.toLowerCase();
+      result = result.filter(
+        (g) =>
+          g.title.toLowerCase().includes(q) ||
+          g.category.toLowerCase().includes(q)
+      );
+    }
+
+    const seen = new Set();
+    return result.filter((g) => {
+      if (seen.has(g.slug)) return false;
+      seen.add(g.slug);
+      return true;
+    });
+  }, [games, debouncedQuery, selectedCategory, categories]);
+
+  const handleSearchChange = (e) => {
+    const val = e.target.value;
+    setSearchQuery(val);
+    if (selectedCategory && val !== selectedCategory) setSelectedCategory("");
+  };
+
+  const handleCategoryClick = (title) => {
+    const isSame = selectedCategory === title;
+    setSelectedCategory(isSame ? "" : title);
+    setSearchQuery(isSame ? "" : title);
+  };
+
+  const handleClearSearch = () => {
+    setSearchQuery("");
+    setSelectedCategory("");
+    setDebouncedQuery("");
+    setIsSearching(false);
+  };
+
+  const handleGameClick = (game) => {
+    router.push(`/home/${game.slug}`);
+    setTimeout(() => {
+      addToRecentGames({
+        title: game.title,
+        slug: game.slug,
+        image: game.thumbnail,
+        video: game.video,
+        thumbnail: game.thumbnail,
+      });
+    }, 600);
+  };
+
+  const placeholder = selectedCategory || "What are you playing today?";
+  const hasFilters = debouncedQuery || selectedCategory;
+  const popularGames = games.slice(0, 6);
+
+  if (isLoading) {
     return (
-        <div className={styles.drawer}>
-            <div className={styles.nav}>
-                <div className={styles.searchContainer}>
-                    <div className={styles.iconLeft} onClick={() => setOpenDrawer(false)}>
-                        <div className={styles.mobileCloseIcon} >
-                            <ChevronLeft size={24} />
-                        </div>
-                        <Image
-                            src={Images.SmallLogo}
-                            alt="Poki Small Logo"
-                            width={38}
-                            height={38}
-                        />
-                    </div>
-                    <input
-                        type="text"
-                        placeholder={getPlaceholder()}
-                        className={styles.searchInput}
-                        value={searchQuery}
-                        onChange={handleSearchChange}
-                    />
-                    <div className={styles.iconRight} onClick={searchQuery ? handleClearSearch : undefined}>
-                        {isSearching ? (
-                            <div className={styles.spinner}></div>
-                        ) : searchQuery ? (
-                            <X size={28} />
-                        ) : (
-                            <Search size={28} />
-                        )}
-                    </div>
-                </div>
-                <div>
-                    <button className={styles.closeBtn} onClick={() => setOpenDrawer(false)}>
-                        <ChevronLeft size={30} />
-                    </button>
-                </div>
-            </div>
-
-            <div className={styles.filterButtons}>
-                {categories.map((category, idx) => (
-                    <button
-                        key={idx}
-                        onClick={() => handleCategoryClick(category.title)}
-                        className={selectedCategory === category.title ? styles.activeFilter : ''}
-                    >
-                        {category.title}
-                    </button>
-                ))}
-            </div>
-
-            {(debouncedSearchQuery || selectedCategory) && (
-                <div className={styles.section}>
-                    <div className={styles.heading}>
-                        {filteredGames.length > 0
-                            ? `${filteredGames.length} games found`
-                            : (
-                                <div className={styles.noGameFound}>
-                                    <p className={styles.noResultText}>Hmm, nothing is coming up for that.</p>
-                                    <p className={styles.noResultSubText}>Try a different search or play one of these great games.</p>
-                                </div>
-                            )
-                        }
-                    </div>
-                    <div className={styles.gameList}>
-                        {filteredGames.map((game, idx) => (
-                            <div className={styles.card} key={`${game.slug}-${idx}`} onClick={() => handleGameClick(game)}>
-                                <Image
-                                    src={game.thumbnail}
-                                    alt={game.title}
-                                    className={styles.image}
-                                    width={100}
-                                    height={100}
-                                />
-                                <video
-                                    src={game.video}
-                                    className={styles.video}
-                                    muted
-                                    loop
-                                    autoPlay
-                                    playsInline
-                                    preload="none"
-                                />
-                                <div className={styles.gradientOverlay}></div>
-                                <p>{game.title}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {!debouncedSearchQuery && !selectedCategory && (
-                <div className={styles.section}>
-                    <div className={styles.heading}>Popular this week</div>
-                    <div className={styles.gameList}>
-                        {games.slice(0, 6).map((game, idx) => (
-                            <div className={styles.card} key={`popular-${game.slug}-${idx}`} onClick={() => handleGameClick(game)}>
-                                <Image
-                                    src={game.thumbnail}
-                                    alt={game.title}
-                                    className={styles.image}
-                                    width={100}
-                                    height={100}
-                                />
-                                <video
-                                    src={game.video}
-                                    className={styles.video}
-                                    muted
-                                    loop
-                                    autoPlay
-                                    playsInline
-                                    preload="none"
-                                />
-                                <div className={styles.gradientOverlay}></div>
-                                <p>{game.title}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {!debouncedSearchQuery && !selectedCategory && recentGames.length > 0 && (
-                <div className={styles.section}>
-                    <div className={styles.headingTwo}>Recent played</div>
-                    <div className={styles.gameList}>
-                        {recentGames.map((game, idx) => (
-                            <div className={styles.card}
-                                key={`recent-${game.slug}-${idx}`}
-                                onClick={() => handleGameClick(game)}
-                            >
-                                <Image
-                                    src={game.image || game.thumbnail}
-                                    alt={game.title}
-                                    className={styles.image}
-                                    width={100}
-                                    height={100}
-                                />
-                                <video
-                                    src={game.video}
-                                    className={styles.video}
-                                    muted
-                                    loop
-                                    autoPlay
-                                    playsInline
-                                    preload="none"
-                                />
-                                <div className={styles.gradientOverlay}></div>
-                                <p>{game.title}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-        </div >
+      <div className={styles.drawer}>
+        <div className={styles.nav}>
+          <button className={styles.closeBtn} onClick={() => setOpenDrawer(false)}>
+            <ChevronLeft size={30} />
+          </button>
+        </div>
+        <div className={styles.loading}>Loading games...</div>
+      </div>
     );
+  }
+
+  return (
+    <div className={styles.drawer}>
+      <div className={styles.nav}>
+        <div className={styles.searchContainer}>
+          <div className={styles.iconLeft} onClick={() => setOpenDrawer(false)}>
+            <div className={styles.mobileCloseIcon}>
+              <ChevronLeft size={24} />
+            </div>
+            <Image src={Images.SmallLogo} alt="Poki Logo" width={38} height={38} />
+          </div>
+
+          <input
+            type="text"
+            placeholder={placeholder}
+            className={styles.searchInput}
+            value={searchQuery}
+            onChange={handleSearchChange}
+          />
+
+          <div className={styles.iconRight} onClick={searchQuery ? handleClearSearch : undefined}>
+            {isSearching ? <div className={styles.spinner} /> : searchQuery ? <X size={28} /> : <Search size={28} />}
+          </div>
+        </div>
+        <button className={styles.closeBtn} onClick={() => setOpenDrawer(false)}>
+          <ChevronLeft size={30} />
+        </button>
+      </div>
+
+      {/* Category Filters */}
+      <div className={styles.filterButtons}>
+        {categories.map((cat) => (
+          <button
+            key={cat.slug}
+            onClick={() => handleCategoryClick(cat.title)}
+            className={selectedCategory === cat.title ? styles.activeFilter : ""}
+          >
+            {cat.title}
+          </button>
+        ))}
+      </div>
+
+      {/* Filtered Games */}
+      {hasFilters && (
+        <div className={styles.section}>
+          <div className={styles.heading}>
+            {filteredGames.length > 0 ? (
+              `${filteredGames.length} games found`
+            ) : (
+              <div className={styles.noGameFound}>
+                <p className={styles.noResultText}>Hmm, nothing is coming up for that.</p>
+                <p className={styles.noResultSubText}>Try a different search or play one of these great games.</p>
+              </div>
+            )}
+          </div>
+          <div className={styles.gameList}>
+            {filteredGames.map((game) => (
+              <GameCard key={`filtered-${game.slug}`} game={game} onClick={handleGameClick} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Popular Games */}
+      {!hasFilters && (
+        <div className={styles.section}>
+          <div className={styles.heading}>Popular this week</div>
+          <div className={styles.gameList}>
+            {popularGames.map((game,idx) => (
+              <GameCard  key={idx} game={game} onClick={handleGameClick} />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Recent Games */}
+      {!hasFilters && recentGames.length > 0 && (
+        <div className={styles.section}>
+          <div className={styles.headingTwo}>Recently played</div>
+          <div className={styles.gameList}>
+            {recentGames.map((game, idx) => (
+              <GameCard
+                key={idx}
+                game={{
+                  ...game,
+                  thumbnail: game.image || game.thumbnail,
+                }}
+                onClick={handleGameClick}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default SearchDrawer;
+
+
+const GameCard = ({ game, onClick }) => (
+  <div className={styles.card} onClick={() => onClick(game)}>
+    {game.thumbnail && (
+      <Image
+        src={game.thumbnail}
+        alt={game.title}
+        className={styles.image}
+        width={100}
+        height={100}
+        loading="lazy"
+      />
+    )}
+    {game.video && (
+      <video
+        src={game.video}
+        className={styles.video}
+        muted
+        loop
+        autoPlay
+        playsInline
+        preload="none"
+      />
+    )}
+    <div className={styles.gradientOverlay}></div>
+    <p>{game.title}</p>
+  </div>
+);
