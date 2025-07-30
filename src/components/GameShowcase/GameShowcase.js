@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./styles.module.scss";
 import Header from "@/layout/Header/Page";
@@ -23,6 +23,18 @@ const sizePattern = [
 
 const MAX_ROWS = 100;
 
+function getGridCols() {
+  if (typeof window === "undefined") return 17;
+  const width = window.innerWidth;
+
+  if (width <= 480) return 2;
+  if (width <= 768) return 4;
+  if (width <= 1024) return 8;
+  if (width <= 1366) return 12;
+  if (width <= 1700) return 14;
+  return 17;
+}
+
 function findNextFreePos(occupied, colSpan, rowSpan, gridCols) {
   for (let row = 1; row < MAX_ROWS; row++) {
     for (let col = 1; col <= gridCols - colSpan + 1; col++) {
@@ -43,28 +55,26 @@ function findNextFreePos(occupied, colSpan, rowSpan, gridCols) {
 }
 
 export default function GameShowcase({ games }) {
-  const [hoveredIndex, setHoveredIndex] = useState("");
-  const [gridCols, setGridCols] = useState(17);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [gridCols, setGridCols] = useState(null);
   const router = useRouter();
   const { addToRecentGames } = useRecentGames();
-  
-  useEffect(() => {
-    const updateCols = () => {
-      const width = window.innerWidth;
 
-      if (width <= 480) setGridCols(2);         // Mobile
-      else if (width <= 768) setGridCols(4);    // Tablet
-      else if (width <= 1024) setGridCols(8);   // Small Laptop
-      else if (width <= 1366) setGridCols(12);  // Medium Laptop
-      else if (width <= 1700) setGridCols(14);  // Large Laptop
-      else setGridCols(17);                     // Desktop or ultrawide
-    };
+  useLayoutEffect(() => {
+    const updateCols = () => setGridCols(getGridCols());
 
-    updateCols();
+    updateCols(); 
     window.addEventListener("resize", updateCols);
     return () => window.removeEventListener("resize", updateCols);
   }, []);
 
+  if (gridCols === null) {
+    return (
+      <div className={styles.loadingContainer}>
+        <p className={styles.loadingText}>Loading...</p>
+      </div>
+    );
+  }
 
   const occupied = {};
   const positions = [];
@@ -101,15 +111,13 @@ export default function GameShowcase({ games }) {
     positions.push({ colStart: col, rowStart: row, colSpan, rowSpan });
   });
 
-
   const handleGameClick = (game) => {
-
     addToRecentGames({
       title: game.title,
       slug: game.slug,
       image: game.thumbnail,
       video: game.video,
-      thumbnail: game.thumbnail
+      thumbnail: game.thumbnail,
     });
 
     router.push(`/home/${game.slug}`);
@@ -145,7 +153,6 @@ export default function GameShowcase({ games }) {
               }}
               onMouseEnter={() => setHoveredIndex(idx)}
               onMouseLeave={() => setHoveredIndex(null)}
-              // onClick={() => router.push(`/home/${game.slug}`)}
               onClick={() => handleGameClick(game)}
             >
               {isHovered && game.video ? (
