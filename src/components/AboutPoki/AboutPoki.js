@@ -2,6 +2,7 @@
 
 import styles from './styles.module.scss';
 import Link from 'next/link';
+import { popularCategory } from "@/dataStore/categories";
 
 const AboutPoki = () => {
     return (
@@ -34,12 +35,11 @@ const AboutPoki = () => {
                     Unsure what game to play? Start your game discovery on our homepage or pick a game from any of these popular categories:
                 </p>
                 <ul>
-                    <li><Link href="#">Puzzle Games</Link></li>
-                    <li><Link href="#">.io Games</Link></li>
-                    <li><Link href="#">2 Player Games</Link></li>
-                    <li><Link href="#">Car Games</Link></li>
-                    <li><Link href="#">Shooting Games</Link></li>
-                    <li><Link href="#">Puzzle Games</Link></li>
+                    {popularCategory.map((cat, idx) => (
+                        <li key={idx}>
+                            <Link href={cat.href}>{cat.title}</Link>
+                        </li>
+                    ))}
                 </ul>
 
                 <h2>What is Poki?</h2>

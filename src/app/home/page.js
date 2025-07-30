@@ -1,5 +1,5 @@
 import AboutPoki from "@/components/AboutPoki/AboutPoki";
-import GameGrid from "@/components/GameShowcase/GameShowcase";
+import GameShowcase from "@/components/GameShowcase/GameShowcase";
 import SmallGameGrid from "@/components/GameCategories/GameCategories";
 import { getGames } from "@/services/gameService";
 
@@ -8,7 +8,7 @@ export default async function HomePage() {
 
   return (
     <div style={{ padding: '20px' }}>
-      <GameGrid games={games} />
+      <GameShowcase games={games} />
       <SmallGameGrid />
       <AboutPoki />
     </div>
