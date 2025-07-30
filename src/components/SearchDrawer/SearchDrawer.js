@@ -8,7 +8,7 @@ import { useRecentGames } from "@/contexts/RecentGamesContext";
 import { ChevronLeft } from 'lucide-react';
 import Images from "../../../public/images/index";
 import { useRouter } from "next/navigation";
-import { games, filterCategories } from "@/dataStore/categories";
+import { getGames } from "@/services/gameService";
 
 const SearchDrawer = ({ setOpenDrawer }) => {
     const { recentGames, addToRecentGames } = useRecentGames();
@@ -17,6 +17,30 @@ const SearchDrawer = ({ setOpenDrawer }) => {
     const [debouncedSearchQuery, setDebouncedSearchQuery] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
     const [isSearching, setIsSearching] = useState(false);
+    const [games, setGames] = useState([]);
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchGames = async () => {
+            try {
+                const gamesData = await getGames();
+                setGames(gamesData);
+
+                const uniqueCategories = [...new Set(gamesData.map(game => game.category))];
+                const formattedCategories = uniqueCategories.map(category => ({
+                    title: category.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase()),
+                    slug: category
+                }));
+                setCategories(formattedCategories);
+            } catch (error) {
+                console.error('Error fetching games:', error);
+                setGames([]);
+                setCategories([]);
+            }
+        };
+
+        fetchGames();
+    }, []);
 
     useEffect(() => {
         if (searchQuery && searchQuery !== debouncedSearchQuery) {
@@ -31,22 +55,20 @@ const SearchDrawer = ({ setOpenDrawer }) => {
         return () => clearTimeout(timer);
     }, [searchQuery]);
 
-
     const getFilteredGames = () => {
         let filtered = games;
 
         if (selectedCategory) {
-            filtered = filtered.filter(game =>
-                game.category?.toLowerCase() === selectedCategory.toLowerCase() ||
-                game.tags?.some(tag => tag.toLowerCase() === selectedCategory.toLowerCase())
-            );
+            const categorySlug = categories.find(cat => cat.title === selectedCategory)?.slug;
+            if (categorySlug) {
+                filtered = filtered.filter(game => game.category === categorySlug);
+            }
         }
 
-        if (debouncedSearchQuery.trim()) {
+        if (debouncedSearchQuery.trim() && (!selectedCategory || debouncedSearchQuery !== selectedCategory)) {
             filtered = filtered.filter(game =>
                 game.title.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) ||
-                game.description?.toLowerCase().includes(debouncedSearchQuery.toLowerCase()) ||
-                game.tags?.some(tag => tag.toLowerCase().includes(debouncedSearchQuery.toLowerCase()))
+                game.category.toLowerCase().includes(debouncedSearchQuery.toLowerCase())
             );
         }
 
@@ -59,7 +81,6 @@ const SearchDrawer = ({ setOpenDrawer }) => {
 
         return Array.from(uniqueGamesMap.values());
     };
-
 
     const filteredGames = getFilteredGames();
 
@@ -85,10 +106,7 @@ const SearchDrawer = ({ setOpenDrawer }) => {
     };
 
     const getPlaceholder = () => {
-        if (selectedCategory) {
-            return selectedCategory;
-        }
-        return "What are you playing today?";
+        return selectedCategory || "What are you playing today?";
     };
 
     const handleGameClick = (game) => {
@@ -97,7 +115,7 @@ const SearchDrawer = ({ setOpenDrawer }) => {
             addToRecentGames({
                 title: game.title,
                 slug: game.slug,
-                image: game.image || game.thumbnail,
+                image: game.thumbnail,
                 video: game.video,
                 thumbnail: game.thumbnail
             });
@@ -144,7 +162,7 @@ const SearchDrawer = ({ setOpenDrawer }) => {
             </div>
 
             <div className={styles.filterButtons}>
-                {filterCategories.map((category, idx) => (
+                {categories.map((category, idx) => (
                     <button
                         key={idx}
                         onClick={() => handleCategoryClick(category.title)}
@@ -162,7 +180,7 @@ const SearchDrawer = ({ setOpenDrawer }) => {
                             ? `${filteredGames.length} games found`
                             : (
                                 <div className={styles.noGameFound}>
-                                    <p className={styles.noResultText}>Hmm, nothing’s coming up for that.</p>
+                                    <p className={styles.noResultText}>Hmm, nothing is coming up for that.</p>
                                     <p className={styles.noResultSubText}>Try a different search or play one of these great games.</p>
                                 </div>
                             )
@@ -170,9 +188,9 @@ const SearchDrawer = ({ setOpenDrawer }) => {
                     </div>
                     <div className={styles.gameList}>
                         {filteredGames.map((game, idx) => (
-                            <div className={styles.card} key={idx} onClick={() => handleGameClick(game)}>
+                            <div className={styles.card} key={`${game.slug}-${idx}`} onClick={() => handleGameClick(game)}>
                                 <Image
-                                    src={game.image}
+                                    src={game.thumbnail}
                                     alt={game.title}
                                     className={styles.image}
                                     width={100}
@@ -199,10 +217,10 @@ const SearchDrawer = ({ setOpenDrawer }) => {
                 <div className={styles.section}>
                     <div className={styles.heading}>Popular this week</div>
                     <div className={styles.gameList}>
-                        {games.map((game, idx) => (
-                            <div className={styles.card} key={idx} onClick={() => handleGameClick(game)}>
+                        {games.slice(0, 6).map((game, idx) => (
+                            <div className={styles.card} key={`popular-${game.slug}-${idx}`} onClick={() => handleGameClick(game)}>
                                 <Image
-                                    src={game.image}
+                                    src={game.thumbnail}
                                     alt={game.title}
                                     className={styles.image}
                                     width={100}

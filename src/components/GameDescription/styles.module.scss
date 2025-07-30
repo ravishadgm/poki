@@ -1,15 +1,19 @@
 .mainWrapper{
-  max-width: 1860px;
-  margin: 0 auto; 
+  // max-width: 1860px;
+  // margin: 0 auto; 
+  width: 100%;
   display: flex;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 4rem;
   box-shadow: $shadow-mid;
   background-color: $white-color;
   gap: 2rem;
 
+
+
   @media(max-width:768px){
     margin-top:20px;
+    padding:2rem;
   }
 }
 

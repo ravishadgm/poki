@@ -1,10 +1,11 @@
 .gridWrapper {
-  max-width: 1860px;
-  margin: 0 auto;
+  // max-width: 1860px;
+  // margin: 0 auto;
+  width:100%;
   display: grid;
   gap:20px;
   grid-template-columns: repeat(8, 1fr);
-  margin-bottom: 20px;
+  padding-bottom: 20px;
 
   @media (max-width: 1870px) {
     grid-template-columns: repeat(7, 1fr);
@@ -106,8 +107,9 @@
 
 
 .secondCards {
-  max-width: 1860px;
-  margin: 0 auto;
+  // max-width: 1860px;
+  // margin: 0 auto;
+  width:100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
