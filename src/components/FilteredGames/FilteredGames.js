@@ -8,8 +8,6 @@ import Image from "next/image";
 import { useRecentGames } from "@/contexts/RecentGamesContext";
 import { categories } from "@/dataStore/categories";
 
-
-
 const sizePattern = [
   { colSpan: 1, rowSpan: 1 },
   { colSpan: 1, rowSpan: 1 },
@@ -111,6 +109,14 @@ export default function FilteredGames({ games, categoryTitle }) {
     router.push(`/home/${game.slug}`);
   };
 
+  function formatCategoryTitle(title) {
+  return title
+    .split('-') 
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
+    .join(' ');
+}
+
+
   return (
     <div className={styles.container}>
       <div
@@ -143,7 +149,8 @@ export default function FilteredGames({ games, categoryTitle }) {
                   gridRow: `${pos.rowStart} / span ${pos.rowSpan}`,
                 }}
               >
-                <p className={styles.helloText}>{categoryTitle}</p>
+               <p className={styles.helloText}>{formatCategoryTitle(categoryTitle)}</p>
+
               </div>
             );
           }
@@ -193,26 +200,25 @@ export default function FilteredGames({ games, categoryTitle }) {
           }
 
           return (
-           <div
-  key={`category-${index}`}
-  className={styles.categoryCard}
-  style={{
-    gridColumn: `${col} / span 2`,
-    gridRow: `${row}`,
-  }}
-  onClick={() => router.push(`/categories/${cat.slug}`)}
->
-  <div className={styles.categoryImageWrapper}>
-    <Image
-      src={cat.img}
-      alt={cat.title}
-      fill
-      className={styles.categoryImage}
-    />
-  </div>
-  <span className={styles.categoryTitle}>{cat.title}</span>
-</div>
-
+            <div
+              key={`category-${index}`}
+              className={styles.categoryCard}
+              style={{
+                gridColumn: `${col} / span 2`,
+                gridRow: `${row}`,
+              }}
+              onClick={() => router.push(`/categories/${cat.slug}`)}
+            >
+              <div className={styles.categoryImageWrapper}>
+                <Image
+                  src={cat.img}
+                  alt={cat.title}
+                  fill
+                  className={styles.categoryImage}
+                />
+              </div>
+              <span className={styles.categoryTitle}>{cat.title}</span>
+            </div>
           );
         })}
       </div>

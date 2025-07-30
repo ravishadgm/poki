@@ -113,8 +113,9 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 20px;
-
+   margin-top: 27px;
   @media(min-width:1541px) {
+ 
     grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   }
 
