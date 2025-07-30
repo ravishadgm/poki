@@ -166,6 +166,7 @@
   margin-left: 20px;
   padding-right:18px;
   font-weight: bolder;
+  cursor: pointer;
 
   
   @media (max-width: 480px) {
@@ -311,6 +312,40 @@
   }
 }
 
+.noGameFound{
+  background-color: $white-color;
+  padding:20px;
+  color:$blue-text;
+
+  .noResultText{
+    font-size: 20px;
+    padding-bottom: 2px;
+    
+
+    @media(max-width:768px){
+      font-size: 18px;
+    }
+
+    @media(max-width:480px){
+      font-size: 16px;
+    }
+  }
+
+  .noResultSubText{
+    font-size: 16px;
+
+    @media(max-width:768px){
+      font-size: 14px;
+      
+    }
+
+    @media(max-width:480px){
+      font-size: 12px;
+      
+    }
+  }
+}
+
 .headingTwo{ 
   color: $blue-text;
   font-weight:700;
@@ -323,3 +358,16 @@
   }
 }
 
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
