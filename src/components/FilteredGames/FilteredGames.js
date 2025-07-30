@@ -2,7 +2,7 @@
 
 import { useState, useLayoutEffect } from "react";
 import { useRouter } from "next/navigation";
-import styles from "./filter.module.scss";
+import styles from "./style.module.scss";
 import Header from "@/layout/Header/Page";
 import Image from "next/image";
 import { useRecentGames } from "@/contexts/RecentGamesContext";
@@ -193,24 +193,26 @@ export default function FilteredGames({ games, categoryTitle }) {
           }
 
           return (
-            <div
-              key={`category-${index}`}
-              className={styles.categoryCard}
-              style={{
-                gridColumn: `${col} / span 2`,
-                gridRow: `${row}`,
-              }}
-              onClick={() => router.push(`/categories/${cat.slug}`)}
-            >
-              <Image
-                src={cat.img}
-                alt={cat.title}
-                width={40}
-                height={40}
-                className={styles.categoryIcon}
-              />
-              <span className={styles.categoryTitle}>{cat.title}</span>
-            </div>
+           <div
+  key={`category-${index}`}
+  className={styles.categoryCard}
+  style={{
+    gridColumn: `${col} / span 2`,
+    gridRow: `${row}`,
+  }}
+  onClick={() => router.push(`/categories/${cat.slug}`)}
+>
+  <div className={styles.categoryImageWrapper}>
+    <Image
+      src={cat.img}
+      alt={cat.title}
+      fill
+      className={styles.categoryImage}
+    />
+  </div>
+  <span className={styles.categoryTitle}>{cat.title}</span>
+</div>
+
           );
         })}
       </div>
