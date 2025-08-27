@@ -15,27 +15,45 @@ export default function TermsConditionInfo() {
                 </p>
             </div>
 
-
             <div className={styles.infoBox}>
-                <h4>Third-Party Content & Ads</h4>
-                <p>Poki hosts games from independent developers and may display third-party ads.</p>
-                <p>We are not responsible for the content, accuracy, or safety of third-party sites you may visit through ads or external links.</p>
+
+                <div className={styles.section}>
+                    <h4>Accounts & Access</h4>
+                    <p>Most games on Poki can be played without an account.</p>
+                    <p>If you choose to create an account, you must keep your login information safe.</p>
+                    <p>Poki reserves the right to suspend or terminate accounts that violate these Terms.</p>
+                </div>
+
+                <div className={styles.section}>
+                    <h4>Third-Party Content & Ads</h4>
+                    <p>Poki hosts games from independent developers and may display third-party ads.</p>
+                    <p>We are not responsible for the content, accuracy, or safety of third-party sites you may visit through ads or external links.</p>
+                </div>
+
+                <div className={styles.section}>
+                    <h4>Limitation of Liability</h4>
+                    <p>Poki provides games “as is” without any guarantees of availability or error-free experience.</p>
+                    <p>We are not liable for any damages, data loss, or issues caused by using our website or third-party games.</p>
+                </div>
+
+                <div className={styles.section}>
+                    <h4>Changes to These Terms</h4>
+                    <p>We may update these Terms & Conditions from time to time. Any changes will be posted here, and continued use of Poki means you accept the updated terms.</p>
+                </div>
             </div>
 
             <div className={styles.infoBoxBlue}>
                 <div className={styles.header}>
-                    <h4>Local version of Poki</h4>
+                    <h4>Local version of roky</h4>
                     <Info className={styles.infoIcon} />
                 </div>
                 <p>
-                    Your <strong>IP address</strong> tells us from where you visit so we can show you the local version of our
-                    website. This version follows all local privacy rules, including the age requirements for playing games on Poki. If you use a <strong>VPN</strong>, connection you may not see your country’s version.
-                    It’s important to see info that matches your country, as it might affect your privacy rights and how we inform you about this. Not sure it’s correct? Contact us—We’re here to help.
+                    Your <strong>IP address</strong> helps us know where you are located so we can show you the version of our website that is right for your country. This version follows all local privacy rules, including any age requirements to play games on roky. If you are using a <strong>VPN</strong>, you might not see the version that matches your country. It is important to see information that applies to your country because it can affect your privacy rights and how we give you important updates. If you are not sure if this is correct, you can contact us—we are here to help.
                 </p>
                 <div className={styles.note}>
                     <Info className={styles.infoIcon} />
                     <span>
-                        Depending on your location, there might be an age requirement for using Poki. Click the button to go to the age rules.
+                        Depending on where you are from, there might be an age rule for using roky.
                     </span>
                 </div>
             </div>
