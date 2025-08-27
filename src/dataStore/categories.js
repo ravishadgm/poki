@@ -52,28 +52,27 @@ export const smallGameModel = [
 
 export const slides = [
   {
-    title: 'We let the world play',
+    title: 'Play Without Limits',
     content:
-      'Because play is how we learn. That&#39;s why we&#39;re creating the ultimate online playground. Free and open to all. Wanna play?',
+      'Games are meant to be fun and simple to enjoy. That’s why we built an open playground online — free, easy, and always ready for you.',
     bgClass: 'section1',
     hasButton: true,
-    buttonLabel: "Let's roll!",
+    buttonLabel: "Start Playing!",
   },
   {
-    title: 'Easy access for all',
-    content: 'Millions of players. Two lines of code. Better ads.',
+    title: 'Access Made Simple',
+    content: 'Thousands of players, a single click, and smarter ads — all in one place.',
     bgClass: 'section2',
     hasButton: true,
-    buttonLabel: 'Try it now!',
+    buttonLabel: 'Get Started!',
   },
   {
-    title: 'Original content',
-    content: 'We work with top brands for exclusive experiences.',
+    title: 'Fresh & Exclusive',
+    content: 'Discover unique games and experiences created with our partners just for you.',
     bgClass: 'section3',
     hasButton: false,
   },
 ];
-
 
 export const games = [
   {
