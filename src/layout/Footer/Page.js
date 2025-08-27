@@ -1,5 +1,6 @@
 "use client";
 
+import APP_CONFIG from "@/utils/config";
 import images from "../../../public/images/index";
 import styles from "./styles.module.scss";
 import Image from "next/image";
@@ -13,7 +14,8 @@ export default function Footer() {
                     <Link href="/">
                         <Image
                             src={images.Logo}
-                            alt="Poki Logo"
+                            alt={`${APP_CONFIG.appName} Logo`} 
+
                             className={styles.logo}
                         />
                     </Link>
@@ -30,7 +32,7 @@ export default function Footer() {
             </div>
 
             <div className={styles.bottomText}>
-                <span>POKI – A-491B2A1D | SDK - 38619F</span>
+                <span>{APP_CONFIG.appName} – A-491B2A1D | SDK - 38619F</span>
             </div>
         </footer>
     );

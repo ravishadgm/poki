@@ -4,6 +4,7 @@ import { useRef, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import Link from 'next/link';
 import { slides } from '@/dataStore/categories';
+import APP_CONFIG from '@/utils/config';
 
 
 
@@ -79,7 +80,7 @@ export default function AboutPage() {
 
       <div className={styles.header}>
         <Link href="/" passHref>
-          <h1 className={styles.logo} style={{ cursor: 'pointer' }}>poki</h1>
+          <h1 className={styles.logo} style={{ cursor: 'pointer' }}>{APP_CONFIG.appName}</h1>
         </Link>
       </div>
 

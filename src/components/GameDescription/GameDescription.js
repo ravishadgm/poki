@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import Image from 'next/image';
 import { categories } from "@/dataStore/categories";
 import { useRouter } from "next/navigation";
+import APP_CONFIG from '@/utils/config';
 
 const GameDescription = ({ game }) => {
     const router = useRouter();
@@ -15,7 +16,7 @@ const GameDescription = ({ game }) => {
     return (
         <div className={styles.mainWrapper}>
             <div className={styles.left}>
-                <p className={styles.breadcrumb}>POKI &gt; {game.category.toUpperCase()} &gt; {game.name.toUpperCase()}</p>
+                <p className={styles.breadcrumb}>{APP_CONFIG.appName} &gt; {game.category.toUpperCase()} &gt; {game.name.toUpperCase()}</p>
                 <h1>{game.name}</h1>
 
                 <p className={styles.description}>{game.description}</p>

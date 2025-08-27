@@ -2,9 +2,11 @@ import Script from "next/script";
 import "../styles/globals.scss";
 import Footer from "@/layout/Footer/Page";
 import { RecentGamesProvider } from "@/contexts/RecentGamesContext";
+import APP_CONFIG from "@/utils/config";
+
 
 export const metadata = {
-  title: "Poki",
+  title: APP_CONFIG.appName,
   description: "Play Games Online Free",
 };
 

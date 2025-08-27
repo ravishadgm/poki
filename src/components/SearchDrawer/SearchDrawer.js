@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useRecentGames } from "@/contexts/RecentGamesContext";
 import { getGames } from "@/services/gameService";
 import Images from "../../../public/images/index";
+import APP_CONFIG from "@/utils/config";
 
 const SearchDrawer = ({ setOpenDrawer }) => {
   const router = useRouter();
@@ -28,11 +29,9 @@ const SearchDrawer = ({ setOpenDrawer }) => {
     filter: false,
   });
 
-
   useEffect(() => {
     const fetchGames = async () => {
       if (!didLogRef.current.fetchGames) {
-
         didLogRef.current.fetchGames = true;
       }
 
@@ -65,11 +64,10 @@ const SearchDrawer = ({ setOpenDrawer }) => {
     return () => {
       if (debounceTimer.current) clearTimeout(debounceTimer.current);
     };
-  }, [searchQuery]); 
+  }, [searchQuery]);
 
   const categories = useMemo(() => {
     if (!didLogRef.current.categories) {
-
       didLogRef.current.categories = true;
     }
 
@@ -80,17 +78,17 @@ const SearchDrawer = ({ setOpenDrawer }) => {
     }));
   }, [games]);
 
-
   const filteredGames = useMemo(() => {
     if (!didLogRef.current.filter) {
-   
       didLogRef.current.filter = true;
     }
 
     let result = [...games];
 
     if (selectedCategory) {
-      const catSlug = categories.find((c) => c.title === selectedCategory)?.slug;
+      const catSlug = categories.find(
+        (c) => c.title === selectedCategory
+      )?.slug;
       result = result.filter((g) => g.category === catSlug);
     }
 
@@ -151,7 +149,10 @@ const SearchDrawer = ({ setOpenDrawer }) => {
     return (
       <div className={styles.drawer}>
         <div className={styles.nav}>
-          <button className={styles.closeBtn} onClick={() => setOpenDrawer(false)}>
+          <button
+            className={styles.closeBtn}
+            onClick={() => setOpenDrawer(false)}
+          >
             <ChevronLeft size={30} />
           </button>
         </div>
@@ -168,7 +169,12 @@ const SearchDrawer = ({ setOpenDrawer }) => {
             <div className={styles.mobileCloseIcon}>
               <ChevronLeft size={24} />
             </div>
-            <Image src={Images.SmallLogo} alt="Poki Logo" width={38} height={38} />
+            <Image
+              src={Images.SmallLogo}
+              alt={`${APP_CONFIG.appName} Logo`}
+              width={38}
+              height={38}
+            />
           </div>
 
           <input
@@ -179,11 +185,23 @@ const SearchDrawer = ({ setOpenDrawer }) => {
             onChange={handleSearchChange}
           />
 
-          <div className={styles.iconRight} onClick={searchQuery ? handleClearSearch : undefined}>
-            {isSearching ? <div className={styles.spinner} /> : searchQuery ? <X size={28} /> : <Search size={28} />}
+          <div
+            className={styles.iconRight}
+            onClick={searchQuery ? handleClearSearch : undefined}
+          >
+            {isSearching ? (
+              <div className={styles.spinner} />
+            ) : searchQuery ? (
+              <X size={28} />
+            ) : (
+              <Search size={28} />
+            )}
           </div>
         </div>
-        <button className={styles.closeBtn} onClick={() => setOpenDrawer(false)}>
+        <button
+          className={styles.closeBtn}
+          onClick={() => setOpenDrawer(false)}
+        >
           <ChevronLeft size={30} />
         </button>
       </div>
@@ -194,7 +212,9 @@ const SearchDrawer = ({ setOpenDrawer }) => {
           <button
             key={cat.slug}
             onClick={() => handleCategoryClick(cat.title)}
-            className={selectedCategory === cat.title ? styles.activeFilter : ""}
+            className={
+              selectedCategory === cat.title ? styles.activeFilter : ""
+            }
           >
             {cat.title}
           </button>
@@ -209,14 +229,22 @@ const SearchDrawer = ({ setOpenDrawer }) => {
               `${filteredGames.length} games found`
             ) : (
               <div className={styles.noGameFound}>
-                <p className={styles.noResultText}>Hmm, nothing is coming up for that.</p>
-                <p className={styles.noResultSubText}>Try a different search or play one of these great games.</p>
+                <p className={styles.noResultText}>
+                  Hmm, nothing is coming up for that.
+                </p>
+                <p className={styles.noResultSubText}>
+                  Try a different search or play one of these great games.
+                </p>
               </div>
             )}
           </div>
           <div className={styles.gameList}>
             {filteredGames.map((game) => (
-              <GameCard key={`filtered-${game.slug}`} game={game} onClick={handleGameClick} />
+              <GameCard
+                key={`filtered-${game.slug}`}
+                game={game}
+                onClick={handleGameClick}
+              />
             ))}
           </div>
         </div>
@@ -227,8 +255,8 @@ const SearchDrawer = ({ setOpenDrawer }) => {
         <div className={styles.section}>
           <div className={styles.heading}>Popular this week</div>
           <div className={styles.gameList}>
-            {popularGames.map((game,idx) => (
-              <GameCard  key={idx} game={game} onClick={handleGameClick} />
+            {popularGames.map((game, idx) => (
+              <GameCard key={idx} game={game} onClick={handleGameClick} />
             ))}
           </div>
         </div>
@@ -257,7 +285,6 @@ const SearchDrawer = ({ setOpenDrawer }) => {
 };
 
 export default SearchDrawer;
-
 
 const GameCard = ({ game, onClick }) => (
   <div className={styles.card} onClick={() => onClick(game)}>

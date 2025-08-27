@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 import { Pencil, PhoneCall, MapPin } from "lucide-react";
 import Image from 'next/image';
 import Images from '../../../public/images/index';
+import APP_CONFIG from '@/utils/config';
 
 export default function GetInTouch() {
     return (
@@ -24,7 +25,7 @@ export default function GetInTouch() {
 
                     <div className={styles.contactItem}>
                         <MapPin className={styles.icon} />
-                        <strong>Poki B.V.</strong>
+                        <strong>{APP_CONFIG.appName} B.V.</strong>
                         <p>Spul 10, 1012 WZ Amsterdam,<br />The Netherlands</p>
                     </div>
 

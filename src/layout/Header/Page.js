@@ -7,6 +7,7 @@ import styles from "./styles.module.scss";
 import Images from "../../../public/images/index";
 import { useRouter } from 'next/navigation';
 import SearchDrawer from "@/components/SearchDrawer/SearchDrawer";
+import APP_CONFIG from "@/utils/config";
 
 const Header = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
@@ -37,7 +38,8 @@ const Header = () => {
         <div className={styles.headerTop}>
           <Image
             src={Images.Logo}
-            alt="Poki Logo"
+             alt={`${APP_CONFIG.appName} Logo`} 
+
             className={styles.logo}
           />
         </div>
