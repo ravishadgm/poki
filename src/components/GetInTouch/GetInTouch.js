@@ -1,4 +1,5 @@
 "use client";
+
 import styles from './styles.module.scss';
 import { Pencil, PhoneCall, MapPin } from "lucide-react";
 import Image from 'next/image';

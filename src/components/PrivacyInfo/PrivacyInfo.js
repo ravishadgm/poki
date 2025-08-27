@@ -43,16 +43,16 @@ export default function PrivacyInfo() {
 
             <div className={styles.infoBoxBlue}>
                 <div className={styles.header}>
-                    <h4>Local version of roky</h4>
+                    <h4>Local version of {APP_CONFIG.appName} </h4>
                     <Info className={styles.infoIcon} />
                 </div>
                 <p>
-                    Your <strong>IP address</strong> helps us know where you are located so we can show you the version of our website that is right for your country. This version follows all local privacy rules, including any age requirements to play games on roky. If you are using a <strong>VPN</strong>, you might not see the version that matches your country. It is important to see information that applies to your country because it can affect your privacy rights and how we give you important updates. If you are not sure if this is correct, you can contact us—we are here to help.
+                    Your <strong>IP address</strong> helps us know where you are located so we can show you the version of our website that is right for your country. This version follows all local privacy rules, including any age requirements to play games on {APP_CONFIG.appName} . If you are using a <strong>VPN</strong>, you might not see the version that matches your country. It is important to see information that applies to your country because it can affect your privacy rights and how we give you important updates. If you are not sure if this is correct, you can contact us—we are here to help.
                 </p>
                 <div className={styles.note}>
                     <Info className={styles.infoIcon} />
                     <span>
-                        Depending on where you are from, there might be an age rule for using roky.
+                        Depending on where you are from, there might be an age rule for using {APP_CONFIG.appName} .
                     </span>
                 </div>
             </div>

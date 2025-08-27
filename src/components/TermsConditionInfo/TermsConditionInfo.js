@@ -1,7 +1,8 @@
 'use client';
 
+import APP_CONFIG from '@/utils/config';
 import styles from './styles.module.scss';
-import { BookOpen, Cookie, Scale, ShieldCheck, Info, Circle, ExternalLink } from 'lucide-react';
+import { Info } from 'lucide-react';
 
 
 export default function TermsConditionInfo() {
@@ -11,7 +12,7 @@ export default function TermsConditionInfo() {
             <div className={styles.heading}>
                 <h1>Play by the Rules: Terms & Conditions</h1>
                 <p>
-                    Welcome to Poki. By accessing or using our website, you agree to these Terms & Conditions. Please read them carefully before using our services. If you do not agree, you need to stop using our website right away.
+                    Welcome to {APP_CONFIG.appName} . By accessing or using our website, you agree to these Terms & Conditions. Please read them carefully before using our services. If you do not agree, you need to stop using our website right away.
                 </p>
             </div>
 
@@ -19,26 +20,26 @@ export default function TermsConditionInfo() {
 
                 <div className={styles.section}>
                     <h4>Accounts & Access</h4>
-                    <p>Most games on Poki can be played without an account.</p>
+                    <p>Most games on {APP_CONFIG.appName}  can be played without an account.</p>
                     <p>If you choose to create an account, you must keep your login information safe.</p>
-                    <p>Poki reserves the right to suspend or terminate accounts that violate these Terms.</p>
+                    <p>{APP_CONFIG.appName}  reserves the right to suspend or terminate accounts that violate these Terms.</p>
                 </div>
 
                 <div className={styles.section}>
                     <h4>Third-Party Content & Ads</h4>
-                    <p>Poki hosts games from independent developers and may display third-party ads.</p>
+                    <p>{APP_CONFIG.appName}  hosts games from independent developers and may display third-party ads.</p>
                     <p>We are not responsible for the content, accuracy, or safety of third-party sites you may visit through ads or external links.</p>
                 </div>
 
                 <div className={styles.section}>
                     <h4>Limitation of Liability</h4>
-                    <p>Poki provides games “as is” without any guarantees of availability or error-free experience.</p>
+                    <p>{APP_CONFIG.appName}  provides games “as is” without any guarantees of availability or error-free experience.</p>
                     <p>We are not liable for any damages, data loss, or issues caused by using our website or third-party games.</p>
                 </div>
 
                 <div className={styles.section}>
                     <h4>Changes to These Terms</h4>
-                    <p>We may update these Terms & Conditions from time to time. Any changes will be posted here, and continued use of Poki means you accept the updated terms.</p>
+                    <p>We may update these Terms & Conditions from time to time. Any changes will be posted here, and continued use of {APP_CONFIG.appName}  means you accept the updated terms.</p>
                 </div>
             </div>
 
