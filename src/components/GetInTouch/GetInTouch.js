@@ -31,7 +31,7 @@ export default function GetInTouch() {
                     <div className={styles.contactItem}>
                         <MapPin className={styles.icon} />
                         <strong>{APP_CONFIG.appName} B.V.</strong>
-                        <p>119, Royal Arcade, Surat, Gujarat<br />The India</p>
+                        <p>119, Rise on Plaza, Surat, Gujarat<br />The India</p>
                     </div>
 
                 </div>
