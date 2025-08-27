@@ -13,20 +13,25 @@ export default function GetInTouch() {
                 <div className={styles.contactContainer}>
                     <div className={styles.contactItem}>
                         <Pencil className={styles.icon} />
-                        <strong>privacy@poki.com</strong>
-                        <p>Ask a question or request our privacy information in another language.</p>
+                        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=resilient.tech001@gmail.com"
+                            target="_blank">
+                            <strong>resilient.tech001@gmail.com</strong>
+                        </a>
+                        <p>Have a question or need our privacy details in a different language? Just ask!</p>
                     </div>
 
                     <div className={styles.contactItem}>
                         <PhoneCall className={styles.icon} />
-                        <strong>+31 20 2800 870</strong>
-                        <p>Reach out to us – we speak English, Dutch and will do our best with other languages.</p>
+                        <a href="tel:+919825805271">
+                            <strong>+91 98258 05271</strong>
+                        </a>
+                        <p>We’re here for you – fluent in English and we’ll gladly try our best with other languages.</p>
                     </div>
 
                     <div className={styles.contactItem}>
                         <MapPin className={styles.icon} />
                         <strong>{APP_CONFIG.appName} B.V.</strong>
-                        <p>Spul 10, 1012 WZ Amsterdam,<br />The Netherlands</p>
+                        <p>119, Royal Arcade, Surat, Gujarat<br />The India</p>
                     </div>
 
                 </div>

@@ -11,11 +11,13 @@ const Contact = () => {
       </div>
       <div className={styles.content}>
         <h2>Get in touch ✉️</h2>
-        <p>Have a question about Poki?</p>
-        <p>We’d love to hear from you! 🤗</p>
+        <p>Curious about Poki or have a question?</p>
+        <p>We’re always happy to connect with you!!🤗</p>
         <p>
-          Send us a message and we’ll get back to you as soon as possible:{" "}
-          <a href="mailto:hello@poki.com">hello@poki.com</a>
+          Reach out to us and we’ll reply as quickly as we can :
+          <a href="https://mail.google.com/mail/?view=cm&fs=1&to=resilient.tech001@gmail.com"
+            target="_blank"
+          > resilient.tech001@gmail.com</a>
         </p>
       </div>
     </div>

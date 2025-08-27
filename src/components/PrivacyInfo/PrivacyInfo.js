@@ -10,11 +10,9 @@ export default function PrivacyInfo() {
         <section className={styles.privacyWrapper}>
 
             <div className={styles.heading}>
-                <h1>Everything you need to know about privacy</h1>
+                <h1>All You Need to Know About Privacy</h1>
                 <p>
-                    It’s important for you to know how online privacy works. That’s why we
-                    won’t bore you with complicated explanations but make it easy to understand what
-                    happens with the information we collect from you. Start exploring and learn what you need.
+                    We think it’s important for you to know how online privacy works. That’s why we keep everything clear and simple, without confusing terms. Here, you’ll find a straightforward explanation of how we manage the information we collect from you. Dive in and see what really matters for your privacy.
                 </p>
             </div>
             <div className={styles.cardGrid}>
@@ -39,8 +37,7 @@ export default function PrivacyInfo() {
             <div className={styles.infoBox}>
                 <h4>Cookie settings</h4>
                 <p>
-                    Our website uses cookies to provide a better experience, keep track of page visits and game performance,
-                    and show personalized ads.
+                    We use cookies to improve your experience, track page visits, measure game performance, and display ads tailored to you.
                 </p>
             </div>
 
