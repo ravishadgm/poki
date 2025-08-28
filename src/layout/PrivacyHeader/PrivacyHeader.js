@@ -18,7 +18,7 @@ const PrivacyHeader = ({ title }) => {
             </div>
             <div className={styles.content}>
                 <div className={styles.left}>
-                    <Image src={Images.Logo} alt="Logo" width={60} height={45} />
+                    <Image src={Images.Logo} alt="Logo" className={styles.logo} />
                     <span>{title}</span>
                 </div>
                 <Link href="/" className={styles.link}>
