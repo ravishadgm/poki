@@ -6,7 +6,7 @@ export async function getGames() {
         : process.env.PORT || '3000';
       return `http://localhost:${port}`;
     }
-    return 'https://poki-tan.vercel.app';
+    return 'https://gameworlds.vercel.app';
   };
 
   try {
