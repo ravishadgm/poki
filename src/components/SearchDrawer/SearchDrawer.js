@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import styles from "./styles.module.scss";
-import { Search, X, ChevronLeft } from "lucide-react";
+import { Search, X, ChevronLeft, Gamepad2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useRecentGames } from "@/contexts/RecentGamesContext";
@@ -169,12 +169,7 @@ const SearchDrawer = ({ setOpenDrawer }) => {
             <div className={styles.mobileCloseIcon}>
               <ChevronLeft size={24} />
             </div>
-            <Image
-              src={Images.SmallLogo}
-              alt={`${APP_CONFIG.appName} Logo`}
-              width={38}
-              height={38}
-            />
+            <Gamepad2 size={38} />
           </div>
 
           <input

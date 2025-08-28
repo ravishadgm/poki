@@ -4,6 +4,11 @@
   gap: 20px;
   align-items: flex-start;
 
+   .header{
+        width: 230px;
+        height: 162px;
+    }
+
   .content {
     background-color: white;
     width: 100%;
@@ -29,7 +34,7 @@
     
     .header{
         width: 230px;
-                height: 162px;
+        height: 162px;
     }
   }
  @media (max-width: 720px) {
