@@ -1,6 +1,6 @@
 
 const APP_CONFIG = {
-  appName: "roky",
+  appName: "GameWorlds",
 };
 
 export default APP_CONFIG;

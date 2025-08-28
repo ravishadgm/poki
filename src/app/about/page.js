@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { useRef, useEffect, useState } from 'react';
-import styles from './styles.module.scss';
-import Link from 'next/link';
-import { slides } from '@/dataStore/categories';
-import APP_CONFIG from '@/utils/config';
-
-
+import { useRef, useEffect, useState } from "react";
+import styles from "./styles.module.scss";
+import Link from "next/link";
+import { slides } from "@/dataStore/categories";
+import APP_CONFIG from "@/utils/config";
+import Images from "../../../public/images/index";
+import Image from "next/image";
 
 export default function AboutPage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -51,21 +51,21 @@ export default function AboutPage() {
   };
 
   useEffect(() => {
-    window.addEventListener('wheel', handleWheel);
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener("wheel", handleWheel);
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchend", handleTouchEnd);
 
     // Optional: disable native scroll on mobile
     const preventScroll = (e) => e.preventDefault();
-    document.body.style.overflow = 'hidden';
-    document.addEventListener('touchmove', preventScroll, { passive: false });
+    document.body.style.overflow = "hidden";
+    document.addEventListener("touchmove", preventScroll, { passive: false });
 
     return () => {
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchend', handleTouchEnd);
-      document.removeEventListener('touchmove', preventScroll);
-      document.body.style.overflow = '';
+      window.removeEventListener("wheel", handleWheel);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchend", handleTouchEnd);
+      document.removeEventListener("touchmove", preventScroll);
+      document.body.style.overflow = "";
     };
   }, [currentSlide]);
 
@@ -80,7 +80,12 @@ export default function AboutPage() {
 
       <div className={styles.header}>
         <Link href="/" passHref>
-          <h1 className={styles.logo} style={{ cursor: 'pointer' }}>{APP_CONFIG.appName}</h1>
+          <Image
+            src={Images.Logo}
+            alt={`${APP_CONFIG.appName} Logo`}
+            className={styles.logo}
+          />
+          {/* <h1 className={styles.logo} style={{ cursor: 'pointer' }}>{APP_CONFIG.appName}</h1> */}
         </Link>
       </div>
 
@@ -129,7 +134,7 @@ export default function AboutPage() {
           <span
             key={idx}
             className={`${styles.dot} ${
-              currentSlide === idx ? styles.activeDot : ''
+              currentSlide === idx ? styles.activeDot : ""
             }`}
             onClick={() => setCurrentSlide(idx)}
           />

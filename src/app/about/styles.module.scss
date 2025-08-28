@@ -240,6 +240,18 @@
   box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
 }
 
+
+
+.logo {
+ width: 120px;
+    height: 120px;
+ 
+
+  &:hover{
+    transform: scale(1.1);
+  }
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .header {
