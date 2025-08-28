@@ -89,14 +89,14 @@
 .externalControls {
   width: 100%;
   background: white;
-  border-radius: 0 0 12px 12px;
+
   padding: 12px 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 
   @media (max-width: 480px) {
     padding: 10px 12px;
-    border-radius: 0 0 8px 8px;
+    
   }
 }
 
@@ -185,11 +185,7 @@
   }
 }
 
-@media (max-width: 768px) {
-  .externalControls {
-    background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
-  }
-}
+
 
 @keyframes buttonPress {
   0% {
