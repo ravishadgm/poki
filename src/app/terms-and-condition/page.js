@@ -5,7 +5,7 @@ import TermsConditionInfo from "@/components/TermsConditionInfo/TermsConditionIn
 export default function PrivacyPage() {
     return (
         <div style={{ backgroundColor: '#ffffff' }}>
-            <PrivacyHeader title="Terms & Conditions" />
+            <PrivacyHeader />
             <TermsConditionInfo />
             <GetInTouch />
         </div>

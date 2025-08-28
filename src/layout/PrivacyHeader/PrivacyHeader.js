@@ -5,7 +5,7 @@ import { ExternalLink } from 'lucide-react';
 import styles from './styles.module.scss';
 import Images from '../../../public/images/index';
 
-const PrivacyHeader = ({ title }) => {
+const PrivacyHeader = () => {
     return (
         <div className={styles.container}>
             <div className={styles.backgroundContainer}>
@@ -18,8 +18,9 @@ const PrivacyHeader = ({ title }) => {
             </div>
             <div className={styles.content}>
                 <div className={styles.left}>
-                    <Image src={Images.Logo} alt="Logo" className={styles.logo} />
-                    <span>{title}</span>
+                    <Link href="/" className={styles.link}>
+                        <Image src={Images.Logo} alt="Logo" className={styles.logo} />
+                    </Link>
                 </div>
                 <Link href="/" className={styles.link}>
                     Exit <ExternalLink size={16} />
