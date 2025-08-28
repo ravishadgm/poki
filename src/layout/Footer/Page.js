@@ -32,9 +32,7 @@ export default function Footer() {
                 </div>
             </div>
 
-            <div className={styles.bottomText}>
-                <span>{APP_CONFIG.appName} – A-491B2A1D | SDK - 38619F</span>
-            </div>
+            
         </footer>
     );
 }

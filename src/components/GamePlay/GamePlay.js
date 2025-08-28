@@ -8,6 +8,7 @@ import Image from "next/image";
 import { AdSenseTestAd } from "../../ads/AdSense/AdSenseTestAd";
 import { useRecentGames } from "@/contexts/RecentGamesContext";
 import GameDescription from "../GameDescription/GameDescription";
+import IframePlayer from "@/components/IframePlayer/IframePlayer"; // Import the new component
 
 export const BlueAd = () => (
   <div className={styles.adWrapper}>
@@ -51,6 +52,7 @@ export default function GamePlay({ game }) {
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [hoveredSidebar, setHoveredSidebar] = useState(null);
   const { addToRecentGames } = useRecentGames();
+  
   const handleGameClick = (gameToPlay) => {
     addToRecentGames({
       title: gameToPlay.title,
@@ -61,6 +63,7 @@ export default function GamePlay({ game }) {
     });
     router.push(`/home/${gameToPlay.slug}`);
   };
+
   useEffect(() => {
     const updateCols = () => {
       const w = window.innerWidth;
@@ -89,6 +92,7 @@ export default function GamePlay({ game }) {
   }, [game.slug]);
 
   useEffect(() => setMounted(true), []);
+  
   if (!mounted) {
     return (
       <div className={styles.loadingContainer}>
@@ -111,7 +115,6 @@ export default function GamePlay({ game }) {
       rowSpan: 1,
       content: <Header />,
     },
-
     {
       type: "iframe",
       col: isTablet ? 1 : 3,
@@ -123,17 +126,12 @@ export default function GamePlay({ game }) {
           : Math.min(10, gridCols - 4),
       rowSpan: isTablet ? 5 : 6,
       content: (
-        <div className={styles.player}>
-          <iframe
-            src={game.iframe}
-            title={game.title}
-            allowFullScreen
-            className={styles.desktopIframe}
-            frameBorder="0"
-            scrolling="no"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          />
-        </div>
+        <IframePlayer
+          src={game.iframe}
+          title={game.title}
+          isMobile={false}
+          className={styles.desktopPlayer}
+        />
       ),
     },
     {
@@ -168,7 +166,7 @@ export default function GamePlay({ game }) {
                 >
                   {hoveredSidebar === idx && g.video ? (
                     <video
-                      src={game.video}
+                      src={g.video}
                       muted
                       autoPlay
                       loop
@@ -236,14 +234,11 @@ export default function GamePlay({ game }) {
         </div>
 
         <div className={styles.mobilePlayer}>
-          <iframe
+          <IframePlayer
             src={game.iframe}
             title={game.title}
-            allowFullScreen
-            className={styles.mobileIframe}
-            frameBorder="0"
-            scrolling="no"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            isMobile={true}
+            className={styles.mobilePlayerFrame}
           />
         </div>
 
@@ -304,7 +299,6 @@ export default function GamePlay({ game }) {
               onMouseLeave={() => setHoveredIndex(null)}
               onClick={() => {
                 if (el.type === "game") {
-                  // router.push(`/home/${el.game.slug}`);
                   handleGameClick(el.game);
                 }
               }}
