@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useRef, useCallback, useEffect } from "react";
-import { AiOutlineClose } from "react-icons/ai"; 
+import { X } from "lucide-react";
 import styles from "./IframePlayer.module.scss";
 
 const IframePlayer = ({ src, title, className = "", isMobile = false }) => {
@@ -48,9 +48,8 @@ const IframePlayer = ({ src, title, className = "", isMobile = false }) => {
     <div className={`${styles.iframePlayerWrapper} ${className}`}>
       <div
         ref={playerRef}
-        className={`${styles.iframePlayer} ${
-          isMobile ? styles.mobile : styles.desktop
-        } ${isFullscreen ? styles.fullscreen : ""}`}
+        className={`${styles.iframePlayer} ${isMobile ? styles.mobile : styles.desktop
+          } ${isFullscreen ? styles.fullscreen : ""}`}
       >
         <iframe
           ref={iframeRef}
@@ -71,7 +70,7 @@ const IframePlayer = ({ src, title, className = "", isMobile = false }) => {
               className={`${styles.controlBtn} ${styles.minimizeBtn}`}
               title="Exit Fullscreen"
             >
-              <AiOutlineClose size={24} /> 
+              <X size={24} />
             </button>
           </div>
         )}
